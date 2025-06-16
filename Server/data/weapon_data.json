@@ -1,0 +1,40 @@
+[
+    {
+        "weaponId": "62e7c4fba689e8c9c50dfc38",
+        "overrideProperties": {
+            "RecoilForceBack": 50,
+            "RecoilForceUp": 55,
+            "RecoilCenter": {
+                "x": 0,
+                "y": -0.3,
+                "z": -0.01
+            }
+        }
+    },
+    {
+        "weaponId": "5bb2475ed4351e00853264e3",
+        "overrideProperties": {
+            "RecoilForceBack": 150
+        }
+    },
+    {
+        "weaponId": "5447a9cd4bdc2dbd208b4567",
+        "overrideProperties": {
+            "RecoilForceBack": 180
+        }
+    },
+    {
+        "weaponId": "5dcbd56fdbd3d91b3e5468d5",
+        "overrideProperties": {
+            "RecoilForceBack": 250,
+            "RecoilForceUp": 110
+        }
+    },
+    {
+        "weaponIds": ["661cec09b2c6356b4d0c7a36", "661ceb1b9311543c7104149b", "65fb023261d5829b2d090755"],
+        "overrideProperties": {
+            "RecoilForceBack": 350,
+            "RecoilForceUp": 90
+        }
+    }
+]
