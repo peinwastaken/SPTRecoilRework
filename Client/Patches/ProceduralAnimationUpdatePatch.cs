@@ -12,7 +12,7 @@ namespace PeinRecoilRework.Patches
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.UpdateWeaponVariables));
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.method_8));
         }
 
         [PatchPostfix]
@@ -29,11 +29,8 @@ namespace PeinRecoilRework.Patches
 
             __instance.CrankRecoil = Plugin.EnableCrankRecoil.Value;
 
-            if (weapon != null)
-            {
-                template.CameraSnap = Plugin.CameraSnap.Value;
-                template.CameraToWeaponAngleSpeedRange = Plugin.CameraToWeaponAngleSpeed.Value;
-            }
+            __instance.CameraSmoothRecoil = Plugin.CameraSnap.Value;
+            __instance.CameraToWeaponAngleSpeedRange = Plugin.CameraToWeaponAngleSpeed.Value;
 
             camAngRecoil.Intensity = Plugin.CameraRecoilIntensity.Value;
             camAngRecoil.ReturnSpeed = Plugin.CameraRecoilReturnSpeed.Value;

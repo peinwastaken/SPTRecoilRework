@@ -41,7 +41,7 @@ class Mod implements IPostDBLoadMod
             weaponCount += weaponIds?.length || 1
         })
 
-        logger.logWithColor(`[PeinCameraRecoilMod] Successfully modified data for ${weaponCount} weapons. ${randomString}`, LogTextColor.YELLOW)
+        logger.logWithColor(`[SPTRecoilRework] Successfully modified data for ${weaponCount} weapons. ${randomString}`, LogTextColor.YELLOW)
     }
 }
 
