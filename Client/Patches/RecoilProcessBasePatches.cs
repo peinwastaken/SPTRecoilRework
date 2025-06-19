@@ -78,38 +78,6 @@ namespace PeinRecoilRework.Patches
         }
     }
 
-    public class RecoilCalculatePatch : ModulePatch
-    {
-        protected override MethodBase GetTargetMethod()
-        {
-            return AccessTools.Method(typeof(NewRecoilShotEffect), nameof(NewRecoilShotEffect.method_3));
-        }
-
-        [PatchPrefix]
-        private static bool PatchPrefix(NewRecoilShotEffect __instance, out Vector2 recoilRadian)
-        {
-            Vector2 vector = default;
-
-            foreach (ShotsGroupSettings shotsGroupSettings in __instance.ShotsGroupsSettings)
-            {
-                if (shotsGroupSettings.IsShotIndexInRange(__instance._autoFireShotIndex))
-                {
-                    vector += shotsGroupSettings.ShotRecoilRadianRange;
-                }
-            }
-            if (__instance.HandRotationRecoil.StableOn)
-            {
-                __instance.HandRotationRecoil.CurrentAngleAdd += __instance.HandRotationRecoil.StableAngleIncreaseStep;
-                __instance.HandRotationRecoil.CurrentAngleAdd = Mathf.Clamp(__instance.HandRotationRecoil.CurrentAngleAdd, __instance.HandRotationRecoil.ProgressRecoilAngleOnStable.x, __instance.HandRotationRecoil.ProgressRecoilAngleOnStable.y);
-                vector += new Vector2(-__instance.HandRotationRecoil.CurrentAngleAdd, __instance.HandRotationRecoil.CurrentAngleAdd) * 0.2f;
-            }
-
-            recoilRadian = __instance.BasicRecoilRadian + vector * 0.017453292f;
-
-            return false;
-        }
-    }
-
     public class RecoilStableModePatch : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
