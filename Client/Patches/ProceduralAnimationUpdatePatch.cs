@@ -3,8 +3,11 @@ using EFT.Animations;
 using EFT.Animations.NewRecoil;
 using EFT.InventoryLogic;
 using HarmonyLib;
+using PeinRecoilRework.Data;
+using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
+using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
@@ -18,6 +21,7 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance)
         {
+            // variable hell
             ShotEffector shotEffector = __instance.Shootingg;
             NewRecoilShotEffect newRecoil = shotEffector.NewShotRecoil;
             RecoilProcessBase camAngRecoil = newRecoil.CameraRotationRecoil;
@@ -26,23 +30,90 @@ namespace PeinRecoilRework.Patches
             Player.FirearmController firearmController = newRecoil._firearmController;
             Weapon weapon = firearmController?.Item;
             WeaponTemplate template = weapon?.Template;
+            string weaponId = weapon?.StringTemplateId ?? string.Empty;
+            WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
+            bool isPistol = WeaponHelper.IsPistol(template);
+
+            var handAngIntensity = isPistol ? Plugin.PistolHandRecoilAngIntensity.Value : Plugin.HandRecoilAngIntensity.Value;
+            var handAngReturnSpeed = isPistol ? Plugin.PistolHandRecoilAngReturnSpeed.Value : Plugin.HandRecoilAngReturnSpeed.Value;
+            var handAngDamping = isPistol ? Plugin.PistolHandRecoilAngDamping.Value : Plugin.HandRecoilAngDamping.Value;
+
+            var handPosIntensity = isPistol ? Plugin.PistolHandRecoilPosIntensity.Value : Plugin.HandRecoilPosIntensity.Value;
+            var handPosReturnSpeed = isPistol ? Plugin.PistolHandRecoilPosReturnSpeed.Value : Plugin.HandRecoilPosReturnSpeed.Value;
+            var handPosDamping = isPistol ? Plugin.PistolHandRecoilPosDamping.Value : Plugin.HandRecoilPosDamping.Value;
 
             __instance.CrankRecoil = Plugin.EnableCrankRecoil.Value;
-
-            __instance.CameraSmoothRecoil = Plugin.CameraSnap.Value;
             __instance.CameraToWeaponAngleSpeedRange = Plugin.CameraToWeaponAngleSpeed.Value;
 
             camAngRecoil.Intensity = Plugin.CameraRecoilIntensity.Value;
             camAngRecoil.ReturnSpeed = Plugin.CameraRecoilReturnSpeed.Value;
             camAngRecoil.Damping = Plugin.CameraRecoilDamping.Value;
 
-            handAngRecoil.Intensity = Plugin.HandRecoilAngIntensity.Value;
-            handAngRecoil.ReturnSpeed = Plugin.HandRecoilAngReturnSpeed.Value;
-            handAngRecoil.Damping = Plugin.HandRecoilAngDamping.Value;
+            if (customData != null && Plugin.AllowServerOverride.Value == true)
+            {
+                handAngRecoil.Intensity = customData.OverrideProperties.HandRecoilAngIntensity ?? handAngIntensity;
+                handAngRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilAngReturnSpeed ?? handAngReturnSpeed;
+                handAngRecoil.Damping = customData.OverrideProperties.HandRecoilAngDamping ?? handAngDamping;
 
-            handPosRecoil.Intensity = Plugin.HandRecoilPosIntensity.Value;
-            handPosRecoil.ReturnSpeed = Plugin.HandRecoilPosReturnSpeed.Value;
-            handPosRecoil.Damping = Plugin.HandRecoilPosDamping.Value;
+                handPosRecoil.Intensity = customData.OverrideProperties.HandRecoilPosIntensity ?? handPosIntensity;
+                handPosRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilPosReturnSpeed ?? handPosReturnSpeed;
+                handPosRecoil.Damping = customData.OverrideProperties.HandRecoilPosDamping ?? handPosDamping;
+
+                __instance.CameraSmoothRecoil = customData.OverrideProperties.CameraSnap ?? Plugin.CameraSnap.Value;
+            }
+            else
+            {
+                handAngRecoil.Intensity = handAngIntensity;
+                handAngRecoil.ReturnSpeed = handAngReturnSpeed;
+                handAngRecoil.Damping = handAngDamping;
+
+                handPosRecoil.Intensity = handPosIntensity;
+                handPosRecoil.ReturnSpeed = handPosReturnSpeed;
+                handPosRecoil.Damping = handPosDamping;
+
+                __instance.CameraSmoothRecoil = Plugin.CameraSnap.Value;
+            }
+
+            WeaponHelper.IsPistolCurrentlyEquipped = isPistol;
+            WeaponHelper.CurrentTemplate = template;
+        }
+    }
+
+    public class ApplyComplexRotationPatch : ModulePatch
+    {
+        private static float leftStanceTarget = 0f;
+        private static float leftStanceMult = 0f;
+        private static FieldInfo strategyField;
+        private static Vector3 originalLocalPos;
+        private static bool posCached = false;
+
+        protected override MethodBase GetTargetMethod()
+        {
+            strategyField = AccessTools.Field(typeof(ProceduralWeaponAnimation), "_strategy");
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.ApplyComplexRotation));
+        }
+
+        [PatchPostfix]
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
+        {
+            Transform weaponRoot = __instance.HandsContainer.WeaponRootAnim;
+            GInterface38 strategy = (GInterface38)strategyField.GetValue(__instance);
+
+            leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
+            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, Time.deltaTime * 4f);
+
+            Util.Logger.LogInfo($"leftStanceTarget: {leftStanceTarget}");
+            Util.Logger.LogInfo($"leftStanceMult: {leftStanceMult}");
+
+            Vector3 leftStanceOffset = new Vector3(-0.2f * leftStanceMult, 0f, 0f);
+            Quaternion rotationOffset = Quaternion.Euler(0f, -5f * leftStanceMult, 0f);
+
+            weaponRoot.SetPositionAndRotation(
+                weaponRoot.position,
+                weaponRoot.rotation
+            );
+
+            weaponRoot.localPosition = weaponRoot.localPosition + leftStanceOffset;
         }
     }
 }

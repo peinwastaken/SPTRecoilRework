@@ -1,15 +1,33 @@
 import { DependencyContainer } from "tsyringe";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
-import path from "path";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
 import Util from "./util";
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
+import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
+import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
-class Mod implements IPostDBLoadMod
+class Mod implements IPostDBLoadMod, IPreSptLoadMod
 {
-    public async postDBLoad(container: DependencyContainer): Promise<void>
+    public preSptLoad(container: DependencyContainer): void {
+        const staticRouter = container.resolve<StaticRouterModService>("StaticRouterModService")
+
+        staticRouter.registerStaticRouter(
+            "getRecoilData",
+            [
+                {
+                    url: "/recoilrework/get/recoildata",
+                    action: async (url, info, sessionId, output) => {
+                        return JSON.stringify(Util.parseJson(Util.getDataFile("weapon_data.json")))
+                    }
+                }
+            ],
+            "PeinRecoilRework"
+        )
+    }
+
+    public postDBLoad(container: DependencyContainer): void
     {
         const logger = container.resolve<ILogger>("WinstonLogger")
         const dbServer = container.resolve<DatabaseServer>("DatabaseServer")

@@ -1,4 +1,4 @@
-import { readFileSync } from "fs"
+import { readFile, readFileSync } from "fs"
 import path from "path"
 
 class Util {
