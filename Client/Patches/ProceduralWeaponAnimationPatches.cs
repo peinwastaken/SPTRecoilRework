@@ -96,26 +96,24 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, ref float dt)
         {
-            Transform weaponRoot = __instance.HandsContainer.WeaponRootAnim;
+            Transform weaponRootAnim = __instance.HandsContainer.WeaponRootAnim;
             GInterface38 strategy = (GInterface38)strategyField.GetValue(__instance);
             dt = Time.deltaTime;
 
             leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
             leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * 4f);
-
-            Util.Logger.LogInfo($"leftStanceTarget: {leftStanceTarget}");
-            Util.Logger.LogInfo($"leftStanceMult: {leftStanceMult}");
+            WeaponHelper.LeftStanceMult = leftStanceMult;
 
             Vector3 leftStanceOffset = new Vector3(-0.2f * leftStanceMult, 0f, 0f);
             Quaternion rotationOffset = Quaternion.Euler(0f, -5f * leftStanceMult, 0f);
 
-            weaponRoot.SetPositionAndRotation(
-                weaponRoot.position,
-                weaponRoot.rotation
+            weaponRootAnim.SetPositionAndRotation(
+                weaponRootAnim.position,
+                weaponRootAnim.rotation
             );
 
-            weaponRoot.localPosition = weaponRoot.localPosition + leftStanceOffset;
-            weaponRoot.localRotation = weaponRoot.localRotation * rotationOffset;
+            weaponRootAnim.localPosition = weaponRootAnim.localPosition + leftStanceOffset;
+            weaponRootAnim.localRotation = weaponRootAnim.localRotation * rotationOffset;
         }
     }
 }

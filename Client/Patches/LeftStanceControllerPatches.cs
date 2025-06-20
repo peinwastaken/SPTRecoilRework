@@ -1,5 +1,4 @@
-﻿using Comfort.Common;
-using EFT;
+﻿using EFT;
 using HarmonyLib;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;

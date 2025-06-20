@@ -1,10 +1,8 @@
 ﻿using EFT.Animations;
-using EFT.Animations.NewRecoil;
 using HarmonyLib;
 using PeinRecoilRework.Data;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
-using System;
 using System.Reflection;
 using UnityEngine;
 

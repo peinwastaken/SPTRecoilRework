@@ -97,6 +97,7 @@ namespace PeinRecoilRework
             new RecoilStableModePatch().Enable();
             new ToggleLeftStancePatch().Enable();
             new ApplyComplexRotationPatch().Enable();
+            new WeaponOverlapLeftStancePatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;

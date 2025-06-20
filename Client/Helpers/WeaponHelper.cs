@@ -7,6 +7,7 @@ namespace PeinRecoilRework.Helpers
     {
         public static bool IsPistolCurrentlyEquipped = false;
         public static bool IsLeftStance = false;
+        public static float LeftStanceMult = 0f;
         public static WeaponTemplate CurrentTemplate { get; set; } = null;
 
         public static bool IsPistol(WeaponTemplate template)
