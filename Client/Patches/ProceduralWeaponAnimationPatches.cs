@@ -86,8 +86,6 @@ namespace PeinRecoilRework.Patches
         private static float leftStanceTarget = 0f;
         private static float leftStanceMult = 0f;
         private static FieldInfo strategyField;
-        private static Vector3 originalLocalPos;
-        private static bool posCached = false;
 
         protected override MethodBase GetTargetMethod()
         {
@@ -96,13 +94,14 @@ namespace PeinRecoilRework.Patches
         }
 
         [PatchPostfix]
-        private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance, ref float dt)
         {
             Transform weaponRoot = __instance.HandsContainer.WeaponRootAnim;
             GInterface38 strategy = (GInterface38)strategyField.GetValue(__instance);
+            dt = Time.deltaTime;
 
             leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
-            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, Time.deltaTime * 4f);
+            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * 4f);
 
             Util.Logger.LogInfo($"leftStanceTarget: {leftStanceTarget}");
             Util.Logger.LogInfo($"leftStanceMult: {leftStanceMult}");
@@ -116,6 +115,7 @@ namespace PeinRecoilRework.Patches
             );
 
             weaponRoot.localPosition = weaponRoot.localPosition + leftStanceOffset;
+            weaponRoot.localRotation = weaponRoot.localRotation * rotationOffset;
         }
     }
 }
