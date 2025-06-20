@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
-    public class ProceduralAnimationUpdatePatch : ModulePatch
+    public class ProceduralWeaponAnimationPatches : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
         {
@@ -34,13 +34,15 @@ namespace PeinRecoilRework.Patches
             WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
             bool isPistol = WeaponHelper.IsPistol(template);
 
-            var handAngIntensity = isPistol ? Plugin.PistolHandRecoilAngIntensity.Value : Plugin.HandRecoilAngIntensity.Value;
-            var handAngReturnSpeed = isPistol ? Plugin.PistolHandRecoilAngReturnSpeed.Value : Plugin.HandRecoilAngReturnSpeed.Value;
-            var handAngDamping = isPistol ? Plugin.PistolHandRecoilAngDamping.Value : Plugin.HandRecoilAngDamping.Value;
+            float handAngIntensity = isPistol ? Plugin.PistolHandRecoilAngIntensity.Value : Plugin.HandRecoilAngIntensity.Value;
+            float handAngReturnSpeed = isPistol ? Plugin.PistolHandRecoilAngReturnSpeed.Value : Plugin.HandRecoilAngReturnSpeed.Value;
+            float handAngDamping = isPistol ? Plugin.PistolHandRecoilAngDamping.Value : Plugin.HandRecoilAngDamping.Value;
 
-            var handPosIntensity = isPistol ? Plugin.PistolHandRecoilPosIntensity.Value : Plugin.HandRecoilPosIntensity.Value;
-            var handPosReturnSpeed = isPistol ? Plugin.PistolHandRecoilPosReturnSpeed.Value : Plugin.HandRecoilPosReturnSpeed.Value;
-            var handPosDamping = isPistol ? Plugin.PistolHandRecoilPosDamping.Value : Plugin.HandRecoilPosDamping.Value;
+            float handPosIntensity = isPistol ? Plugin.PistolHandRecoilPosIntensity.Value : Plugin.HandRecoilPosIntensity.Value;
+            float handPosReturnSpeed = isPistol ? Plugin.PistolHandRecoilPosReturnSpeed.Value : Plugin.HandRecoilPosReturnSpeed.Value;
+            float handPosDamping = isPistol ? Plugin.PistolHandRecoilPosDamping.Value : Plugin.HandRecoilPosDamping.Value;
+
+            float cameraSnap = isPistol ? Plugin.PistolCameraSnap.Value : Plugin.CameraSnap.Value;
 
             __instance.CrankRecoil = Plugin.EnableCrankRecoil.Value;
             __instance.CameraToWeaponAngleSpeedRange = Plugin.CameraToWeaponAngleSpeed.Value;
@@ -59,7 +61,7 @@ namespace PeinRecoilRework.Patches
                 handPosRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilPosReturnSpeed ?? handPosReturnSpeed;
                 handPosRecoil.Damping = customData.OverrideProperties.HandRecoilPosDamping ?? handPosDamping;
 
-                __instance.CameraSmoothRecoil = customData.OverrideProperties.CameraSnap ?? Plugin.CameraSnap.Value;
+                __instance.CameraSmoothRecoil = customData.OverrideProperties.CameraSnap ?? cameraSnap;
             }
             else
             {
@@ -71,7 +73,7 @@ namespace PeinRecoilRework.Patches
                 handPosRecoil.ReturnSpeed = handPosReturnSpeed;
                 handPosRecoil.Damping = handPosDamping;
 
-                __instance.CameraSmoothRecoil = Plugin.CameraSnap.Value;
+                __instance.CameraSmoothRecoil = cameraSnap;
             }
 
             WeaponHelper.IsPistolCurrentlyEquipped = isPistol;
