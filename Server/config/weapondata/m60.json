@@ -1,0 +1,7 @@
+{
+    "weaponIds": ["661cec09b2c6356b4d0c7a36", "661ceb1b9311543c7104149b", "65fb023261d5829b2d090755"],
+    "overrideProperties": {
+        "RecoilForceBack": 250,
+        "RecoilForceUp": 110
+    }
+}

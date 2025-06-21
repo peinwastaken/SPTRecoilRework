@@ -1,0 +1,26 @@
+[
+    {
+        "weaponId": "62e7c4fba689e8c9c50dfc38",
+        "overrideProperties": {
+            "RecoilForceBack": 100,
+            "RecoilForceUp": 55,
+            "RecoilCenter": {
+                "x": 0,
+                "y": -0.3,
+                "z": -0.01
+            }
+        }
+    },
+    {
+        "weaponIds": ["63171672192e68c5460cebc5", "6718817435e3cfd9550d2c27"],
+        "overrideProperties": {
+            "RecoilForceBack": 150,
+            "RecoilForceUp": 90,
+            "RecoilCenter": {
+                "x": 0,
+                "y": -0.3,
+                "z": -0.01
+            }
+        }
+    }
+]

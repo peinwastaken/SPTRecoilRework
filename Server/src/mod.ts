@@ -10,6 +10,8 @@ import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRou
 
 class Mod implements IPostDBLoadMod, IPreSptLoadMod
 {
+    private cachedWeaponData = []
+
     public preSptLoad(container: DependencyContainer): void {
         const staticRouter = container.resolve<StaticRouterModService>("StaticRouterModService")
 
@@ -19,7 +21,7 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
                 {
                     url: "/recoilrework/get/recoildata",
                     action: async (url, info, sessionId, output) => {
-                        return JSON.stringify(Util.parseJson(Util.getDataFile("weapon_data.json")))
+                        return JSON.stringify(this.cachedWeaponData)
                     }
                 }
             ],
@@ -34,8 +36,8 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
         const tables: IDatabaseTables = dbServer.getTables()
         const templates = tables.templates
 
-        const weaponData = Util.parseJson(Util.getDataFile("weapon_data.json"))
-        const strings = Util.parseJson(Util.getDataFile("strings.json"))
+        const weaponData = Util.parseDirectory("/../config/weapondata")
+        const strings = Util.parseJson(Util.getConfigFile("strings.json"))
         const randomString = strings[Math.floor(Math.random() * strings.length)]
 
         // do weapon data
@@ -58,6 +60,8 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
 
             weaponCount += weaponIds?.length || 1
         })
+
+        this.cachedWeaponData = weaponData
 
         logger.logWithColor(`[SPTRecoilRework] Successfully modified data for ${weaponCount} weapons. ${randomString}`, LogTextColor.YELLOW)
     }

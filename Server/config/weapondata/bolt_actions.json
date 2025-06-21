@@ -1,0 +1,6 @@
+{
+    "weaponIds": ["5bfea6e90db834001b7347f3", "588892092459774ac91d4b11", "5df24cf80dee1b22f862e9bc"],
+    "overrideProperties": {
+        "RecoilCamera": 0.2
+    }
+}  

@@ -1,0 +1,15 @@
+{
+    "weaponIds": ["669fa3d876116c89840b1217", "669fa39b48fc9f8db6035a0c", "669fa3f88abd2662d80eee77", "668fe5a998b5ad715703ddd6", "669fa409933e898cce0c2166"],
+    "overrideProperties": {
+        "ForceClientOverride": true,
+        "RecoilCategoryMultiplierHandRotation": 0.36,
+        "HandRecoilAngDamping": 0.5,
+        "HandRecoilAngReturnSpeed": 20,
+        "HandRecoilAngUpMult": 10,
+        "HandRecoilAngSideMult": 1,
+        "HandRecoilPosBackMult": 2,
+        "HandRecoilPosReturnSpeed": 0.5,
+        "HandRecoilPosDamping": 0.3,
+        "CameraSnap": 1
+    }
+}
