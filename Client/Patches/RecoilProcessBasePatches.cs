@@ -1,5 +1,4 @@
-﻿using EFT.Animations;
-using HarmonyLib;
+﻿using HarmonyLib;
 using PeinRecoilRework.Data;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
@@ -26,8 +25,6 @@ namespace PeinRecoilRework.Patches
             float posBackMult = pistolEquipped ? Plugin.PistolHandRecoilPosBackMult.Value : Plugin.HandRecoilPosBackMult.Value;
             float angUpMult = pistolEquipped ? Plugin.PistolHandRecoilAngUpMult.Value : Plugin.HandRecoilAngUpMult.Value;
             float angSideMult = pistolEquipped ? Plugin.PistolHandRecoilAngSideMult.Value : Plugin.HandRecoilAngSideMult.Value;
-
-            Util.Logger.LogInfo(rnd.ToString());
 
             if (processType == Target.CameraRotation)
             {
@@ -72,22 +69,6 @@ namespace PeinRecoilRework.Patches
                 }
             }
 
-            return true;
-        }
-    }
-
-    public class RecoilStableModePatch : ModulePatch
-    {
-        protected override MethodBase GetTargetMethod()
-        {
-            return AccessTools.Method(typeof(NewRotationRecoilProcess), nameof(NewRotationRecoilProcess.SetStableMode));
-        }
-
-        [PatchPrefix]
-        private static bool PatchPrefix(ref bool enable)
-
-        {
-            //enable = false;
             return true;
         }
     }

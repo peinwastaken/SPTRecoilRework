@@ -20,6 +20,11 @@ namespace PeinRecoilRework
         public static ConfigEntry<float> PistolCameraSnap { get; set; } // pistol camera snap speed
         public static ConfigEntry<Vector2> CameraToWeaponAngleSpeed { get; set; } // camera angle speed min, max
         public static ConfigEntry<bool> AllowServerOverride { get; set; } // allow server to override recoil settings
+        public static ConfigEntry<bool> AllowLeanCameraTilt { get; set; }
+
+        // left stance
+        public static ConfigEntry<float> LeftStanceOffset { get; set; } // left stance offset
+        public static ConfigEntry<float> LeftStanceAngle { get; set; } // left stance angle
 
         // cam recoil
         public static ConfigEntry<float> CameraRecoilUpMult { get; set; } // camera recoil up/down
@@ -91,13 +96,17 @@ namespace PeinRecoilRework
             PistolCameraSnap = Config.Bind(Category.General, "Pistol Camera Snap Speed", 0.1f, new ConfigDescription("Speed at which the camera snaps back to its original position after pistol recoil.", new AcceptableValueRange<float>(0f, 2f), new ConfigurationManagerAttributes { Order = 940 }));
             CameraToWeaponAngleSpeed = Config.Bind(Category.General, "Camera to Weapon Angle Speed", new Vector2(0.0f, 0.0f), new ConfigDescription("Minimum and maximum speed at which the camera aligns with the weapon's angle.", null, new ConfigurationManagerAttributes { Order = 930 }));
             AllowServerOverride = Config.Bind(Category.General, "Allow Server Override", true, new ConfigDescription("Allows the server to override client-side recoil settings. Currently required for some unique weapon recoils (Deagle, Glock 18c, etc.)", null, new ConfigurationManagerAttributes { Order = 920 }));
+            AllowLeanCameraTilt = Config.Bind(Category.General, "Allow Lean Camera Tilt", false, new ConfigDescription("Changes whether the camera rotates during leaning.", null, new ConfigurationManagerAttributes { Order = 910 }));
+
+            LeftStanceOffset = Config.Bind(Category.LeftStance, "Left Stance Offset", 0.2f, new ConfigDescription("Offset for the left stance position.", new AcceptableValueRange<float>(0f, 0.2f), new ConfigurationManagerAttributes { Order = 900 }));
+            LeftStanceAngle = Config.Bind(Category.LeftStance, "Left Stance Angle", 5f, new ConfigDescription("Angle for the left stance position.", new AcceptableValueRange<float>(-15f, 15f), new ConfigurationManagerAttributes { Order = 890 }));
 
             new RecoilProcessPatch().Enable();
-            new ProceduralWeaponAnimationPatches().Enable();
-            new RecoilStableModePatch().Enable();
+            new UpdateWeaponVariablesPatch().Enable();
             new ToggleLeftStancePatch().Enable();
             new ApplyComplexRotationPatch().Enable();
             new WeaponOverlapLeftStancePatch().Enable();
+            new CameraRecoilRotationPatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;

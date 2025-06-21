@@ -1,4 +1,5 @@
-﻿using EFT.InventoryLogic;
+﻿using EFT;
+using EFT.InventoryLogic;
 using PeinRecoilRework.Data;
 
 namespace PeinRecoilRework.Helpers

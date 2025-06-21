@@ -1,6 +1,8 @@
-﻿using EFT;
+﻿using Comfort.Common;
+using EFT;
 using EFT.Animations;
 using EFT.Animations.NewRecoil;
+using EFT.Interactive;
 using EFT.InventoryLogic;
 using HarmonyLib;
 using PeinRecoilRework.Data;
@@ -11,7 +13,7 @@ using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
-    public class ProceduralWeaponAnimationPatches : ModulePatch
+    public class UpdateWeaponVariablesPatch : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
         {
@@ -33,6 +35,12 @@ namespace PeinRecoilRework.Patches
             string weaponId = weapon?.StringTemplateId ?? string.Empty;
             WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
             bool isPistol = WeaponHelper.IsPistol(template);
+            Player player = __instance.GetComponent<Player>();
+
+            if (player != Util.GetLocalPlayer() && Util.GetGameWorld().LocationId != LocationSettingsClass.Location.HIDEOUT_ID)
+            {
+                return;
+            }
 
             float handAngIntensity = isPistol ? Plugin.PistolHandRecoilAngIntensity.Value : Plugin.HandRecoilAngIntensity.Value;
             float handAngReturnSpeed = isPistol ? Plugin.PistolHandRecoilAngReturnSpeed.Value : Plugin.HandRecoilAngReturnSpeed.Value;
@@ -45,7 +53,6 @@ namespace PeinRecoilRework.Patches
             float cameraSnap = isPistol ? Plugin.PistolCameraSnap.Value : Plugin.CameraSnap.Value;
 
             __instance.CrankRecoil = Plugin.EnableCrankRecoil.Value;
-            __instance.CameraToWeaponAngleSpeedRange = Plugin.CameraToWeaponAngleSpeed.Value;
 
             camAngRecoil.Intensity = Plugin.CameraRecoilIntensity.Value;
             camAngRecoil.ReturnSpeed = Plugin.CameraRecoilReturnSpeed.Value;
@@ -81,6 +88,30 @@ namespace PeinRecoilRework.Patches
         }
     }
 
+    public class CameraRecoilRotationPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.method_19));
+        }
+
+        [PatchPrefix]
+        private static bool PatchPrefix(ProceduralWeaponAnimation __instance, float deltaTime)
+        {
+            Quaternion localRotation = __instance.HandsContainer.CameraTransform.localRotation;
+            float leanRotation = Plugin.AllowLeanCameraTilt.Value == true ? localRotation.z : 0;
+            Quaternion newLocalRotation = localRotation * Quaternion.Euler(
+                localRotation.x * Plugin.CameraRecoilUpMult.Value,
+                localRotation.y * Plugin.CameraRecoilSideMult.Value,
+                leanRotation
+            );
+
+            __instance.HandsContainer.CameraTransform.localRotation = localRotation;
+
+            return false;
+        }
+    }
+
     public class ApplyComplexRotationPatch : ModulePatch
     {
         private static float leftStanceTarget = 0f;
@@ -97,20 +128,16 @@ namespace PeinRecoilRework.Patches
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, ref float dt)
         {
             Transform weaponRootAnim = __instance.HandsContainer.WeaponRootAnim;
-            GInterface38 strategy = (GInterface38)strategyField.GetValue(__instance);
+            float offset = Plugin.LeftStanceOffset.Value;
+            float angle = Plugin.LeftStanceAngle.Value;
             dt = Time.deltaTime;
 
             leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
             leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * 4f);
             WeaponHelper.LeftStanceMult = leftStanceMult;
 
-            Vector3 leftStanceOffset = new Vector3(-0.2f * leftStanceMult, 0f, 0f);
-            Quaternion rotationOffset = Quaternion.Euler(0f, -5f * leftStanceMult, 0f);
-
-            weaponRootAnim.SetPositionAndRotation(
-                weaponRootAnim.position,
-                weaponRootAnim.rotation
-            );
+            Vector3 leftStanceOffset = new Vector3(-offset * leftStanceMult, 0f, 0f);
+            Quaternion rotationOffset = Quaternion.Euler(0f, -angle * leftStanceMult, 0f);
 
             weaponRootAnim.localPosition = weaponRootAnim.localPosition + leftStanceOffset;
             weaponRootAnim.localRotation = weaponRootAnim.localRotation * rotationOffset;
