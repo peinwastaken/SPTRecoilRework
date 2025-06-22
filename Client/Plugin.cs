@@ -25,6 +25,7 @@ namespace PeinRecoilRework
         // left stance
         public static ConfigEntry<float> LeftStanceOffset { get; set; } // left stance offset
         public static ConfigEntry<float> LeftStanceAngle { get; set; } // left stance angle
+        public static ConfigEntry<float> LeftStanceSpeed { get; set; } // left stance speed
 
         // cam recoil
         public static ConfigEntry<float> CameraRecoilUpMult { get; set; } // camera recoil up/down
@@ -100,6 +101,7 @@ namespace PeinRecoilRework
 
             LeftStanceOffset = Config.Bind(Category.LeftStance, "Left Stance Offset", 0.2f, new ConfigDescription("Offset for the left stance position.", new AcceptableValueRange<float>(0f, 0.2f), new ConfigurationManagerAttributes { Order = 900 }));
             LeftStanceAngle = Config.Bind(Category.LeftStance, "Left Stance Angle", 5f, new ConfigDescription("Angle for the left stance position.", new AcceptableValueRange<float>(-15f, 15f), new ConfigurationManagerAttributes { Order = 890 }));
+            LeftStanceSpeed = Config.Bind(Category.LeftStance, "Left Stance Speed", 4f, new ConfigDescription("Speed at which the weapon moves when transitioning shoulders.", new AcceptableValueRange<float>(1f, 10f), new ConfigurationManagerAttributes { Order = 880 }));
 
             new RecoilProcessPatch().Enable();
             new UpdateWeaponVariablesPatch().Enable();

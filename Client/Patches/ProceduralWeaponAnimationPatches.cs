@@ -125,15 +125,14 @@ namespace PeinRecoilRework.Patches
         }
 
         [PatchPostfix]
-        private static void PatchPostfix(ProceduralWeaponAnimation __instance, ref float dt)
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
         {
             Transform weaponRootAnim = __instance.HandsContainer.WeaponRootAnim;
             float offset = Plugin.LeftStanceOffset.Value;
             float angle = Plugin.LeftStanceAngle.Value;
-            dt = Time.deltaTime;
 
             leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
-            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * 4f);
+            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * Plugin.LeftStanceSpeed.Value);
             WeaponHelper.LeftStanceMult = leftStanceMult;
 
             Vector3 leftStanceOffset = new Vector3(-offset * leftStanceMult, 0f, 0f);
