@@ -6,7 +6,7 @@ using System;
 
 namespace PeinRecoilRework.Helpers
 {
-    public class RouteHelper
+    public static class RouteHelper
     {
         public static List<WeaponRecoilData> FetchWeaponDataFromServer()
         {

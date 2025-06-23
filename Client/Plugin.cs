@@ -18,7 +18,6 @@ namespace PeinRecoilRework
         public static ConfigEntry<bool> EnableCrankRecoil { get; set; } // recoil backwards instead of forwards
         public static ConfigEntry<float> CameraSnap { get; set; } // camera snap speed
         public static ConfigEntry<float> PistolCameraSnap { get; set; } // pistol camera snap speed
-        public static ConfigEntry<Vector2> CameraToWeaponAngleSpeed { get; set; } // camera angle speed min, max
         public static ConfigEntry<bool> AllowServerOverride { get; set; } // allow server to override recoil settings
         public static ConfigEntry<bool> AllowLeanCameraTilt { get; set; }
 
@@ -95,7 +94,6 @@ namespace PeinRecoilRework
             EnableCrankRecoil = Config.Bind(Category.General, "Enable Crank Recoil", true, new ConfigDescription("Toggles whether your weapon recoils toward the screen.", null, new ConfigurationManagerAttributes { Order = 950 }));
             CameraSnap = Config.Bind(Category.General, "Camera Snap Speed", 1f, new ConfigDescription("Speed at which the camera snaps back to its original position after recoil.", new AcceptableValueRange<float>(0f, 2f), new ConfigurationManagerAttributes { Order = 940 }));
             PistolCameraSnap = Config.Bind(Category.General, "Pistol Camera Snap Speed", 0.1f, new ConfigDescription("Speed at which the camera snaps back to its original position after pistol recoil.", new AcceptableValueRange<float>(0f, 2f), new ConfigurationManagerAttributes { Order = 940 }));
-            CameraToWeaponAngleSpeed = Config.Bind(Category.General, "Camera to Weapon Angle Speed", new Vector2(0.0f, 0.0f), new ConfigDescription("Minimum and maximum speed at which the camera aligns with the weapon's angle.", null, new ConfigurationManagerAttributes { Order = 930 }));
             AllowServerOverride = Config.Bind(Category.General, "Allow Server Override", true, new ConfigDescription("Allows the server to override client-side recoil settings. Currently required for some unique weapon recoils (Deagle, Glock 18c, etc.)", null, new ConfigurationManagerAttributes { Order = 920 }));
             AllowLeanCameraTilt = Config.Bind(Category.General, "Allow Lean Camera Tilt", false, new ConfigDescription("Changes whether the camera rotates during leaning.", null, new ConfigurationManagerAttributes { Order = 910 }));
 
@@ -109,6 +107,7 @@ namespace PeinRecoilRework
             new ApplyComplexRotationPatch().Enable();
             new WeaponOverlapLeftStancePatch().Enable();
             new CameraRecoilRotationPatch().Enable();
+            new CamereLeanPatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;

@@ -4,7 +4,7 @@ using PeinRecoilRework.Data;
 
 namespace PeinRecoilRework.Helpers
 {
-    public class WeaponHelper
+    public static class WeaponHelper
     {
         public static bool IsPistolCurrentlyEquipped = false;
         public static bool IsLeftStance = false;

@@ -25,19 +25,19 @@ namespace PeinRecoilRework.Patches
         {
             // variable hell
             ShotEffector shotEffector = __instance.Shootingg;
-            NewRecoilShotEffect newRecoil = shotEffector.NewShotRecoil;
-            RecoilProcessBase camAngRecoil = newRecoil.CameraRotationRecoil;
-            NewRotationRecoilProcess handAngRecoil = newRecoil.HandRotationRecoil;
-            RecoilProcessBase handPosRecoil = newRecoil.HandPositionRecoil;
-            Player.FirearmController firearmController = newRecoil._firearmController;
+            NewRecoilShotEffect recoilEffect = shotEffector.NewShotRecoil;
+            RecoilProcessBase camAngRecoil = recoilEffect.CameraRotationRecoil;
+            NewRotationRecoilProcess handAngRecoil = recoilEffect.HandRotationRecoil;
+            RecoilProcessBase handPosRecoil = recoilEffect.HandPositionRecoil;
+            Player.FirearmController firearmController = recoilEffect._firearmController;
             Weapon weapon = firearmController?.Item;
             WeaponTemplate template = weapon?.Template;
             string weaponId = weapon?.StringTemplateId ?? string.Empty;
             WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
             bool isPistol = WeaponHelper.IsPistol(template);
-            Player player = __instance.GetComponent<Player>();
+            Player player = firearmController?.gameObject.GetComponent<Player>();
 
-            if (player != Util.GetLocalPlayer() && Util.GetGameWorld().LocationId != LocationSettingsClass.Location.HIDEOUT_ID)
+            if (player == null || player != Util.GetLocalPlayer())
             {
                 return;
             }
@@ -98,17 +98,23 @@ namespace PeinRecoilRework.Patches
         [PatchPrefix]
         private static bool PatchPrefix(ProceduralWeaponAnimation __instance, float deltaTime)
         {
-            Quaternion localRotation = __instance.HandsContainer.CameraTransform.localRotation;
-            float leanRotation = Plugin.AllowLeanCameraTilt.Value == true ? localRotation.z : 0;
-            Quaternion newLocalRotation = localRotation * Quaternion.Euler(
-                localRotation.x * Plugin.CameraRecoilUpMult.Value,
-                localRotation.y * Plugin.CameraRecoilSideMult.Value,
-                leanRotation
-            );
-
-            __instance.HandsContainer.CameraTransform.localRotation = localRotation;
-
             return false;
+        }
+    }
+
+    public class CamereLeanPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.CalculateCameraPosition));
+        }
+
+        [PatchPostfix]
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance)
+        {
+            Vector3 zero = __instance.HandsContainer.CameraRotation.Zero;
+            float lean = Plugin.AllowLeanCameraTilt.Value ? zero.z : 0f;
+            __instance.HandsContainer.CameraRotation.Zero = new Vector3(zero.x, zero.y, lean);
         }
     }
 
