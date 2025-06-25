@@ -48,14 +48,12 @@ namespace PeinRecoilRework
         // hand ang recoil
         public static ConfigEntry<float> HandRecoilAngUpMult { get; set; } // viewmodel rotate up/down
         public static ConfigEntry<float> HandRecoilAngSideMult { get; set; } // viewmodel rotate left/right
-        public static ConfigEntry<float> HandRecoilAngIntensity { get; set; } // viewmodel recoil intensity
         public static ConfigEntry<float> HandRecoilAngReturnSpeed { get; set; } // viewmodel recoil speed
         public static ConfigEntry<float> HandRecoilAngDamping { get; set; } // viewmodel recoil damping
 
         // pistol ang
         public static ConfigEntry<float> PistolHandRecoilAngUpMult { get; set; } // pistol viewmodel rotate up/down
         public static ConfigEntry<float> PistolHandRecoilAngSideMult { get; set; } // pistol viewmodel rotate left/right
-        public static ConfigEntry<float> PistolHandRecoilAngIntensity { get; set; } // pistol viewmodel recoil intensity
         public static ConfigEntry<float> PistolHandRecoilAngReturnSpeed { get; set; } // pistol viewmodel recoil speed
         public static ConfigEntry<float> PistolHandRecoilAngDamping { get; set; } // pistol viewmodel recoil damping
 
@@ -81,13 +79,11 @@ namespace PeinRecoilRework
 
             HandRecoilAngUpMult = Config.Bind(Category.RecoilAng, "Recoil Rotation Up Mult", 0.6f, new ConfigDescription("Multiplier for hand recoil angle up/down.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 970 }));
             HandRecoilAngSideMult = Config.Bind(Category.RecoilAng, "Recoil Rotation Side Mult", 1.3f, new ConfigDescription("Multiplier for sideways hand recoil.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 960 }));
-            HandRecoilAngIntensity = Config.Bind(Category.RecoilAng, "Recoil Rotation Intensity", 1.0f, new ConfigDescription("Multiplier for hand recoil intensity.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 940 }));
             HandRecoilAngReturnSpeed = Config.Bind(Category.RecoilAng, "Recoil Rotation Return Speed", 2.0f, new ConfigDescription("Multiplier for hand recoil return speed.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 930 }));
             HandRecoilAngDamping = Config.Bind(Category.RecoilAng, "Recoil Rotation Damping", 0.8f, new ConfigDescription("Multiplier for hand recoil damping.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 920 }));
 
             PistolHandRecoilAngUpMult = Config.Bind(Category.PistolRecoilAng, "Pistol Recoil Rotation Up Mult", 10f, new ConfigDescription("Multiplier for pistol hand recoil angle up/down.", new AcceptableValueRange<float>(-50f, 50f), new ConfigurationManagerAttributes { Order = 970 }));
             PistolHandRecoilAngSideMult = Config.Bind(Category.PistolRecoilAng, "Pistol Recoil Rotation Side Mult", 4f, new ConfigDescription("Multiplier for pistol hand recoil left/right.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 960 }));
-            PistolHandRecoilAngIntensity = Config.Bind(Category.PistolRecoilAng, "Pistol Recoil Rotation Intensity", 5f, new ConfigDescription("Multiplier for pistol hand recoil intensity.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 950 }));
             PistolHandRecoilAngReturnSpeed = Config.Bind(Category.PistolRecoilAng, "Pistol Recoil Rotation Return Speed", 25f, new ConfigDescription("Multiplier for pistol hand recoil return speed.", new AcceptableValueRange<float>(-50f, 50f), new ConfigurationManagerAttributes { Order = 940 }));
             PistolHandRecoilAngDamping = Config.Bind(Category.PistolRecoilAng, "Pistol Recoil Rotation Damping", 0.4f, new ConfigDescription("Multiplier for pistol hand recoil damping.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 930 }));
 

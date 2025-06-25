@@ -42,7 +42,6 @@ namespace PeinRecoilRework.Patches
                 return;
             }
 
-            float handAngIntensity = isPistol ? Plugin.PistolHandRecoilAngIntensity.Value : Plugin.HandRecoilAngIntensity.Value;
             float handAngReturnSpeed = isPistol ? Plugin.PistolHandRecoilAngReturnSpeed.Value : Plugin.HandRecoilAngReturnSpeed.Value;
             float handAngDamping = isPistol ? Plugin.PistolHandRecoilAngDamping.Value : Plugin.HandRecoilAngDamping.Value;
 
@@ -60,7 +59,6 @@ namespace PeinRecoilRework.Patches
 
             if (customData != null && Plugin.AllowServerOverride.Value == true)
             {
-                handAngRecoil.Intensity = customData.OverrideProperties.HandRecoilAngIntensity ?? handAngIntensity;
                 handAngRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilAngReturnSpeed ?? handAngReturnSpeed;
                 handAngRecoil.Damping = customData.OverrideProperties.HandRecoilAngDamping ?? handAngDamping;
 
@@ -72,7 +70,6 @@ namespace PeinRecoilRework.Patches
             }
             else
             {
-                handAngRecoil.Intensity = handAngIntensity;
                 handAngRecoil.ReturnSpeed = handAngReturnSpeed;
                 handAngRecoil.Damping = handAngDamping;
 
