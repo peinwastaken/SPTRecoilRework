@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace PeinRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.2.1")]
+    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.2.2")]
     public class Plugin : BaseUnityPlugin
     {
         public static List<WeaponRecoilData> WeaponRecoils { get; set; }
