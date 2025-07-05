@@ -35,9 +35,11 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\dependencies\EscapeFromTarkov_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="spt-common">
       <HintPath>..\..\dependencies\BepInEx\plugins\spt\spt-common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="spt-custom">
       <HintPath>..\..\dependencies\BepInEx\plugins\spt\spt-custom.dll</HintPath>
