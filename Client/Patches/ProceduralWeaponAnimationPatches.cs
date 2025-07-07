@@ -1,10 +1,9 @@
-﻿using Comfort.Common;
-using EFT;
+﻿using EFT;
 using EFT.Animations;
 using EFT.Animations.NewRecoil;
-using EFT.Interactive;
 using EFT.InventoryLogic;
 using HarmonyLib;
+using PeinRecoilRework.Components;
 using PeinRecoilRework.Data;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
@@ -143,6 +142,29 @@ namespace PeinRecoilRework.Patches
 
             weaponRootAnim.localPosition = weaponRootAnim.localPosition + leftStanceOffset;
             weaponRootAnim.localRotation = weaponRootAnim.localRotation * rotationOffset;
+        }
+    }
+
+    public class ShootPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.Shoot));
+        }
+
+        [PatchPostfix]
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance)
+        {
+            ShotEffector shotEffector = __instance.Shootingg;
+            Player.FirearmController fc = shotEffector._firearmController;
+            Player player = fc.gameObject.GetComponent<Player>();
+            RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
+            bool isMounted = __instance.IsMountedState || __instance.IsBipodUsed || __instance.IsVerticalMounting;
+            float mountedMult = isMounted ? 0.5f : 1f;
+            float recoilVertical = fc.Weapon.Template.RecoilForceUp * mountedMult * 0.003f * Plugin.RealRecoilVerticalMult.Value;
+            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * mountedMult * 0.001f * Plugin.RealRecoilHorizontalMult.Value;
+
+            realRecoil?.ApplyRecoil(recoilVertical, recoilHorizontal);
         }
     }
 }

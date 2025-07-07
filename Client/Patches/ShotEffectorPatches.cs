@@ -47,7 +47,7 @@ namespace PeinRecoilRework.Patches
                 {
                     Vector3 newVector = rnd;
                     newVector.x *= customData.OverrideProperties.HandRecoilAngUpMult ?? angUpMult;
-                    newVector.z *= customData.OverrideProperties.HandRecoilAngSideMult ?? angSideMult;
+                    newVector.y *= customData.OverrideProperties.HandRecoilAngSideMult ?? angSideMult;
                     rnd = newVector;
                 }
             }
@@ -64,7 +64,7 @@ namespace PeinRecoilRework.Patches
                 {
                     Vector3 newVector = rnd;
                     newVector.x *= angUpMult;
-                    newVector.z *= angSideMult;
+                    newVector.y *= angSideMult;
                     rnd = newVector;
                 }
             }
