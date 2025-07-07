@@ -159,8 +159,10 @@ namespace PeinRecoilRework.Patches
             Player.FirearmController fc = shotEffector._firearmController;
             Player player = fc.gameObject.GetComponent<Player>();
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
+
             bool isMounted = __instance.IsMountedState || __instance.IsBipodUsed || __instance.IsVerticalMounting;
             bool isPistol = WeaponHelper.IsPistol(fc.Weapon.Template);
+
             float verticalMult = isPistol ? Plugin.RealRecoilPistolVerticalMult.Value : Plugin.RealRecoilVerticalMult.Value;
             float horizontalMult = isPistol ? Plugin.RealRecoilPistolHorizontalMult.Value : Plugin.RealRecoilHorizontalMult.Value;
             float mountedMult = isMounted ? Plugin.RealRecoilMountedMult.Value : 1f;
