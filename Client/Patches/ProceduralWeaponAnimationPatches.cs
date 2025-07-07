@@ -156,6 +156,7 @@ namespace PeinRecoilRework.Patches
         private static void PatchPostfix(ProceduralWeaponAnimation __instance)
         {
             ShotEffector shotEffector = __instance.Shootingg;
+            NewRecoilShotEffect newRecoil = shotEffector.NewShotRecoil;
             Player.FirearmController fc = shotEffector._firearmController;
             Player player = fc.gameObject.GetComponent<Player>();
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
@@ -167,8 +168,9 @@ namespace PeinRecoilRework.Patches
             float horizontalMult = isPistol ? Plugin.RealRecoilPistolHorizontalMult.Value : Plugin.RealRecoilHorizontalMult.Value;
             float mountedMult = isMounted ? Plugin.RealRecoilMountedMult.Value : 1f;
             float aimingMult = __instance.IsAiming ? Plugin.RealRecoilAimingMult.Value : 1f;
-            float recoilVertical = fc.Weapon.Template.RecoilForceUp * mountedMult * aimingMult * 0.003f * verticalMult;
-            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * mountedMult * aimingMult * 0.001f * horizontalMult;
+            float modsMult = newRecoil.BasicPlayerRecoilRotationStrength.magnitude / 100f;
+            float recoilVertical = fc.Weapon.Template.RecoilForceUp * mountedMult * aimingMult * modsMult * 0.003f * verticalMult;
+            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * mountedMult * aimingMult * modsMult * 0.001f * horizontalMult;
 
             realRecoil?.ApplyRecoil(recoilVertical, recoilHorizontal);
         }
