@@ -29,8 +29,11 @@ namespace PeinRecoilRework
         public static ConfigEntry<bool> EnableRealRecoil { get; set; }
         public static ConfigEntry<float> RealRecoilVerticalMult { get; set; }
         public static ConfigEntry<float> RealRecoilHorizontalMult { get; set; }
+        public static ConfigEntry<float> RealRecoilPistolVerticalMult { get; set; }
+        public static ConfigEntry<float> RealRecoilPistolHorizontalMult { get; set; }
         public static ConfigEntry<float> RealRecoilDecaySpeed { get; set; }
         public static ConfigEntry<float> RealRecoilMountedMult { get; set; }
+        public static ConfigEntry<float> RealRecoilAimingMult { get; set; }
 
         // cam recoil
         public static ConfigEntry<float> CameraRecoilUpMult { get; set; } // camera recoil up/down
@@ -106,8 +109,11 @@ namespace PeinRecoilRework
             EnableRealRecoil = Config.Bind(Category.ReallyReal, "Enable Real Recoil", true, new ConfigDescription("Enables real recoil, which moves the camera while shooting. The camera will kick upward and left/right randomly. The amount depends on your weapon's stats and the multipliers below.", null, new ConfigurationManagerAttributes { Order = 870 }));
             RealRecoilVerticalMult = Config.Bind(Category.ReallyReal, "Real Recoil Vertical Mult", 1f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
             RealRecoilHorizontalMult = Config.Bind(Category.ReallyReal, "Real Recoil Horizontal Mult", 1f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
-            RealRecoilDecaySpeed = Config.Bind(Category.ReallyReal, "Real Recoil Decay Speed", 6f, new ConfigDescription("Real recoil decay speed.", null, new ConfigurationManagerAttributes { Order = 850 }));
-            RealRecoilMountedMult = Config.Bind(Category.ReallyReal, "Real Recoil Mounted Multiplier", 0.5f, new ConfigDescription("Changes the amount of REAL RECOIL while mounted or using bipods.", null, new ConfigurationManagerAttributes { Order = 840 }));
+            RealRecoilVerticalMult = Config.Bind(Category.ReallyReal, "Pistol Real Recoil Vertical Mult", 0.5f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 859 }));
+            RealRecoilHorizontalMult = Config.Bind(Category.ReallyReal, "Pistol Real Recoil Horizontal Mult", 0.7f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 858 }));
+            RealRecoilDecaySpeed = Config.Bind(Category.ReallyReal, "Real Recoil Decay Speed", 10f, new ConfigDescription("Real recoil decay speed.", null, new ConfigurationManagerAttributes { Order = 850 }));
+            RealRecoilMountedMult = Config.Bind(Category.ReallyReal, "Real Recoil Mounted Multiplier", 0.5f, new ConfigDescription("Changes the amount of recoil while mounted or using bipods.", null, new ConfigurationManagerAttributes { Order = 840 }));
+            RealRecoilAimingMult = Config.Bind(Category.ReallyReal, "Real Recoil Aimimt Multiplier", 1f, new ConfigDescription("Changes the amount of recoil while aiming.", null, new ConfigurationManagerAttributes { Order = 830 }));
 
             new RecoilProcessPatch().Enable();
             new UpdateWeaponVariablesPatch().Enable();

@@ -160,9 +160,13 @@ namespace PeinRecoilRework.Patches
             Player player = fc.gameObject.GetComponent<Player>();
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
             bool isMounted = __instance.IsMountedState || __instance.IsBipodUsed || __instance.IsVerticalMounting;
-            float mountedMult = isMounted ? 0.5f : 1f;
-            float recoilVertical = fc.Weapon.Template.RecoilForceUp * mountedMult * 0.003f * Plugin.RealRecoilVerticalMult.Value;
-            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * mountedMult * 0.001f * Plugin.RealRecoilHorizontalMult.Value;
+            bool isPistol = WeaponHelper.IsPistol(fc.Weapon.Template);
+            float verticalMult = isPistol ? Plugin.RealRecoilPistolVerticalMult.Value : Plugin.RealRecoilVerticalMult.Value;
+            float horizontalMult = isPistol ? Plugin.RealRecoilPistolHorizontalMult.Value : Plugin.RealRecoilHorizontalMult.Value;
+            float mountedMult = isMounted ? Plugin.RealRecoilMountedMult.Value : 1f;
+            float aimingMult = __instance.IsAiming ? Plugin.RealRecoilAimingMult.Value : 1f;
+            float recoilVertical = fc.Weapon.Template.RecoilForceUp * mountedMult * aimingMult * 0.003f * verticalMult;
+            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * mountedMult * aimingMult * 0.001f * horizontalMult;
 
             realRecoil?.ApplyRecoil(recoilVertical, recoilHorizontal);
         }
