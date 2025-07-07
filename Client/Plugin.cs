@@ -19,6 +19,7 @@ namespace PeinRecoilRework
         public static ConfigEntry<float> PistolCameraSnap { get; set; } // pistol camera snap speed
         public static ConfigEntry<bool> AllowServerOverride { get; set; } // allow server to override recoil settings
         public static ConfigEntry<bool> AllowLeanCameraTilt { get; set; }
+        public static ConfigEntry<bool> AllowStableRecoil { get; set; }
 
         // left stance
         public static ConfigEntry<float> LeftStanceOffset { get; set; } // left stance offset
@@ -101,6 +102,7 @@ namespace PeinRecoilRework
             PistolCameraSnap = Config.Bind(Category.General, "Pistol Camera Snap Speed", 1f, new ConfigDescription("Speed at which the camera follows the weapon's recoil.", new AcceptableValueRange<float>(0f, 2f), new ConfigurationManagerAttributes { Order = 940 }));
             AllowServerOverride = Config.Bind(Category.General, "Allow Server Override", true, new ConfigDescription("Allows the server to override client-side recoil settings. Currently required for some unique weapon recoils (Deagle, Glock 18c, etc.)", null, new ConfigurationManagerAttributes { Order = 920 }));
             AllowLeanCameraTilt = Config.Bind(Category.General, "Allow Lean Camera Tilt", false, new ConfigDescription("Changes whether the camera rotates during leaning.", null, new ConfigurationManagerAttributes { Order = 910 }));
+            AllowStableRecoil = Config.Bind(Category.General, "Allow Vanilla Stable Recoil", true, new ConfigDescription("Allows vanilla recoil stabilization.", null, new ConfigurationManagerAttributes { Order = 909 }));
 
             LeftStanceOffset = Config.Bind(Category.LeftStance, "Left Stance Offset", 0.2f, new ConfigDescription("Offset for the left stance position.", new AcceptableValueRange<float>(0f, 0.2f), new ConfigurationManagerAttributes { Order = 900 }));
             LeftStanceAngle = Config.Bind(Category.LeftStance, "Left Stance Angle", 5f, new ConfigDescription("Angle for the left stance position.", new AcceptableValueRange<float>(-45f, 45f), new ConfigurationManagerAttributes { Order = 890 }));
@@ -124,6 +126,7 @@ namespace PeinRecoilRework
             new CamereLeanPatch().Enable();
             new PlayerInitPatch().Enable();
             new ShootPatch().Enable();
+            new SetStableModePatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;

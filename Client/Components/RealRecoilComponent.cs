@@ -21,7 +21,7 @@ namespace PeinRecoilRework.Components
 
             RecoilDirection = Vector2.Lerp(RecoilDirection, Vector2.zero, Plugin.RealRecoilDecaySpeed.Value * dt);
 
-            _player.Rotate(RecoilDirection, false);
+            _player.Rotate(RecoilDirection, true);
         }
 
         public void ApplyRecoil(float verticalAmount, float horizontalAmount, bool randomHorizontal = true)
