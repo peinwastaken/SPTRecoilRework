@@ -157,6 +157,9 @@ namespace PeinRecoilRework.Patches
         {
             if (Plugin.EnableRealRecoil.Value == false) return;
 
+            float scaleVert = 0.01f;
+            float scaleHor = 0.01f;
+
             ShotEffector shotEffector = __instance.Shootingg;
             NewRecoilShotEffect newRecoil = shotEffector.NewShotRecoil;
             Player.FirearmController fc = shotEffector._firearmController;
@@ -165,15 +168,15 @@ namespace PeinRecoilRework.Patches
 
             bool isMounted = __instance.IsMountedState || __instance.IsBipodUsed || __instance.IsVerticalMounting;
             bool isPistol = WeaponHelper.IsPistol(fc.Weapon.Template);
-            Vector2 rotationStrength = newRecoil.BasicPlayerRecoilRotationStrength;
-            float recoilStrength = Random.Range(rotationStrength.x, rotationStrength.y);
+            float recoilStr = shotEffector.NewShotRecoil.BasicPlayerRecoilRotationStrength.y;
 
             float verticalMult = isPistol ? Plugin.RealRecoilPistolVerticalMult.Value : Plugin.RealRecoilVerticalMult.Value;
             float horizontalMult = isPistol ? Plugin.RealRecoilPistolHorizontalMult.Value : Plugin.RealRecoilHorizontalMult.Value;
             float mountedMult = isMounted ? Plugin.RealRecoilMountedMult.Value : 1f;
             float aimingMult = __instance.IsAiming ? Plugin.RealRecoilAimingMult.Value : 1f;
-            float recoilVertical = fc.Weapon.Template.RecoilForceUp * 0.003f * mountedMult * aimingMult * verticalMult;
-            float recoilHorizontal = fc.Weapon.Template.RecoilForceBack * 0.001f * mountedMult * aimingMult * horizontalMult;
+
+            float recoilVertical = recoilStr * scaleVert * mountedMult * aimingMult * verticalMult;
+            float recoilHorizontal = recoilStr * scaleHor * mountedMult * aimingMult * horizontalMult;
 
             realRecoil?.ApplyRecoil(recoilVertical, recoilHorizontal);
         }
