@@ -1,8 +1,10 @@
 ﻿using EFT;
 using HarmonyLib;
 using PeinRecoilRework.Components;
+using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
+using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
@@ -19,6 +21,7 @@ namespace PeinRecoilRework.Patches
             if (__instance.IsYourPlayer == true)
             {
                 __instance.gameObject.AddComponent<RealRecoilComponent>();
+                __instance.gameObject.AddComponent<CameraOffsetComponent>();
             }
         }
     }

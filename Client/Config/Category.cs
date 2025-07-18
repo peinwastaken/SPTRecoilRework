@@ -2,13 +2,16 @@
 {
     public class Category
     {
-        public static string General = "1. General";
-        public static string LeftStance = "2. Left Stance";
-        public static string ReallyReal = "3. Real Recoil";
-        public static string CameraRecoil = "4. Camera Recoil";
-        public static string RecoilPos = "5. Rifle Recoil Position";
-        public static string PistolRecoilPos = "6. Pistol Recoil Position";
-        public static string RecoilAng = "7. Rifle Recoil Angle";
-        public static string PistolRecoilAng = "8. Pistol Recoil Angle";
+        public static string General = "General";
+        public static string LeftStance = "Left Stance";
+        public static string ReallyReal = "Real Recoil";
+        public static string CameraRecoil = "Camera Recoil";
+        public static string RecoilPos = "Rifle Recoil Position";
+        public static string PistolRecoilPos = "Pistol Recoil Position";
+        public static string RecoilAng = "Rifle Recoil Angle";
+        public static string PistolRecoilAng = "Pistol Recoil Angle";
+        public static string AdditionalCamera = "Additional Camera Recoil";
+
+        public static string Format(int order, string category) => $"{order}. {category}";
     }
 }

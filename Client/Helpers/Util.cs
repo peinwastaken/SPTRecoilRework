@@ -53,5 +53,15 @@ namespace PeinRecoilRework.Helpers
 
             return _gameWorld;
         }
+
+        public static Vector2 GetAngleVector(float ang)
+        {
+            float rad = Mathf.Deg2Rad * ang;
+
+            return new Vector2(
+                Mathf.Cos(rad),
+                Mathf.Sin(rad)
+            );
+        }
     }
 }

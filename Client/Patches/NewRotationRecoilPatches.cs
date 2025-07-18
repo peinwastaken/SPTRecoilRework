@@ -1,5 +1,6 @@
 ﻿using EFT.Animations;
 using HarmonyLib;
+using PeinRecoilRework.Config.Settings;
 using SPT.Reflection.Patching;
 using System.Reflection;
 
@@ -15,7 +16,7 @@ namespace PeinRecoilRework.Patches
         [PatchPrefix]
         private static bool PatchPrefix(NewRotationRecoilProcess __instance, bool enable)
         {
-            if (Plugin.AllowStableRecoil.Value == false)
+            if (GeneralSettings.AllowStableRecoil.Value == false)
             {
                 __instance.StableOn = false;
                 return false;

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using PeinRecoilRework.Config.Settings;
 using PeinRecoilRework.Data;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
@@ -22,19 +23,19 @@ namespace PeinRecoilRework.Patches
             bool pistolEquipped = WeaponHelper.IsPistolCurrentlyEquipped;
             bool isLeftStance = WeaponHelper.IsLeftStance; // temporary
 
-            float posBackMult = pistolEquipped ? Plugin.PistolHandRecoilPosBackMult.Value : Plugin.HandRecoilPosBackMult.Value;
-            float angUpMult = pistolEquipped ? Plugin.PistolHandRecoilAngUpMult.Value : Plugin.HandRecoilAngUpMult.Value;
-            float angSideMult = pistolEquipped ? Plugin.PistolHandRecoilAngSideMult.Value : Plugin.HandRecoilAngSideMult.Value;
+            float posBackMult = pistolEquipped ? PistolRecoilPosSettings.PistolRecoilPosBackMult.Value : RecoilPosSettings.RecoilPosBackMult.Value;
+            float angUpMult = pistolEquipped ? PistolRecoilAngSettings.PistolRecoilAngUpMult.Value : RecoilAngSettings.RecoilAngUpMult.Value;
+            float angSideMult = pistolEquipped ? PistolRecoilAngSettings.PistolRecoilAngSideMult.Value : RecoilAngSettings.RecoilAngSideMult.Value;
 
             if (processType == Target.CameraRotation)
             {
                 Vector3 newVector = rnd;
-                newVector.x *= Plugin.CameraRecoilUpMult.Value;
-                newVector.y *= Plugin.CameraRecoilSideMult.Value;
+                newVector.x *= CameraRecoilSettings.CameraRecoilUpMult.Value;
+                newVector.y *= CameraRecoilSettings.CameraRecoilSideMult.Value;
                 rnd = newVector;
             }
 
-            if (customData != null && Plugin.AllowServerOverride.Value == true)
+            if (customData != null && GeneralSettings.AllowServerOverride.Value == true)
             {
                 if (processType == Target.HandsPosition)
                 {
