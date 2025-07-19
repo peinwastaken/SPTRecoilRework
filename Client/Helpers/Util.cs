@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using Comfort.Common;
+﻿using Comfort.Common;
 using EFT;
 using UnityEngine;
 
@@ -7,7 +6,6 @@ namespace PeinRecoilRework.Helpers
 {
     public static class Util
     {
-        public static ManualLogSource Logger { get; set; }
         private static Player.FirearmController _firearmController;
         private static GameWorld _gameWorld;
 

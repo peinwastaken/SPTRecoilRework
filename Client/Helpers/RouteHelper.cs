@@ -18,7 +18,7 @@ namespace PeinRecoilRework.Helpers
             }
             catch (Exception e)
             {
-                Util.Logger.LogError($"Failed to fetch weapon data from server: {e.Message}");
+                Debug.Logger.LogError($"Failed to fetch weapon data from server: {e.Message}");
                 return new List<WeaponRecoilData>();
             }
         }

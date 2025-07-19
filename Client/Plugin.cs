@@ -15,8 +15,9 @@ namespace PeinRecoilRework
 
         private void Awake()
         {
-            Util.Logger = Logger;
+            Debug.Logger = Logger;
 
+            DebugSettings.Bind(Config, 0, Category.Debug);
             GeneralSettings.Bind(Config, 1, Category.General);
             LeftStanceSettings.Bind(Config, 2, Category.LeftStance);
             RealRecoilSettings.Bind(Config, 3, Category.ReallyReal);
