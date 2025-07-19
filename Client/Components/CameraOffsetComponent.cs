@@ -51,7 +51,6 @@ namespace PeinRecoilRework.Components
 
             if (AdditionalCameraRecoilSettings.EnableCameraSpring.Value == true)
             {
-                Util.Logger.LogInfo("Applying camera spring");
                 Vector3 dir = AdditionalCameraRecoilSettings.CameraSpringDirection.Value;
                 Vector2 horizontalMult = AdditionalCameraRecoilSettings.CameraSpringHorizontalMinMax.Value;
                 Vector2 verticalMult = AdditionalCameraRecoilSettings.CameraSpringVerticalMinMax.Value;
