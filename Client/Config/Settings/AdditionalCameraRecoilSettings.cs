@@ -15,6 +15,7 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<Vector2> SlowSpringHorizontalMinMax { get; set; }
         public static ConfigEntry<Vector2> SlowSpringAngleMinMax { get; set; }
         public static ConfigEntry<bool> SlowSpringUseRealRecoilDir { get; set; }
+        public static ConfigEntry<bool> SlowSpringRealRecoilDirNormalize { get; set; }
         public static ConfigEntry<Vector2> SlowSpringRealRecoilVerticalMinMax { get; set; }
         public static ConfigEntry<Vector2> SlowSpringRealRecoilHorizontalMinMax { get; set; }
 
@@ -26,6 +27,7 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<Vector2> FastSpringHorizontalMinMax { get; set; }
         public static ConfigEntry<Vector2> FastSpringAngleMinMax { get; set; }
         public static ConfigEntry<bool> FastSpringUseRealRecoilDir { get; set; }
+        public static ConfigEntry<bool> FastSpringRealRecoilDirNormalize { get; set; }
         public static ConfigEntry<Vector2> FastSpringRealRecoilVerticalMinMax { get; set; }
         public static ConfigEntry<Vector2> FastSpringRealRecoilHorizontalMinMax { get; set; }
 
@@ -51,6 +53,7 @@ namespace PeinRecoilRework.Config.Settings
             SlowSpringVerticalMinMax = Config.Bind(formattedCategory, "Slow Spring Vertical Mult Min/Max", new Vector2(0.3f, 0.3f), new ConfigDescription("Minimum/maximum vertical force multiplier for slow recoil spring.", null, new ConfigurationManagerAttributes { Order = 930 }));
             SlowSpringHorizontalMinMax = Config.Bind(formattedCategory, "Slow Spring Horizontal Mult Min/Max", new Vector2(-0.15f, 0.15f), new ConfigDescription("Minimum/maximum horizontal force multiplier for slow recoil spring.", null, new ConfigurationManagerAttributes { Order = 920 }));
             SlowSpringUseRealRecoilDir = Config.Bind(formattedCategory, "Slow Spring Use Real Recoil", false, new ConfigDescription("Makes slow spring use real recoil direction for impulse direction.", null, new ConfigurationManagerAttributes { Order = 919 }));
+            SlowSpringRealRecoilDirNormalize = Config.Bind(formattedCategory, "Slow Spring Real Recoil Direction Normalize", true, new ConfigDescription("Normalizes real recoil force for slow spring which makes every weapon have apply the same amount of force to the spring.", null, new ConfigurationManagerAttributes { Order = 918 }));
             SlowSpringRealRecoilVerticalMinMax = Config.Bind(formattedCategory, "Slow Spring Real Recoil Vertical Min/Max", new Vector2(0.1f, 0.1f), new ConfigDescription("Multiplier range for vertical recoil. X = minimum, Y = maximum.", null, new ConfigurationManagerAttributes { Order = 917 }));
             SlowSpringRealRecoilHorizontalMinMax = Config.Bind(formattedCategory, "Slow Spring Real Recoil Horizontal Min/Max", new Vector2(0.1f, 0.1f), new ConfigDescription("Multiplier range for horizontal recoil. X = minimum, Y = maximum.", null, new ConfigurationManagerAttributes { Order = 916 }));
 
@@ -62,6 +65,7 @@ namespace PeinRecoilRework.Config.Settings
             FastSpringVerticalMinMax = Config.Bind(formattedCategory, "Fast Vertical Mult Min/Max", new Vector2(0.1f, 0.3f), new ConfigDescription("Minimum/maximum vertical force multiplier for fast recoil spring.", null, new ConfigurationManagerAttributes { Order = 860 }));
             FastSpringHorizontalMinMax = Config.Bind(formattedCategory, "Fast Horizontal Mult Min/Max", new Vector2(-0.05f, 0.05f), new ConfigDescription("Minimum/maximum horizontal force multiplier for fast recoil spring.", null, new ConfigurationManagerAttributes { Order = 850 }));
             FastSpringUseRealRecoilDir = Config.Bind(formattedCategory, "Fast Spring Use Real Recoil", false, new ConfigDescription("Makes fast spring use real recoil direction for impulse direction.", null, new ConfigurationManagerAttributes { Order = 849 }));
+            FastSpringRealRecoilDirNormalize = Config.Bind(formattedCategory, "Fast Spring Real Recoil Direction Normalize", true, new ConfigDescription("Normalizes real recoil force for fast spring which makes every weapon have apply the same amount of force to the spring.", null, new ConfigurationManagerAttributes { Order = 848 }));
             FastSpringRealRecoilVerticalMinMax = Config.Bind(formattedCategory, "Fast Spring Real Recoil Vertical Min/Max", new Vector2(0.05f, 0.2f), new ConfigDescription("Multiplier range for vertical recoil. X = minimum, Y = maximum.", null, new ConfigurationManagerAttributes { Order = 847 }));
             FastSpringRealRecoilHorizontalMinMax = Config.Bind(formattedCategory, "Fast Spring Real Recoil Horizontal Min/Max", new Vector2(0.05f, 0.1f), new ConfigDescription("Multiplier range for horizontal recoil. X = minimum, Y = maximum.", null, new ConfigurationManagerAttributes { Order = 846 }));
 

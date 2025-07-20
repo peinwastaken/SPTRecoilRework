@@ -14,7 +14,7 @@ namespace PeinRecoilRework.Components
 
         public void DoRecoilShake(Vector2? dir = null)
         {
-            Vector2 recoilDir = dir?.normalized ?? Vector2.zero;
+            Vector2 recoilDir = dir ?? Vector2.zero;
 
             DebugLogger.Log($"Recoil direction: {recoilDir}");
 
@@ -28,8 +28,13 @@ namespace PeinRecoilRework.Components
 
                 if (useRealRecoil)
                 {
+                    if (AdditionalCameraRecoilSettings.SlowSpringRealRecoilDirNormalize.Value == true)
+                    {
+                        slowDir = slowDir.normalized;
+                    }
+
                     Vector2 horizontalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilHorizontalMinMax.Value;
-                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilHorizontalMinMax.Value;
+                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilVerticalMinMax.Value;
 
                     slowDir.x *= Random.Range(horizontalMult.x, horizontalMult.y);
                     slowDir.y *= Random.Range(verticalMult.x, verticalMult.y);
@@ -56,6 +61,11 @@ namespace PeinRecoilRework.Components
 
                 if (useRealRecoil)
                 {
+                    if (AdditionalCameraRecoilSettings.FastSpringRealRecoilDirNormalize.Value == true)
+                    {
+                        fastDir = fastDir.normalized;
+                    }
+
                     Vector2 horizontalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilHorizontalMinMax.Value;
                     Vector2 verticalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilVerticalMinMax.Value;
 
