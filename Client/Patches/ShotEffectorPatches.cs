@@ -21,7 +21,6 @@ namespace PeinRecoilRework.Patches
             Target processType = __instance.ProcessType;
             WeaponRecoilData customData = WeaponHelper.FindRecoilData(WeaponHelper.CurrentTemplate?.StringId ?? string.Empty);
             bool pistolEquipped = WeaponHelper.IsPistolCurrentlyEquipped;
-            bool isLeftStance = WeaponHelper.IsLeftStance; // temporary
 
             float posBackMult = pistolEquipped ? PistolRecoilPosSettings.PistolRecoilPosBackMult.Value : RecoilPosSettings.RecoilPosBackMult.Value;
             float angUpMult = pistolEquipped ? PistolRecoilAngSettings.PistolRecoilAngUpMult.Value : RecoilAngSettings.RecoilAngUpMult.Value;

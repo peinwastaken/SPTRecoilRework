@@ -8,18 +8,19 @@ using System.Collections.Generic;
 
 namespace PeinRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.5.1")]
+    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.6.0")]
     public class Plugin : BaseUnityPlugin
     {
         public static List<WeaponRecoilData> WeaponRecoils { get; set; }        
 
         private void Awake()
         {
-            Debug.Logger = Logger;
+            DebugLogger.Logger = Logger;
 
             DebugSettings.Bind(Config, 0, Category.Debug);
             GeneralSettings.Bind(Config, 1, Category.General);
             LeftStanceSettings.Bind(Config, 2, Category.LeftStance);
+            // WeaponSwaySettings.Bind(Config, 3, Category.WeaponSway);
             RealRecoilSettings.Bind(Config, 3, Category.ReallyReal);
             CameraRecoilSettings.Bind(Config, 4, Category.CameraRecoil);
             AdditionalCameraRecoilSettings.Bind(Config, 5, Category.AdditionalCamera);
@@ -29,7 +30,6 @@ namespace PeinRecoilRework
             PistolRecoilAngSettings.Bind(Config, 9, Category.PistolRecoilAng);
 
             new RecoilProcessPatch().Enable();
-            new UpdateWeaponVariablesPatch().Enable();
             new ToggleLeftStancePatch().Enable();
             new ApplyComplexRotationPatch().Enable();
             new WeaponOverlapLeftStancePatch().Enable();
@@ -39,6 +39,7 @@ namespace PeinRecoilRework
             new ShootPatch().Enable();
             new SetStableModePatch().Enable();
             new LerpCameraPatch().Enable();
+            new RecalculateRecoilOnWeaponSwitchPatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;

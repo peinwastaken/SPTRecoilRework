@@ -3,14 +3,14 @@ using PeinRecoilRework.Config.Settings;
 
 namespace PeinRecoilRework.Helpers
 {
-    public class Debug
+    public class DebugLogger
     {
         public static ManualLogSource Logger { get; set; }
-        private static bool isDebug => DebugSettings.EnableDebug.Value;
+        private static bool _isDebug => DebugSettings.EnableDebug.Value;
 
         public static void Log(string message, LogLevel logLevel = LogLevel.Info)
         {
-            if (!isDebug) return;
+            if (!_isDebug) return;
 
             Logger?.Log(logLevel, message);
         }

@@ -6,12 +6,24 @@ namespace PeinRecoilRework.Components
 {
     public class RealRecoilComponent : MonoBehaviour
     {
+        public static RealRecoilComponent Instance { get; private set; }
+
         public Vector2 RecoilDirection = Vector2.zero; // Y - vertical, X - horizontal
         
         private Player _player;
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+
             _player = GetComponent<Player>();
         }
 

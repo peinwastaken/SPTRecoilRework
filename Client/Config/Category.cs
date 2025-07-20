@@ -12,6 +12,7 @@
         public static string PistolRecoilAng = "Pistol Recoil Angle";
         public static string AdditionalCamera = "Additional Camera Recoil";
         public static string Debug = "Debug";
+        public static string WeaponSway = "Weapon Sway";
 
         public static string Format(int order, string category) => $"{order}. {category}";
     }

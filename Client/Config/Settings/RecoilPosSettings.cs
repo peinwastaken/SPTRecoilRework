@@ -4,10 +4,10 @@ namespace PeinRecoilRework.Config.Settings
 {
     public class RecoilPosSettings
     {
-        public static ConfigEntry<float> RecoilPosBackMult { get; set; } // viewmodel back
-        public static ConfigEntry<float> RecoilPosIntensity { get; set; } // viewmodel recoil intensity
-        public static ConfigEntry<float> RecoilPosReturnSpeed { get; set; } // viewmodel recoil speed
-        public static ConfigEntry<float> RecoilPosDamping { get; set; } // viewmodel recoil damping
+        public static ConfigEntry<float> RecoilPosBackMult { get; set; }
+        public static ConfigEntry<float> RecoilPosIntensity { get; set; }
+        public static ConfigEntry<float> RecoilPosReturnSpeed { get; set; }
+        public static ConfigEntry<float> RecoilPosDamping { get; set; }
 
         public static void Bind(ConfigFile Config, int order, string category)
         {

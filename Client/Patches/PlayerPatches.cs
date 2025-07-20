@@ -1,10 +1,8 @@
 ﻿using EFT;
 using HarmonyLib;
 using PeinRecoilRework.Components;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
-using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
@@ -22,6 +20,7 @@ namespace PeinRecoilRework.Patches
             {
                 __instance.gameObject.AddComponent<RealRecoilComponent>();
                 __instance.gameObject.AddComponent<CameraOffsetComponent>();
+                // __instance.gameObject.AddComponent<WeaponSwayComponent>();
             }
         }
     }

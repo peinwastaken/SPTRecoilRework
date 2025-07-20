@@ -1,0 +1,14 @@
+[
+    {
+        "weaponId": "5fc3f2d5900b1d5091531e57",
+        "overrideProperties": {
+            "RecoilPosZMult": 0.7
+        }
+    },
+    {
+        "weaponId": "5fb64bc92b1b027b1f50bcf2",
+        "overrideProperties": {
+            "RecoilPosZMult": 0.5
+        }
+    }
+]

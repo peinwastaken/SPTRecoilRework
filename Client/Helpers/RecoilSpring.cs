@@ -4,6 +4,8 @@ namespace PeinRecoilRework.Helpers
 {
     public class RecoilSpring
     {
+        public bool Enabled = true;
+
         public float Damping = 0.8f;
         public float Stiffness = 0.2f;
         public float Speed = 1.0f;
@@ -14,7 +16,12 @@ namespace PeinRecoilRework.Helpers
 
         public Vector3 Update(float deltaTime)
         {
-            float dtScaled = deltaTime * Speed;
+            if (!Enabled)
+            {
+                return Vector2.zero;
+            }
+
+            float dtScaled = Mathf.Min(deltaTime * Speed, 1);
 
             Vector3 displacement = Target - Position;
             Vector3 force = displacement * Stiffness;
@@ -35,6 +42,11 @@ namespace PeinRecoilRework.Helpers
         public void ApplyImpulse(Vector3 dir)
         {
             Velocity = dir;
+        }
+
+        public void AddVelocity(Vector3 dir)
+        {
+            Velocity += dir;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Comfort.Common;
 using EFT;
+using PeinRecoilRework.Config.Settings;
 using UnityEngine;
 
 namespace PeinRecoilRework.Helpers
@@ -60,6 +61,21 @@ namespace PeinRecoilRework.Helpers
                 Mathf.Cos(rad),
                 Mathf.Sin(rad)
             );
+        }
+
+        public static float GetStanceMultiplier(EPlayerPose pose)
+        {
+            switch(pose)
+            {
+                case EPlayerPose.Prone:
+                    return RealRecoilSettings.RealRecoilProneMult.Value;
+                case EPlayerPose.Duck:
+                    return RealRecoilSettings.RealRecoilCrouchMult.Value;
+                case EPlayerPose.Stand:
+                    return 1f;
+                default:
+                    return 1f;
+            }
         }
     }
 }
