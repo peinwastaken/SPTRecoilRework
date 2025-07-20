@@ -15,6 +15,7 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RealRecoilAimingMult { get; set; }
 
         public static ConfigEntry<Vector2> RifleRealRecoilMult { get; set; }
+        public static ConfigEntry<Vector2> CarbineRealRecoilMult { get; set; }
         public static ConfigEntry<Vector2> PistolRealRecoilMult { get; set; }
         public static ConfigEntry<Vector2> SmgRealRecoilMult { get; set; }
         public static ConfigEntry<Vector2> ShotgunRealRecoilMult { get; set; }
@@ -37,6 +38,7 @@ namespace PeinRecoilRework.Config.Settings
             RealRecoilAimingMult = Config.Bind(formattedCategory, "Real Recoil Aiming Multiplier", 0.75f, new ConfigDescription("Changes the amount of recoil while aiming.", null, new ConfigurationManagerAttributes { Order = 800 }));
 
             RifleRealRecoilMult = Config.Bind(formattedCategory, "Rifle Real Recoil Multiplier", new Vector2(0.7f, 1f), new ConfigDescription("Real recoil multiplier for rifles.", null, new ConfigurationManagerAttributes { Order = 790 }));
+            CarbineRealRecoilMult = Config.Bind(formattedCategory, "Carbine Real Recoil Multiplier", new Vector2(0.5f, 0.8f), new ConfigDescription("Real recoil multiplier for carbines.", null, new ConfigurationManagerAttributes { Order = 780 }));
             PistolRealRecoilMult = Config.Bind(formattedCategory, "Pistol Real Recoil Multiplier", new Vector2(0.35f, 0.5f), new ConfigDescription("Real recoil multiplier for pistols.", null, new ConfigurationManagerAttributes { Order = 780 }));
             SmgRealRecoilMult = Config.Bind(formattedCategory, "SMG Real Recoil Multiplier", new Vector2(0.6f, 1f), new ConfigDescription("Real recoil multiplier for SMGs.", null, new ConfigurationManagerAttributes { Order = 770 }));
             ShotgunRealRecoilMult = Config.Bind(formattedCategory, "Shotgun Real Recoil Multiplier", new Vector2(1.1f, 1.5f), new ConfigDescription("Real recoil multiplier for shotguns.", null, new ConfigurationManagerAttributes { Order = 760 }));

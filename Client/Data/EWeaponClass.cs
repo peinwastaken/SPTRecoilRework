@@ -5,6 +5,7 @@
         None, // null
         Pistol, // pistol
         AssaultRifle, // assaultRifle
+        AssaultCarbine, // assaultCarbine
         Shotgun, // shotgun
         MachineGun, // machinegun
         SubMachineGun, // smg
