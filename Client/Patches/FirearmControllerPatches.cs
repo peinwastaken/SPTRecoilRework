@@ -1,6 +1,7 @@
-﻿using EFT;
+﻿using Comfort.Common;
+using EFT;
 using HarmonyLib;
-using PeinRecoilRework.Helpers;
+using PeinRecoilRework.Components;
 using SPT.Reflection.Patching;
 using System.Reflection;
 using UnityEngine;
@@ -17,7 +18,10 @@ namespace PeinRecoilRework.Patches
         [PatchPrefix]
         private static bool PatchPrefix(Player.FirearmController __instance, ref Vector3 origin)
         {
-            if (WeaponHelper.IsLeftStance)
+            Player player = __instance.GetComponent<Player>();
+            LeftStanceComponent lsc = player.GetComponent<LeftStanceComponent>();
+
+            if (lsc.IsLeftStance)
             {
                 origin += -__instance.WeaponRoot.right * 0.2f;
             }

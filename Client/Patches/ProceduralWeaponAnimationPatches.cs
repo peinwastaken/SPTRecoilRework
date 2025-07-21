@@ -59,27 +59,13 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
         {
-            Transform weaponRootAnim = __instance.HandsContainer.WeaponRootAnim;
-            float offset = LeftStanceSettings.LeftStanceOffset.Value;
-            float angle = LeftStanceSettings.LeftStanceAngle.Value;
+            Player.FirearmController fc = __instance.Shootingg._firearmController;
+            if (fc == null) return;
 
-            _displacementStrField.SetValue(__instance, 0f);
-            _swayStrengthField.SetValue(__instance, 0f);
+            Player player = fc.gameObject.GetComponent<Player>();
+            LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
-            leftStanceTarget = WeaponHelper.IsLeftStance ? 1f : 0f;
-            leftStanceMult = Mathf.Lerp(leftStanceMult, leftStanceTarget, dt * LeftStanceSettings.LeftStanceSpeed.Value);
-            WeaponHelper.LeftStanceMult = leftStanceMult;
-
-            Vector3 leftStanceOffset = new Vector3(-offset * leftStanceMult, 0f, 0f);
-            Vector3 leftStanceAngOffset = new Vector3(0f, -angle * leftStanceMult, 0f);
-
-            Vector3 finalPosOffset = leftStanceOffset;
-            Vector3 finalAngOffset = leftStanceAngOffset;
-
-            Quaternion finalRotationOffset = Quaternion.Euler(finalAngOffset);
-
-            weaponRootAnim.localPosition += finalPosOffset;
-            weaponRootAnim.localRotation *= finalRotationOffset;
+            lsc?.DoLeftStance(__instance.HandsContainer.WeaponRootAnim, dt);
         }
     }
 

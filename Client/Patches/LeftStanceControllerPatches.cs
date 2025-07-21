@@ -1,5 +1,6 @@
 ﻿using EFT;
 using HarmonyLib;
+using PeinRecoilRework.Components;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
@@ -20,8 +21,9 @@ namespace PeinRecoilRework.Patches
         private static bool PatchPrefix(Player.FirearmController __instance)
         {
             Player player = (Player)playerField.GetValue(__instance);
+            LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
-            if (!Util.GetLocalPlayer() == player)
+            if (!Util.GetLocalPlayer() == player || lsc == null)
             {
                 return true;
             }
@@ -37,7 +39,7 @@ namespace PeinRecoilRework.Patches
                     return false;
                 }
 
-                WeaponHelper.IsLeftStance = !WeaponHelper.IsLeftStance;
+                lsc.SetLeftStance(!lsc.IsLeftStance);
             }
 
             return false;

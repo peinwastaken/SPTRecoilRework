@@ -20,7 +20,7 @@ namespace PeinRecoilRework.Patches
             {
                 __instance.gameObject.AddComponent<RealRecoilComponent>();
                 __instance.gameObject.AddComponent<CameraOffsetComponent>();
-                // __instance.gameObject.AddComponent<WeaponSwayComponent>();
+                __instance.gameObject.AddComponent<LeftStanceComponent>();
             }
         }
     }

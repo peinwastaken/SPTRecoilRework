@@ -23,10 +23,7 @@ namespace PeinRecoilRework.Helpers
 
         public static WeaponTemplate CurrentTemplate { get; set; } = null;
         public static Vector2 CurrentRecoilMult = new Vector2(1, 1);
-
         public static bool IsPistolCurrentlyEquipped = false;
-        public static bool IsLeftStance = false;
-        public static float LeftStanceMult = 0f;
 
         public static bool IsPistol(WeaponTemplate template)
         {
@@ -52,6 +49,8 @@ namespace PeinRecoilRework.Helpers
             {
                 case "assaultrifle":
                     return EWeaponClass.AssaultRifle;
+                case "assaultcarbine":
+                    return EWeaponClass.AssaultCarbine;
                 case "pistol":
                     return EWeaponClass.Pistol;
                 case "shotgun":

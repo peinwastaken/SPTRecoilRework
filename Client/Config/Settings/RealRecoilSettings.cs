@@ -38,14 +38,14 @@ namespace PeinRecoilRework.Config.Settings
             RealRecoilAimingMult = Config.Bind(formattedCategory, "Real Recoil Aiming Multiplier", 0.75f, new ConfigDescription("Changes the amount of recoil while aiming.", null, new ConfigurationManagerAttributes { Order = 800 }));
 
             RifleRealRecoilMult = Config.Bind(formattedCategory, "Rifle Real Recoil Multiplier", new Vector2(0.7f, 1f), new ConfigDescription("Real recoil multiplier for rifles.", null, new ConfigurationManagerAttributes { Order = 790 }));
-            CarbineRealRecoilMult = Config.Bind(formattedCategory, "Carbine Real Recoil Multiplier", new Vector2(0.5f, 0.8f), new ConfigDescription("Real recoil multiplier for carbines.", null, new ConfigurationManagerAttributes { Order = 780 }));
+            CarbineRealRecoilMult = Config.Bind(formattedCategory, "Carbine Real Recoil Multiplier", new Vector2(0.7f, 1.3f), new ConfigDescription("Real recoil multiplier for carbines.", null, new ConfigurationManagerAttributes { Order = 780 }));
             PistolRealRecoilMult = Config.Bind(formattedCategory, "Pistol Real Recoil Multiplier", new Vector2(0.35f, 0.5f), new ConfigDescription("Real recoil multiplier for pistols.", null, new ConfigurationManagerAttributes { Order = 780 }));
             SmgRealRecoilMult = Config.Bind(formattedCategory, "SMG Real Recoil Multiplier", new Vector2(0.6f, 1f), new ConfigDescription("Real recoil multiplier for SMGs.", null, new ConfigurationManagerAttributes { Order = 770 }));
             ShotgunRealRecoilMult = Config.Bind(formattedCategory, "Shotgun Real Recoil Multiplier", new Vector2(1.1f, 1.5f), new ConfigDescription("Real recoil multiplier for shotguns.", null, new ConfigurationManagerAttributes { Order = 760 }));
             SniperRealRecoilMult = Config.Bind(formattedCategory, "Sniper Real Recoil Multiplier", new Vector2(1f, 1.3f), new ConfigDescription("Real recoil multiplier for sniper rifles.", null, new ConfigurationManagerAttributes { Order = 750 }));
             MarksmanRealRecoilMult = Config.Bind(formattedCategory, "Marksman Real Recoil Multiplier", new Vector2(0.7f, 1.3f), new ConfigDescription("Real recoil multiplier for marksman rifles.", null, new ConfigurationManagerAttributes { Order = 740 }));
             MachineGunRealRecoilMult = Config.Bind(formattedCategory, "Machine Gun Real Recoil Multiplier", new Vector2(1f, 1f), new ConfigDescription("Real recoil multiplier for machine guns.", null, new ConfigurationManagerAttributes { Order = 730 }));
-            GrenadeLauncherRealRecoilMult = Config.Bind(formattedCategory, "Grenade Launcher Real Recoil Multiplier", new Vector2(0.5f, 0.5f), new ConfigDescription("Real recoil multiplier for grenade launchers.", null, new ConfigurationManagerAttributes { Order = 720 }));
+            GrenadeLauncherRealRecoilMult = Config.Bind(formattedCategory, "Grenade Launcher Real Recoil Multiplier", new Vector2(1f, 2f), new ConfigDescription("Real recoil multiplier for grenade launchers.", null, new ConfigurationManagerAttributes { Order = 720 }));
         }
     }
 }
