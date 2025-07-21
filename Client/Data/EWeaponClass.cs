@@ -12,5 +12,6 @@
         SniperRifle, // sniperRifle
         MarksmanRifle, // marksmanRifle
         GrenadeLauncher, // grenadeLauncher
+        SpecialWeapon, // specialWeapon
     }
 }
