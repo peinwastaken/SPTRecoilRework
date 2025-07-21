@@ -9,18 +9,15 @@ namespace PeinRecoilRework.Patches
 {
     public class ToggleLeftStancePatch : ModulePatch
     {
-        private static FieldInfo playerField;
-
         protected override MethodBase GetTargetMethod()
         {
-            playerField = AccessTools.Field(typeof(Player.FirearmController), "_player");
             return AccessTools.Method(typeof(Player.FirearmController), nameof(Player.FirearmController.ChangeLeftStance));
         }
 
         [PatchPrefix]
         private static bool PatchPrefix(Player.FirearmController __instance)
         {
-            Player player = (Player)playerField.GetValue(__instance);
+            Player player = __instance.GetComponent<Player>();
             LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
             if (!Util.GetLocalPlayer() == player || lsc == null)
