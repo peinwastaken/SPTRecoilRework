@@ -43,16 +43,8 @@ namespace PeinRecoilRework.Patches
 
     public class ApplyComplexRotationPatch : ModulePatch
     {
-        private static float leftStanceTarget = 0f;
-        private static float leftStanceMult = 0f;
-
-        private static FieldInfo _displacementStrField;
-        private static FieldInfo _swayStrengthField;
-
         protected override MethodBase GetTargetMethod()
         {
-            _displacementStrField = AccessTools.Field(typeof(ProceduralWeaponAnimation), "_displacementStr");
-            _swayStrengthField = AccessTools.Field(typeof(ProceduralWeaponAnimation), "_swayStrength");
             return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.ApplyComplexRotation));
         }
 
