@@ -51,13 +51,33 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
         {
+            /*
             Player.FirearmController fc = __instance.Shootingg._firearmController;
             if (fc == null) return;
 
             Player player = fc.gameObject.GetComponent<Player>();
             LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
-            lsc?.DoLeftStance(__instance.HandsContainer.WeaponRootAnim, dt);
+            lsc?.ApplyComplexRotation(__instance, dt);*/
+        }
+    }
+
+    public class ZeroAdjustmentsPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.ZeroAdjustments));
+        }
+        [PatchPostfix]
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance)
+        {
+            Player.FirearmController fc = __instance.Shootingg._firearmController;
+            if (fc == null) return;
+
+            Player player = fc.gameObject.GetComponent<Player>();
+            LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
+
+            lsc?.ZeroAdjustments(__instance, 0f);
         }
     }
 

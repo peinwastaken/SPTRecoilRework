@@ -20,6 +20,8 @@ namespace PeinRecoilRework.Patches
             Player player = __instance.GetComponent<Player>();
             LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
+            DebugLogger.Log("Toggling left stance");
+
             if (!Util.GetLocalPlayer() == player || lsc == null)
             {
                 return true;

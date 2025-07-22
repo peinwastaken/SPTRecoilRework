@@ -32,6 +32,7 @@ namespace PeinRecoilRework
             new RecoilProcessPatch().Enable();
             new ToggleLeftStancePatch().Enable();
             new ApplyComplexRotationPatch().Enable();
+            new ZeroAdjustmentsPatch().Enable();
             new WeaponOverlapLeftStancePatch().Enable();
             new CameraRecoilRotationPatch().Enable();
             new CameraLeanPatch().Enable();
