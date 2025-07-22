@@ -22,7 +22,7 @@ namespace PeinRecoilRework.Patches
 
             DebugLogger.Log("Toggling left stance");
 
-            if (!Util.GetLocalPlayer() == player || lsc == null)
+            if (player != Util.GetLocalPlayer() || lsc == null)
             {
                 return true;
             }
