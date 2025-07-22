@@ -34,6 +34,7 @@ namespace PeinRecoilRework.Patches
         )
         {
             Player player = firearmController?.gameObject.GetComponent<Player>();
+            if (player == null) return;
             ProceduralWeaponAnimation pwa = player.ProceduralWeaponAnimation;
             ShotEffector shotEffector = pwa.Shootingg;
 

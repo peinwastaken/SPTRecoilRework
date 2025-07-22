@@ -41,27 +41,6 @@ namespace PeinRecoilRework.Patches
         }
     }
 
-    public class ApplyComplexRotationPatch : ModulePatch
-    {
-        protected override MethodBase GetTargetMethod()
-        {
-            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.ApplyComplexRotation));
-        }
-
-        [PatchPostfix]
-        private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
-        {
-            /*
-            Player.FirearmController fc = __instance.Shootingg._firearmController;
-            if (fc == null) return;
-
-            Player player = fc.gameObject.GetComponent<Player>();
-            LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
-
-            lsc?.ApplyComplexRotation(__instance, dt);*/
-        }
-    }
-
     public class ZeroAdjustmentsPatch : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
