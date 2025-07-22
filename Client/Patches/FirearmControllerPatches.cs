@@ -21,7 +21,7 @@ namespace PeinRecoilRework.Patches
             Player player = __instance.GetComponent<Player>();
             LeftStanceComponent lsc = player.GetComponent<LeftStanceComponent>();
 
-            if (lsc.IsLeftStance)
+            if (lsc != null && lsc.IsLeftStance)
             {
                 origin += -__instance.WeaponRoot.right * 0.2f;
             }

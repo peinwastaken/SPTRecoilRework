@@ -30,8 +30,6 @@ namespace PeinRecoilRework.Components
             Vector3 posOffset = CurrentLeftStanceOffset;
             Vector3 angOffset = CurrentLeftStanceAngle;
 
-            DebugLogger.LogInfo("ZeroAdjustments called");
-
             handsPosition.Zero += posOffset;
             handsRotation.Zero += angOffset;
         }

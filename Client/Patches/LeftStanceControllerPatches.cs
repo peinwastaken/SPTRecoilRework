@@ -1,7 +1,6 @@
 ﻿using EFT;
 using HarmonyLib;
 using PeinRecoilRework.Components;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
 
@@ -20,20 +19,13 @@ namespace PeinRecoilRework.Patches
             Player player = __instance.GetComponent<Player>();
             LeftStanceComponent lsc = player.gameObject.GetComponent<LeftStanceComponent>();
 
-            DebugLogger.Log("Toggling left stance");
-
-            if (player != Util.GetLocalPlayer() || lsc == null)
+            if (!player.IsYourPlayer || lsc == null)
             {
                 return true;
             }
             else
             {
-                if (__instance.Blindfire)
-                {
-                    return false;
-                }
-
-                if (player.MovementContext.IsInMountedState)
+                if (__instance.Blindfire || player.MovementContext.IsInMountedState)
                 {
                     return false;
                 }

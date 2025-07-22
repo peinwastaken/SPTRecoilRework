@@ -131,8 +131,13 @@ namespace PeinRecoilRework.Patches
             ShotEffector shotEffector = __instance.Shootingg;
             Player.FirearmController fc = shotEffector._firearmController;
             Player player = fc.gameObject.GetComponent<Player>();
+
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
+            if (realRecoil == null) return;
+
             CameraOffsetComponent cameraShake = player.gameObject.GetComponent<CameraOffsetComponent>();
+            if (realRecoil == null) return;
+
             Vector2? realRecoilDirection = null;
 
             if (RealRecoilSettings.EnableRealRecoil.Value == true)
@@ -151,8 +156,6 @@ namespace PeinRecoilRework.Patches
 
                 float recoilVertical = recoilStr * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult;
                 float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult;
-
-                realRecoilDirection = realRecoil.ApplyRecoil(recoilVertical, recoilHorizontal);
 
                 realRecoilDirection = realRecoil.ApplyRecoil(recoilVertical, recoilHorizontal);
             }
