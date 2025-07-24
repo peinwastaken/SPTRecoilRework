@@ -19,20 +19,20 @@ namespace PeinRecoilRework
 
             DebugSettings.Bind(Config, 0, Category.Debug);
             GeneralSettings.Bind(Config, 1, Category.General);
-            LeftStanceSettings.Bind(Config, 2, Category.LeftStance);
+            // LeftStanceSettings.Bind(Config, 2, Category.LeftStance);
             // WeaponSwaySettings.Bind(Config, 3, Category.WeaponSway);
-            RealRecoilSettings.Bind(Config, 3, Category.ReallyReal);
-            CameraRecoilSettings.Bind(Config, 4, Category.CameraRecoil);
-            AdditionalCameraRecoilSettings.Bind(Config, 5, Category.AdditionalCamera);
-            RecoilPosSettings.Bind(Config, 6, Category.RecoilPos);
-            PistolRecoilPosSettings.Bind(Config, 7, Category.PistolRecoilPos);
-            RecoilAngSettings.Bind(Config, 8, Category.RecoilAng);
-            PistolRecoilAngSettings.Bind(Config, 9, Category.PistolRecoilAng);
+            RealRecoilSettings.Bind(Config, 2, Category.ReallyReal);
+            CameraRecoilSettings.Bind(Config, 3, Category.CameraRecoil);
+            AdditionalCameraRecoilSettings.Bind(Config, 4, Category.AdditionalCamera);
+            RecoilPosSettings.Bind(Config, 5, Category.RecoilPos);
+            PistolRecoilPosSettings.Bind(Config, 6, Category.PistolRecoilPos);
+            RecoilAngSettings.Bind(Config, 7, Category.RecoilAng);
+            PistolRecoilAngSettings.Bind(Config, 8, Category.PistolRecoilAng);
 
             new RecoilProcessPatch().Enable();
-            new ToggleLeftStancePatch().Enable();
+            // new ToggleLeftStancePatch().Enable();
             new ZeroAdjustmentsPatch().Enable();
-            new WeaponOverlapLeftStancePatch().Enable();
+            // new WeaponOverlapLeftStancePatch().Enable();
             new CameraRecoilRotationPatch().Enable();
             new CameraLeanPatch().Enable();
             new PlayerInitPatch().Enable();
@@ -40,6 +40,8 @@ namespace PeinRecoilRework
             new SetStableModePatch().Enable();
             new LerpCameraPatch().Enable();
             new RecalculateRecoilOnWeaponSwitchPatch().Enable();
+            new ShiftWeaponRootPatch().Enable();
+            new SetPlayerAimingPatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;
