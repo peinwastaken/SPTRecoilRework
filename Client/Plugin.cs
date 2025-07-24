@@ -29,7 +29,6 @@ namespace PeinRecoilRework
             PistolRecoilAngSettings.Bind(Config, 8, Category.PistolRecoilAng);
 
             new RecoilProcessPatch().Enable();
-            new ZeroAdjustmentsPatch().Enable();
             new CameraRecoilRotationPatch().Enable();
             new CameraLeanPatch().Enable();
             new PlayerInitPatch().Enable();
