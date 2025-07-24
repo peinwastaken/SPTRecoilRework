@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace PeinRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.6.1")]
+    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.7.0")]
     public class Plugin : BaseUnityPlugin
     {
         public static List<WeaponRecoilData> WeaponRecoils { get; set; }        

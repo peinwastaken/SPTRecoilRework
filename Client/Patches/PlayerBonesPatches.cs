@@ -13,9 +13,9 @@ namespace PeinRecoilRework.Patches
         }
 
         [PatchPrefix]
-        private static bool PatchPrefix(PlayerBones __instance, ref bool isAiming, ref float leftStanceCurveValue)
+        private static bool PatchPrefix(PlayerBones __instance, ref bool isAiming)
         {
-            isAiming = false;
+            isAiming = false; // temporary!
 
             return true;
         }
