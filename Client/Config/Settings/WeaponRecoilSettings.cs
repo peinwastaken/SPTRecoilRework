@@ -12,9 +12,9 @@ namespace PeinRecoilRework.Config.Settings
         {
             string formattedCategory = Category.Format(order, category);
 
-            Multiplier = Config.Bind(formattedCategory, "Multiplier", 1f, new ConfigDescription("Overall recoil multiplier.", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 1000 }));
-            AimingMultiplier = Config.Bind(formattedCategory, "Aiming Multiplier", 1f, new ConfigDescription("Recoil multiplier when aiming.", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 990 }));
-            TimeMultiplier = Config.Bind(formattedCategory, "Speed Multiplier", 1f, new ConfigDescription("Multiplier for recoil duration.", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 980 }));
+            Multiplier = Config.Bind(formattedCategory, "Multiplier", 1f, new ConfigDescription("Roll visual recoil multiplier while not aiming.", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 1000 }));
+            AimingMultiplier = Config.Bind(formattedCategory, "Aiming Multiplier", 2f, new ConfigDescription("Roll visual recoil multiplier while aiming", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 990 }));
+            TimeMultiplier = Config.Bind(formattedCategory, "Speed Multiplier", 0.5f, new ConfigDescription("Roll visual recoil speed multiplier", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 980 }));
         }
     }
 }
