@@ -118,12 +118,6 @@ namespace PeinRecoilRework.Patches
 
             WeaponHelper.IsPistolCurrentlyEquipped = isPistol;
             WeaponHelper.CurrentTemplate = template;
-
-            /*
-            float recoilMultiplier = Mathf.Max(0f, (1f + modsFactorRecoil) * (1f - recoilSuppressionX - recoilSuppressionY * recoilSuppressionFactor));
-
-            WeaponHelper.CurrentWeaponRecoilValues = __instance.BasicPlayerRecoilRotationStrength * (template.RecoilForceUp * recoilMultiplier + AimingConfig.RecoilVertBonus) * __instance.IncomingRotationStrengthMultiplier;
-            */
         }
     }
 }

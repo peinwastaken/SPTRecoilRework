@@ -13,7 +13,9 @@
         public static string AdditionalCamera = "Additional Camera Recoil";
         public static string Debug = "Debug";
         public static string WeaponSway = "Weapon Sway";
+        public static string WeaponRecoilSettings = "Recoil Rotation Settings";
+        public static string PistolWeaponRecoilSettings = "Pistol Recoil Rotation Settings";
 
-        public static string Format(int order, string category) => $"{order}. {category}";
+        public static string Format(int order, string category) => $"{order.ToString("D2")}. {category}";
     }
 }

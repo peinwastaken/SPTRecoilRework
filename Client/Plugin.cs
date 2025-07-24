@@ -27,6 +27,8 @@ namespace PeinRecoilRework
             PistolRecoilPosSettings.Bind(Config, 6, Category.PistolRecoilPos);
             RecoilAngSettings.Bind(Config, 7, Category.RecoilAng);
             PistolRecoilAngSettings.Bind(Config, 8, Category.PistolRecoilAng);
+            WeaponRecoilSettings.Bind(Config, 9, Category.WeaponRecoilSettings);
+            PistolWeaponRecoilSettings.Bind(Config, 10, Category.PistolWeaponRecoilSettings);
 
             new RecoilProcessPatch().Enable();
             new CameraRecoilRotationPatch().Enable();
@@ -37,6 +39,7 @@ namespace PeinRecoilRework
             new LerpCameraPatch().Enable();
             new RecalculateRecoilOnWeaponSwitchPatch().Enable();
             new SetPlayerAimingPatch().Enable();
+            new WeaponRecoilInitializePatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;
