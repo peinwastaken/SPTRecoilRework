@@ -2,6 +2,7 @@
 using EFT.Animations;
 using HarmonyLib;
 using PeinRecoilRework.Components;
+using PeinRecoilRework.Config.Settings;
 using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
