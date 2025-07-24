@@ -1,4 +1,5 @@
 ﻿using EFT;
+using EFT.Animations;
 using HarmonyLib;
 using PeinRecoilRework.Components;
 using PeinRecoilRework.Helpers;
@@ -34,12 +35,14 @@ namespace PeinRecoilRework.Patches
         }
 
         [PatchPostfix]
-        public static void PatchPostfix(Player __instance, bool value)
+        public static void PatchPostfix(Player.FirearmController __instance, bool value)
         {
-            Player player = __instance.GetComponent<Player>();
+            if (__instance == null) return; // nre fix
 
+            Player player = __instance.GetComponent<Player>();
             bool isYourPlayer = player.IsYourPlayer;
-            EPointOfView pov = player.ProceduralWeaponAnimation.PointOfView;
+            ProceduralWeaponAnimation pwa = player.ProceduralWeaponAnimation;
+            EPointOfView pov = pwa.PointOfView;
 
             if (isYourPlayer && pov == EPointOfView.FirstPerson)
             {
