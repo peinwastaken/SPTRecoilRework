@@ -35,7 +35,7 @@ namespace PeinRecoilRework.Patches
         {
             if (firearmController == null)
             {
-                DebugLogger.LogError("firearmController was not found! please dont run the postfix! thanks!");
+                DebugLogger.LogWarning("firearmController was not found! please dont run the postfix! thanks!");
                 return;
             }
 
