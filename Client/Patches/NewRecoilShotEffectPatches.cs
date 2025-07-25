@@ -33,6 +33,12 @@ namespace PeinRecoilRework.Patches
             float modsFactorRecoil
         )
         {
+            if (firearmController == null)
+            {
+                DebugLogger.LogError("firearmController was not found! please dont run the postfix! thanks!");
+                return;
+            }
+
             Player player = firearmController?.gameObject.GetComponent<Player>();
             if (player == null) return;
             ProceduralWeaponAnimation pwa = player.ProceduralWeaponAnimation;
