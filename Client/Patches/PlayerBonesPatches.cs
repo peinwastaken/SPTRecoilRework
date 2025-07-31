@@ -41,6 +41,11 @@ namespace PeinRecoilRework.Patches
             var weaponRootAnim = __instance.Weapon_Root_Anim;
             var weaponRootThird = __instance.Weapon_Root_Third;
 
+            if (WeaponHelper.IsPistolCurrentlyEquipped)
+            {
+                isAiming = false;
+            }
+
             if (pv != EPointOfView.FirstPerson || weaponRootAnim == null)
             {
                 if (pv != EPointOfView.FirstPerson)
