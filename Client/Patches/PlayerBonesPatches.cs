@@ -1,8 +1,10 @@
 ﻿using EFT;
 using HarmonyLib;
+using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace PeinRecoilRework.Patches
 {
@@ -34,7 +36,7 @@ namespace PeinRecoilRework.Patches
             PlayerBones __instance, float t, EPointOfView pv, float thirdPersonAuthority,
             bool armsupdated, float positionCacheValue, float leftStanceCurveValue,
             bool inSprint, bool inLeftStanceAnimValue, bool inLeftStanceCacheValue,
-            bool isAiming, bool isAnimatedInteraction)
+            ref bool isAiming, bool isAnimatedInteraction)
         {
             var weaponRootAnim = __instance.Weapon_Root_Anim;
             var weaponRootThird = __instance.Weapon_Root_Third;
@@ -67,7 +69,7 @@ namespace PeinRecoilRework.Patches
 
             if (leftStanceCurveValue >= 1f && !inSprint)
             {
-                if (isAiming && __instance.Player.IsForwardInputDirection)
+                if (isAiming && __instance.Player.InputDirection.sqrMagnitude > 0.001f)
                     _wasMovingInLsAimField.SetValue(__instance, true);
 
                 bool wasMovingInAim = (bool)_wasMovingInLsAimField.GetValue(__instance);
@@ -88,7 +90,8 @@ namespace PeinRecoilRework.Patches
 
                 weaponRootAnim.position = (Vector3)_targetLSPositionField.GetValue(__instance);
 
-                if (isAiming)
+                // this part fucks with pistol left stance shooting, guessing its because of recoil position but unsure
+                if (isAiming && WeaponHelper.IsPistolCurrentlyEquipped == false)
                 {
                     Vector3 aimTarget = Vector3.Lerp(
                         (Vector3)_targetLSInAimPositionField.GetValue(__instance),

@@ -106,6 +106,8 @@ namespace PeinRecoilRework.Patches
                 bool isAiming = __instance.IsAiming;
                 float recoilStr = shotEffector.NewShotRecoil.BasicPlayerRecoilRotationStrength.y; // will be reworked in the future if i figure out how to get final recoil values
 
+                float globalVerticalMult = RealRecoilSettings.RealRecoilVerticalMult.Value;
+                float globalHorizontalMult = RealRecoilSettings.RealRecoilHorizontalMult.Value;
                 float verticalMult = WeaponHelper.CurrentRecoilMult.y;
                 float horizontalMult = WeaponHelper.CurrentRecoilMult.x;
                 float mountedMult = isMounted ? RealRecoilSettings.RealRecoilMountedMult.Value : 1f;
@@ -114,8 +116,8 @@ namespace PeinRecoilRework.Patches
 
                 DebugLogger.LogInfo($"vertical mult: {verticalMult}, horizontal mult: {horizontalMult}");
 
-                float recoilVertical = recoilStr * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult;
-                float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult;
+                float recoilVertical = recoilStr * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult * globalVerticalMult;
+                float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult * globalVerticalMult;
 
                 realRecoilDirection = realRecoil.ApplyRecoil(recoilVertical, recoilHorizontal);
             }

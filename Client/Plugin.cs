@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace PeinRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.7.1")]
+    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.7.2")]
     public class Plugin : BaseUnityPlugin
     {
         public static List<WeaponRecoilData> WeaponRecoils { get; set; }        
@@ -40,6 +40,7 @@ namespace PeinRecoilRework
             new RecalculateRecoilOnWeaponSwitchPatch().Enable();
             new SetPlayerAimingPatch().Enable();
             new WeaponRecoilInitializePatch().Enable();
+            new ShiftWeaponRootPatch().Enable();
 
             List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
             WeaponRecoils = recoilData;
