@@ -117,7 +117,7 @@ namespace PeinRecoilRework.Patches
                 DebugLogger.LogInfo($"vertical mult: {verticalMult}, horizontal mult: {horizontalMult}");
 
                 float recoilVertical = recoilStr * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult * globalVerticalMult;
-                float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult * globalVerticalMult;
+                float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult * globalHorizontalMult;
 
                 realRecoilDirection = realRecoil.ApplyRecoil(recoilVertical, recoilHorizontal);
             }
