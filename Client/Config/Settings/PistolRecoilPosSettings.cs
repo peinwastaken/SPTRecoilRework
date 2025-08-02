@@ -14,7 +14,7 @@ namespace PeinRecoilRework.Config.Settings
             string formattedCategory = Category.Format(order, category);
 
             PistolRecoilPosBackMult = Config.Bind(formattedCategory, "Pistol Recoil Position Backwards Mult", 5f, new ConfigDescription("Multiplier for backwards pistol hand recoil.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 980 }));
-            PistolRecoilPosIntensity = Config.Bind(formattedCategory, "Pistol Recoil Position Intensity", 1f, new ConfigDescription("Pistol hand recoil intensity.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 960 }));
+            PistolRecoilPosIntensity = Config.Bind(formattedCategory, "Pistol Recoil Position Intensity", 1f, new ConfigDescription("Recoil intensity. Consider it an additional multiplier.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 960 }));
             PistolRecoilPosReturnSpeed = Config.Bind(formattedCategory, "Pistol Recoil Position Return Speed", 0.5f, new ConfigDescription("Pistol hand recoil return speed.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 950 }));
             PistolRecoilPosDamping = Config.Bind(formattedCategory, "Pistol Recoil Position Damping", 0.3f, new ConfigDescription("Pistol hand recoil damping.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 940 }));
         }

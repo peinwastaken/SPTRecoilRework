@@ -26,6 +26,7 @@ namespace PeinRecoilRework.Helpers
         public static WeaponTemplate CurrentTemplate = null;
         public static Player.FirearmController CurrentFirearmController = null;
         public static Vector2 CurrentRecoilMult = new Vector2(1, 1);
+        public static Vector2 CurrentRecoilVals = new Vector2(1, 1);
         public static bool IsPistolCurrentlyEquipped = false;
 
         public static bool IsPistol(WeaponTemplate template)
@@ -51,17 +52,6 @@ namespace PeinRecoilRework.Helpers
             );
 
             return recoilValues;
-        }
-
-        public static WeaponRecoilData FindRecoilData(string weaponId)
-        {
-            if (Plugin.WeaponRecoils == null || Plugin.WeaponRecoils.Count == 0)
-            {
-                return null;
-            }
-
-            return Plugin.WeaponRecoils
-                .Find(x => x.WeaponId == weaponId || (x.WeaponIds != null && x.WeaponIds.Contains(weaponId)));
         }
 
         public static EWeaponClass GetWeaponClass(WeaponTemplate template)
@@ -107,6 +97,13 @@ namespace PeinRecoilRework.Helpers
             {
                 return false;
             }
+        }
+
+        public static float GetDynamicRecoilRange(float recoilForceBack, Vector2 rangeMinMax)
+        {
+            float delta = Mathf.InverseLerp(rangeMinMax.x, rangeMinMax.y, recoilForceBack);
+
+            return Mathf.Clamp01(delta);
         }
     }
 }

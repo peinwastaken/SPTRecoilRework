@@ -51,8 +51,11 @@ namespace PeinRecoilRework.Patches
 
             EWeaponClass weaponClass = WeaponHelper.GetWeaponClass(template);
             string weaponId = template?.StringId ?? string.Empty;
-            WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
             bool isPistol = WeaponHelper.IsPistol(template);
+            Vector2 recoilVals = WeaponHelper.GetWeaponRecoilValues(WeaponHelper.CurrentFirearmController);
+            float multModifier = WeaponHelper.GetDynamicRecoilRange(recoilVals.x, RecoilPosSettings.DynamicReturnMinMax.Value);
+            float returnModifier = WeaponHelper.GetDynamicRecoilRange(recoilVals.x, RecoilPosSettings.DynamicReturnMinMax.Value);
+            float dampingModifier = WeaponHelper.GetDynamicRecoilRange(recoilVals.x, RecoilPosSettings.DynamicDampingMinMax.Value);
 
             CameraOffsetComponent cameraOffset = player?.GetComponent<CameraOffsetComponent>();
 
@@ -61,12 +64,12 @@ namespace PeinRecoilRework.Patches
                 return;
             }
 
-            float AngReturnSpeed = isPistol ? PistolRecoilAngSettings.PistolRecoilAngReturnSpeed.Value : RecoilAngSettings.RecoilAngReturnSpeed.Value;
-            float AngDamping = isPistol ? PistolRecoilAngSettings.PistolRecoilAngDamping.Value : RecoilAngSettings.RecoilAngDamping.Value;
+            float angReturnSpeed = isPistol ? PistolRecoilAngSettings.PistolRecoilAngReturnSpeed.Value : RecoilAngSettings.RecoilAngReturnSpeed.Value;
+            float angDamping = isPistol ? PistolRecoilAngSettings.PistolRecoilAngDamping.Value : RecoilAngSettings.RecoilAngDamping.Value;
 
-            float PosIntensity = isPistol ? PistolRecoilPosSettings.PistolRecoilPosIntensity.Value : RecoilPosSettings.RecoilPosIntensity.Value;
-            float PosReturnSpeed = isPistol ? PistolRecoilPosSettings.PistolRecoilPosReturnSpeed.Value : RecoilPosSettings.RecoilPosReturnSpeed.Value;
-            float PosDamping = isPistol ? PistolRecoilPosSettings.PistolRecoilPosDamping.Value : RecoilPosSettings.RecoilPosDamping.Value;
+            float posIntensity = isPistol ? PistolRecoilPosSettings.PistolRecoilPosIntensity.Value : RecoilPosSettings.RecoilPosIntensity.Value;
+            float posReturnSpeed = isPistol ? PistolRecoilPosSettings.PistolRecoilPosReturnSpeed.Value : RecoilPosSettings.RecoilPosReturnSpeed.Value;
+            float posDamping = isPistol ? PistolRecoilPosSettings.PistolRecoilPosDamping.Value : RecoilPosSettings.RecoilPosDamping.Value;
 
             float cameraSnap = isPistol ? GeneralSettings.PistolCameraSnap.Value : GeneralSettings.CameraSnap.Value;
             bool useCategoryMult = RealRecoilSettings.EnableRealRecoilPerWeaponMults.Value;
@@ -77,28 +80,14 @@ namespace PeinRecoilRework.Patches
             camAngRecoil.ReturnSpeed = CameraRecoilSettings.CameraRecoilReturnSpeed.Value;
             camAngRecoil.Damping = CameraRecoilSettings.CameraRecoilDamping.Value;
 
-            if (customData != null && GeneralSettings.AllowServerOverride.Value == true)
-            {
-                AngRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilAngReturnSpeed ?? AngReturnSpeed;
-                AngRecoil.Damping = customData.OverrideProperties.HandRecoilAngDamping ?? AngDamping;
+            AngRecoil.ReturnSpeed = angReturnSpeed;
+            AngRecoil.Damping = angDamping;
 
-                PosRecoil.Intensity = customData.OverrideProperties.HandRecoilPosIntensity ?? PosIntensity;
-                PosRecoil.ReturnSpeed = customData.OverrideProperties.HandRecoilPosReturnSpeed ?? PosReturnSpeed;
-                PosRecoil.Damping = customData.OverrideProperties.HandRecoilPosDamping ?? PosDamping;
+            PosRecoil.Intensity = posIntensity;
+            PosRecoil.ReturnSpeed = posReturnSpeed * returnModifier;
+            PosRecoil.Damping = posDamping * dampingModifier;
 
-                pwa.CameraSmoothRecoil = customData.OverrideProperties.CameraSnap ?? cameraSnap;
-            }
-            else
-            {
-                AngRecoil.ReturnSpeed = AngReturnSpeed;
-                AngRecoil.Damping = AngDamping;
-
-                PosRecoil.Intensity = PosIntensity;
-                PosRecoil.ReturnSpeed = PosReturnSpeed;
-                PosRecoil.Damping = PosDamping;
-
-                pwa.CameraSmoothRecoil = cameraSnap;
-            }
+            pwa.CameraSmoothRecoil = cameraSnap;
 
             if (cameraOffset != null)
             {
@@ -133,6 +122,7 @@ namespace PeinRecoilRework.Patches
             WeaponHelper.CurrentFirearmController = firearmController;
             WeaponHelper.IsPistolCurrentlyEquipped = isPistol;
             WeaponHelper.CurrentTemplate = template;
+            WeaponHelper.CurrentRecoilVals = recoilVals;
         }
     }
 }

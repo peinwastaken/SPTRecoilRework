@@ -11,8 +11,6 @@ namespace PeinRecoilRework
     [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.8.0")]
     public class Plugin : BaseUnityPlugin
     {
-        public static List<WeaponRecoilData> WeaponRecoils { get; set; }        
-
         private void Awake()
         {
             DebugLogger.Logger = Logger;
@@ -41,9 +39,6 @@ namespace PeinRecoilRework
             new SetPlayerAimingPatch().Enable();
             new WeaponRecoilInitializePatch().Enable();
             new ShiftWeaponRootPatch().Enable();
-
-            List<WeaponRecoilData> recoilData = RouteHelper.FetchWeaponDataFromServer();
-            WeaponRecoils = recoilData;
         }
     }
 }

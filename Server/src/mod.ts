@@ -8,10 +8,11 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
 
-class Mod implements IPostDBLoadMod, IPreSptLoadMod
+class Mod implements IPostDBLoadMod //, IPreSptLoadMod
 {
     private cachedWeaponData = []
 
+    /*
     public preSptLoad(container: DependencyContainer): void {
         const staticRouter = container.resolve<StaticRouterModService>("StaticRouterModService")
 
@@ -27,7 +28,7 @@ class Mod implements IPostDBLoadMod, IPreSptLoadMod
             ],
             "PeinRecoilRework"
         )
-    }
+    }*/
 
     public postDBLoad(container: DependencyContainer): void
     {

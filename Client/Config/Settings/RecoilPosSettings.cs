@@ -1,4 +1,5 @@
 ﻿using BepInEx.Configuration;
+using UnityEngine;
 
 namespace PeinRecoilRework.Config.Settings
 {
@@ -9,14 +10,26 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RecoilPosReturnSpeed { get; set; }
         public static ConfigEntry<float> RecoilPosDamping { get; set; }
 
+        public static ConfigEntry<bool> AllowDynamicAdjust { get; set; }
+        public static ConfigEntry<Vector2> DynamicRangeMinMax { get; set; }
+        public static ConfigEntry<Vector2> DynamicMultMinMax { get; set; }
+        public static ConfigEntry<Vector2> DynamicReturnMinMax { get; set; }
+        public static ConfigEntry<Vector2> DynamicDampingMinMax { get; set; }
+
         public static void Bind(ConfigFile Config, int order, string category)
         {
             string formattedCategory = Category.Format(order, category);
 
             RecoilPosBackMult = Config.Bind(formattedCategory, "Recoil Position Backwards Mult", 2f, new ConfigDescription("Multiplier for backwards hand recoil.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 980 }));
-            RecoilPosIntensity = Config.Bind(formattedCategory, "Recoil Position Intensity", 1.5f, new ConfigDescription("Hand recoil intensity.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 970 }));
+            RecoilPosIntensity = Config.Bind(formattedCategory, "Recoil Position Intensity", 1.5f, new ConfigDescription("Recoil intensity. Consider it an additional multiplier.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 970 }));
             RecoilPosReturnSpeed = Config.Bind(formattedCategory, "Recoil Position Return Speed", 0.5f, new ConfigDescription("Hand recoil return speed.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 960 }));
             RecoilPosDamping = Config.Bind(formattedCategory, "Recoil Position Damping", 0.3f, new ConfigDescription("Hand recoil damping.", new AcceptableValueRange<float>(-5f, 5f), new ConfigurationManagerAttributes { Order = 950 }));
+
+            AllowDynamicAdjust = Config.Bind(formattedCategory, "Allow Dynamic Adjustments", true, new ConfigDescription("Allows dynamic adjustment of multiplier, damping and return speed based on the equipped weapon's recoil values.", null, new ConfigurationManagerAttributes { Order = 940 }));
+            DynamicRangeMinMax = Config.Bind(formattedCategory, "DynamicRangeMinMax", new Vector2(600f, 900f), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 930}));
+            DynamicMultMinMax = Config.Bind(formattedCategory, "DynamicMultMinMax", new Vector2(1f, 0.6f), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 920 }));
+            DynamicReturnMinMax = Config.Bind(formattedCategory, "DynamicReturnMinMax", new Vector2(1f, 0.6f), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 920 }));
+            DynamicDampingMinMax = Config.Bind(formattedCategory, "DynamicDampingMinMax", new Vector2(1f, 0.6f), new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 920 }));
         }
     }
 }

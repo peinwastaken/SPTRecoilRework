@@ -19,7 +19,6 @@ namespace PeinRecoilRework.Patches
         private static bool PatchPrefix(ShotEffector.RecoilShotVal __instance, ref Vector3 rnd)
         {
             Target processType = __instance.ProcessType;
-            WeaponRecoilData customData = WeaponHelper.FindRecoilData(WeaponHelper.CurrentTemplate?.StringId ?? string.Empty);
             bool pistolEquipped = WeaponHelper.IsPistolCurrentlyEquipped;
 
             float posBackMult = pistolEquipped ? PistolRecoilPosSettings.PistolRecoilPosBackMult.Value : RecoilPosSettings.RecoilPosBackMult.Value;
@@ -34,41 +33,22 @@ namespace PeinRecoilRework.Patches
                 rnd = newVector;
             }
 
-            if (customData != null && GeneralSettings.AllowServerOverride.Value == true)
+            if (processType == Target.HandsPosition)
             {
-                if (processType == Target.HandsPosition)
-                {
-                    Vector3 newVector = rnd;
-                    newVector.z *= customData.OverrideProperties.HandRecoilPosBackMult ?? posBackMult;
-                    rnd = newVector;
-                }
+                Vector2 recoilVals = WeaponHelper.CurrentRecoilVals;
+                float multModifier = WeaponHelper.GetDynamicRecoilRange(recoilVals.x, RecoilPosSettings.DynamicReturnMinMax.Value);
 
-                if (processType == Target.HandsRotation)
-                {
-                    Vector3 newVector = rnd;
-                    newVector.x *= customData.OverrideProperties.HandRecoilAngUpMult ?? angUpMult;
-                    newVector.y *= customData.OverrideProperties.HandRecoilAngSideMult ?? angSideMult;
-                    rnd = newVector;
-                }
+                Vector3 newVector = rnd;
+                newVector.z *= posBackMult * multModifier;
+                rnd = newVector;
             }
-            else
+
+            if (processType == Target.HandsRotation)
             {
-                if (processType == Target.HandsPosition)
-                {
-                    DebugLogger.LogInfo($"handspos back force: {rnd.z}");
-
-                    Vector3 newVector = rnd;
-                    newVector.z *= posBackMult;
-                    rnd = newVector;
-                }
-
-                if (processType == Target.HandsRotation)
-                {
-                    Vector3 newVector = rnd;
-                    newVector.x *= angUpMult;
-                    newVector.y *= angSideMult;
-                    rnd = newVector;
-                }
+                Vector3 newVector = rnd;
+                newVector.x *= angUpMult;
+                newVector.y *= angSideMult;
+                rnd = newVector;
             }
 
             return true;
