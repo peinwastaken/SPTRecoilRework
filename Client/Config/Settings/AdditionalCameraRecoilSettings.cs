@@ -5,7 +5,9 @@ namespace PeinRecoilRework.Config.Settings
 {
     public class AdditionalCameraRecoilSettings
     {
-        public static ConfigEntry<bool> EnableAdditionalCameraRecoil { get; set; }
+        public static ConfigEntry<bool> EnableAdditionalCameraRecoil { get; set; } 
+        public static ConfigEntry<float> AdditionalRecoilIronsMult { get; set; }
+        public static ConfigEntry<float> AdditionalRecoilOpticsMult { get; set; }
 
         public static ConfigEntry<bool> EnableSlowSpring { get; set; }
         public static ConfigEntry<float> SlowSpringSpeed { get; set; }
@@ -45,8 +47,11 @@ namespace PeinRecoilRework.Config.Settings
             string formattedCategory = Category.Format(order, category);
 
             EnableAdditionalCameraRecoil = Config.Bind(formattedCategory, "Additional Camera Recoil", true, new ConfigDescription("Enables additional camera recoil.", null, new ConfigurationManagerAttributes { Order = 1000 }));
+            AdditionalRecoilIronsMult = Config.Bind(formattedCategory, "Additional Recoil Ironsight Multiplier", 0f, new ConfigDescription("Multiplier for additional recoil when using ironsights.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 990 }));
+            AdditionalRecoilOpticsMult = Config.Bind(formattedCategory, "Additional Recoil Optics Multiplier", 1f, new ConfigDescription("Multiplier for additional recoil when using optics.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 985 }));
 
-            EnableSlowSpring = Config.Bind(formattedCategory, "Enable Slow Spring", false, new ConfigDescription("Enables slow additional camera recoil. Just in case you need an additional spring to control.", null, new ConfigurationManagerAttributes { Order = 980 }));            SlowSpringSpeed = Config.Bind(formattedCategory, "Slow Spring Speed", 18f, new ConfigDescription("Speed of the slow spring", null, new ConfigurationManagerAttributes { Order = 970 }));
+            EnableSlowSpring = Config.Bind(formattedCategory, "Enable Slow Spring", false, new ConfigDescription("Enables slow additional camera recoil. Just in case you need an additional spring to control.", null, new ConfigurationManagerAttributes { Order = 980 })); 
+            SlowSpringSpeed = Config.Bind(formattedCategory, "Slow Spring Speed", 18f, new ConfigDescription("Speed of the slow spring", null, new ConfigurationManagerAttributes { Order = 970 }));
             SlowSpringStiffness = Config.Bind(formattedCategory, "Slow Spring Stiffness", 45f, new ConfigDescription("Stiffness of the slow spring", null, new ConfigurationManagerAttributes { Order = 960 }));
             SlowSpringDamping = Config.Bind(formattedCategory, "Slow Spring Damping", 0.001f, new ConfigDescription("Damping of the slow spring", null, new ConfigurationManagerAttributes { Order = 950 }));
             SlowSpringAngleMinMax = Config.Bind(formattedCategory, "Slow Spring Direction Angle", new Vector2(30f, 150f), new ConfigDescription("Minimum/maximum angle for slow recoil spring. X = minimum, Y = maximum, 0 - right, 90 - up, 180 - left, 270 - down.", null, new ConfigurationManagerAttributes { Order = 940 }));

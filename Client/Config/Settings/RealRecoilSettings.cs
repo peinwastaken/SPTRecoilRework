@@ -14,6 +14,7 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RealRecoilProneMult { get; set; }
         public static ConfigEntry<float> RealRecoilAimingMult { get; set; }
 
+        public static ConfigEntry<bool> EnableRealRecoilPerWeaponMults { get; set; }
         public static ConfigEntry<Vector2> RifleRealRecoilMult { get; set; }
         public static ConfigEntry<Vector2> CarbineRealRecoilMult { get; set; }
         public static ConfigEntry<Vector2> PistolRealRecoilMult { get; set; }
@@ -28,7 +29,7 @@ namespace PeinRecoilRework.Config.Settings
         {
             string formattedCategory = Category.Format(order, category);
 
-            EnableRealRecoil = Config.Bind(formattedCategory, "Enable Real Recoil", true, new ConfigDescription("Enables real recoil, which physically rotates the camera while shooting. The camera will kick upward and sideways. The amount depends on your weapon's recoil stats and the multipliers below.", null, new ConfigurationManagerAttributes { Order = 870 }));
+            EnableRealRecoil = Config.Bind(formattedCategory, "Enable Real Recoil", true, new ConfigDescription("Enables real recoil, which simulates recoil by physically rotating the camera. The amount depends on your weapon's recoil stats and the multipliers below.", null, new ConfigurationManagerAttributes { Order = 870 }));
             RealRecoilVerticalMult = Config.Bind(formattedCategory, "Real Recoil Vertical Mult", 1.2f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
             RealRecoilHorizontalMult = Config.Bind(formattedCategory, "Real Recoil Horizontal Mult", 0.2f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 850 }));
             RealRecoilDecaySpeed = Config.Bind(formattedCategory, "Real Recoil Decay Speed", 20f, new ConfigDescription("Real recoil decay speed.", null, new ConfigurationManagerAttributes { Order = 820 }));
@@ -37,6 +38,7 @@ namespace PeinRecoilRework.Config.Settings
             RealRecoilProneMult = Config.Bind(formattedCategory, "Real Recoil Prone Multiplier", 0.35f, new ConfigDescription("Changes the amount of recoil while prone.", null, new ConfigurationManagerAttributes { Order = 810 }));
             RealRecoilAimingMult = Config.Bind(formattedCategory, "Real Recoil Aiming Multiplier", 0.75f, new ConfigDescription("Changes the amount of recoil while aiming.", null, new ConfigurationManagerAttributes { Order = 800 }));
 
+            EnableRealRecoilPerWeaponMults = Config.Bind(formattedCategory, "Enable Weapon Class Multipliers", false, new ConfigDescription("Enables class specific real recoil multipliers.", null, new ConfigurationManagerAttributes { Order = 795 }));
             RifleRealRecoilMult = Config.Bind(formattedCategory, "Rifle Real Recoil Multiplier", new Vector2(0.7f, 1f), new ConfigDescription("Real recoil multiplier for rifles.", null, new ConfigurationManagerAttributes { Order = 790 }));
             CarbineRealRecoilMult = Config.Bind(formattedCategory, "Carbine Real Recoil Multiplier", new Vector2(0.7f, 1.3f), new ConfigDescription("Real recoil multiplier for carbines.", null, new ConfigurationManagerAttributes { Order = 780 }));
             PistolRealRecoilMult = Config.Bind(formattedCategory, "Pistol Real Recoil Multiplier", new Vector2(0.35f, 0.5f), new ConfigDescription("Real recoil multiplier for pistols.", null, new ConfigurationManagerAttributes { Order = 780 }));

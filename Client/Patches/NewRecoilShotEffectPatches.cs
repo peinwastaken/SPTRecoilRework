@@ -53,17 +53,13 @@ namespace PeinRecoilRework.Patches
             string weaponId = template?.StringId ?? string.Empty;
             WeaponRecoilData customData = WeaponHelper.FindRecoilData(weaponId);
             bool isPistol = WeaponHelper.IsPistol(template);
-            
+
             CameraOffsetComponent cameraOffset = player?.GetComponent<CameraOffsetComponent>();
 
             if (player == null || player != Util.GetLocalPlayer())
             {
                 return;
             }
-
-            ConfigEntry<Vector2> recoilConfig;
-            WeaponHelper.RealRecoilMultipliers.TryGetValue(weaponClass, out recoilConfig);
-            WeaponHelper.CurrentRecoilMult = recoilConfig?.Value ?? Vector2.zero;
 
             float AngReturnSpeed = isPistol ? PistolRecoilAngSettings.PistolRecoilAngReturnSpeed.Value : RecoilAngSettings.RecoilAngReturnSpeed.Value;
             float AngDamping = isPistol ? PistolRecoilAngSettings.PistolRecoilAngDamping.Value : RecoilAngSettings.RecoilAngDamping.Value;
@@ -73,6 +69,7 @@ namespace PeinRecoilRework.Patches
             float PosDamping = isPistol ? PistolRecoilPosSettings.PistolRecoilPosDamping.Value : RecoilPosSettings.RecoilPosDamping.Value;
 
             float cameraSnap = isPistol ? GeneralSettings.PistolCameraSnap.Value : GeneralSettings.CameraSnap.Value;
+            bool useCategoryMult = RealRecoilSettings.EnableRealRecoilPerWeaponMults.Value;
 
             pwa.CrankRecoil = GeneralSettings.EnableCrankRecoil.Value;
 
@@ -120,6 +117,17 @@ namespace PeinRecoilRework.Patches
                 cameraSpring.Damping = AdditionalCameraRecoilSettings.CameraSpringDamping.Value;
                 cameraSpring.Speed = AdditionalCameraRecoilSettings.CameraSpringSpeed.Value;
                 cameraSpring.Stiffness = AdditionalCameraRecoilSettings.CameraSpringStiffness.Value;
+            }
+
+            if (useCategoryMult)
+            {
+                ConfigEntry<Vector2> recoilConfig;
+                WeaponHelper.RealRecoilMultipliers.TryGetValue(weaponClass, out recoilConfig);
+                WeaponHelper.CurrentRecoilMult = recoilConfig?.Value ?? Vector2.zero;
+            }
+            else
+            {
+                WeaponHelper.CurrentRecoilMult = Vector2.one;
             }
 
             WeaponHelper.CurrentFirearmController = firearmController;

@@ -127,7 +127,7 @@ namespace PeinRecoilRework.Patches
             if (AdditionalCameraRecoilSettings.EnableAdditionalCameraRecoil.Value == true)
             {
                 bool isUsingIrons = WeaponHelper.IsUsingIrons(__instance);
-                float intensity = isUsingIrons ? 0f : 1f;
+                float intensity = isUsingIrons ? AdditionalCameraRecoilSettings.AdditionalRecoilIronsMult.Value : AdditionalCameraRecoilSettings.AdditionalRecoilOpticsMult.Value;
 
                 DebugLogger.LogInfo($"isUsingIrons: {isUsingIrons}");
 
