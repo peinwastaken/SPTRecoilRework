@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using EFT;
+using EFT.Animations;
 using EFT.InventoryLogic;
 using PeinRecoilRework.Data;
 using System.Collections.Generic;
@@ -30,6 +31,26 @@ namespace PeinRecoilRework.Helpers
         public static bool IsPistol(WeaponTemplate template)
         {
             return GetWeaponClass(template) == EWeaponClass.Pistol;
+        }
+
+        public static Vector2 GetWeaponRecoilValues(Player.FirearmController fc)
+        {
+            if (fc == null) return Vector2.zero;
+
+            float recoilUp = fc.Weapon.Template.RecoilForceUp;
+            float recoilBack = fc.Weapon.Template.RecoilForceBack;
+            float recoilDelta = fc.Weapon.RecoilDelta;
+
+            DebugLogger.LogInfo($"recoilup : {recoilUp}, recoilback: {recoilBack}, recoildelta: {recoilDelta}");
+            DebugLogger.LogInfo($"final recoil: {recoilUp + recoilUp * recoilDelta}, {recoilBack + recoilBack * recoilDelta}");
+
+            // x = hor, y = vert
+            Vector2 recoilValues = new Vector2(
+                recoilBack + recoilBack * recoilDelta,
+                recoilUp + recoilUp * recoilDelta
+            );
+
+            return recoilValues;
         }
 
         public static WeaponRecoilData FindRecoilData(string weaponId)
@@ -72,17 +93,20 @@ namespace PeinRecoilRework.Helpers
             }
         }
 
-        public static bool IsUsingIrons(Weapon weapon)
+        public static bool IsUsingIrons(ProceduralWeaponAnimation pwa)
         {
-            foreach (Mod mod in weapon.Mods)
+            if (pwa.CurrentAimingMod != null)
             {
-                if (mod is IronSightItemClass)
-                {
-                    return true;
-                }
+                return pwa.CurrentAimingMod.Item is IronSightItemClass;
             }
-
-            return false;
+            else if (pwa.CurrentScope != null) // sort of a fallback
+            {
+                return !pwa.CurrentScope.IsOptic;
+            }
+            else // actual fallback
+            {
+                return false;
+            }
         }
     }
 }

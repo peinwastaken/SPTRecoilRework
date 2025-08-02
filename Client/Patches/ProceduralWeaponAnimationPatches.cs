@@ -1,9 +1,6 @@
-﻿using Diz.Jobs;
-using EFT;
+﻿using EFT;
 using EFT.Animations;
-using EFT.InventoryLogic;
 using HarmonyLib;
-using Mono.Cecil.Cil;
 using PeinRecoilRework.Components;
 using PeinRecoilRework.Config.Settings;
 using PeinRecoilRework.Helpers;
@@ -108,7 +105,8 @@ namespace PeinRecoilRework.Patches
             {
                 bool isMounted = __instance.IsMountedState || __instance.IsBipodUsed || __instance.IsVerticalMounting;
                 bool isAiming = __instance.IsAiming;
-                float recoilStr = shotEffector.NewShotRecoil.BasicPlayerRecoilRotationStrength.y; // will be reworked in the future if i figure out how to get final recoil values
+
+                Vector2 weaponRecoil = WeaponHelper.GetWeaponRecoilValues(fc);
 
                 float globalVerticalMult = RealRecoilSettings.RealRecoilVerticalMult.Value;
                 float globalHorizontalMult = RealRecoilSettings.RealRecoilHorizontalMult.Value;
@@ -120,32 +118,19 @@ namespace PeinRecoilRework.Patches
 
                 DebugLogger.LogInfo($"vertical mult: {verticalMult}, horizontal mult: {horizontalMult}");
 
-                float recoilVertical = recoilStr * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult * globalVerticalMult;
-                float recoilHorizontal = recoilStr * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult * globalHorizontalMult;
+                float recoilVertical = weaponRecoil.y * scaleVert * stanceMult * mountedMult * aimingMult * verticalMult * globalVerticalMult;
+                float recoilHorizontal = weaponRecoil.x * scaleHor * stanceMult * mountedMult * aimingMult * horizontalMult * globalHorizontalMult;
 
                 realRecoilDirection = realRecoil.ApplyRecoil(recoilVertical, recoilHorizontal);
             }
 
             if (AdditionalCameraRecoilSettings.EnableAdditionalCameraRecoil.Value == true)
             {
-                bool isUsingIrons;
-
-                if (__instance.CurrentAimingMod != null)
-                {
-                    isUsingIrons = __instance.CurrentAimingMod.Item is IronSightItemClass;
-                }
-                else if (__instance.CurrentScope != null) // sort of a fallback
-                {
-                    isUsingIrons = !__instance.CurrentScope.IsOptic;
-                }
-                else // actual fallback
-                {
-                    isUsingIrons = false;
-                }
-
+                bool isUsingIrons = WeaponHelper.IsUsingIrons(__instance);
                 float intensity = isUsingIrons ? 0f : 1f;
 
                 DebugLogger.LogInfo($"isUsingIrons: {isUsingIrons}");
+
                 if (realRecoilDirection == null)
                 {
                     cameraShake.DoRecoilShake(null, intensity);
