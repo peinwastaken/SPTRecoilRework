@@ -3,6 +3,7 @@ using EFT;
 using EFT.Animations;
 using EFT.InventoryLogic;
 using HarmonyLib;
+using Mono.Cecil.Cil;
 using PeinRecoilRework.Components;
 using PeinRecoilRework.Config.Settings;
 using PeinRecoilRework.Helpers;
@@ -127,10 +128,24 @@ namespace PeinRecoilRework.Patches
 
             if (AdditionalCameraRecoilSettings.EnableAdditionalCameraRecoil.Value == true)
             {
-                bool isUsingOptic = __instance.CurrentScope.IsOptic;
-                float intensity = isUsingOptic ? 1f : 0f;
+                bool isUsingIrons;
 
-                DebugLogger.LogInfo($"isUsingOptic: {isUsingOptic}");
+                if (__instance.CurrentAimingMod != null)
+                {
+                    isUsingIrons = __instance.CurrentAimingMod.Item is IronSightItemClass;
+                }
+                else if (__instance.CurrentScope != null) // sort of a fallback
+                {
+                    isUsingIrons = !__instance.CurrentScope.IsOptic;
+                }
+                else // actual fallback
+                {
+                    isUsingIrons = false;
+                }
+
+                float intensity = isUsingIrons ? 0f : 1f;
+
+                DebugLogger.LogInfo($"isUsingIrons: {isUsingIrons}");
                 if (realRecoilDirection == null)
                 {
                     cameraShake.DoRecoilShake(null, intensity);
