@@ -55,6 +55,8 @@ namespace PeinRecoilRework.Patches
             {
                 if (processType == Target.HandsPosition)
                 {
+                    DebugLogger.LogInfo($"handspos back force: {rnd.z}");
+
                     Vector3 newVector = rnd;
                     newVector.z *= posBackMult;
                     rnd = newVector;
