@@ -1,4 +1,5 @@
 ﻿using BepInEx.Configuration;
+using EFT;
 using EFT.InventoryLogic;
 using PeinRecoilRework.Data;
 using System.Collections.Generic;
@@ -21,7 +22,8 @@ namespace PeinRecoilRework.Helpers
             { EWeaponClass.GrenadeLauncher, Config.Settings.RealRecoilSettings.GrenadeLauncherRealRecoilMult }
         };
 
-        public static WeaponTemplate CurrentTemplate { get; set; } = null;
+        public static WeaponTemplate CurrentTemplate = null;
+        public static Player.FirearmController CurrentFirearmController = null;
         public static Vector2 CurrentRecoilMult = new Vector2(1, 1);
         public static bool IsPistolCurrentlyEquipped = false;
 
@@ -68,6 +70,19 @@ namespace PeinRecoilRework.Helpers
                 default:
                     return EWeaponClass.None; // hopefully this never happens
             }
+        }
+
+        public static bool IsUsingIrons(Weapon weapon)
+        {
+            foreach (Mod mod in weapon.Mods)
+            {
+                if (mod is IronSightItemClass)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

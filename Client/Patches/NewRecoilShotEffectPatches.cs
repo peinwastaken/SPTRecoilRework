@@ -122,6 +122,7 @@ namespace PeinRecoilRework.Patches
                 cameraSpring.Stiffness = AdditionalCameraRecoilSettings.CameraSpringStiffness.Value;
             }
 
+            WeaponHelper.CurrentFirearmController = firearmController;
             WeaponHelper.IsPistolCurrentlyEquipped = isPistol;
             WeaponHelper.CurrentTemplate = template;
         }

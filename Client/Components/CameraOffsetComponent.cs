@@ -12,7 +12,7 @@ namespace PeinRecoilRework.Components
         public RecoilSpring FastShakeSpring;
         public RecoilSpring CameraSpring;
 
-        public void DoRecoilShake(Vector2? dir = null)
+        public void DoRecoilShake(Vector2? dir = null, float intensity = 1f)
         {
             Vector2 recoilDir = dir ?? Vector2.zero;
 
@@ -33,16 +33,16 @@ namespace PeinRecoilRework.Components
                         slowDir = slowDir.normalized;
                     }
 
-                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilHorizontalMinMax.Value;
-                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilVerticalMinMax.Value;
+                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilHorizontalMinMax.Value * intensity;
+                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringRealRecoilVerticalMinMax.Value * intensity;
 
                     slowDir.x *= Random.Range(horizontalMult.x, horizontalMult.y);
                     slowDir.y *= Random.Range(verticalMult.x, verticalMult.y);
                 }
                 else
                 {
-                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.SlowSpringHorizontalMinMax.Value;
-                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringVerticalMinMax.Value;
+                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.SlowSpringHorizontalMinMax.Value * intensity;
+                    Vector2 verticalMult = AdditionalCameraRecoilSettings.SlowSpringVerticalMinMax.Value * intensity;
 
                     slowDir.x *= Random.Range(horizontalMult.x, horizontalMult.y);
                     slowDir.y *= Random.Range(verticalMult.x, verticalMult.y);
@@ -66,16 +66,16 @@ namespace PeinRecoilRework.Components
                         fastDir = fastDir.normalized;
                     }
 
-                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilHorizontalMinMax.Value;
-                    Vector2 verticalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilVerticalMinMax.Value;
+                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilHorizontalMinMax.Value * intensity;
+                    Vector2 verticalMult = AdditionalCameraRecoilSettings.FastSpringRealRecoilVerticalMinMax.Value * intensity;
 
                     fastDir.x *= Random.Range(horizontalMult.x, horizontalMult.y);
                     fastDir.y *= Random.Range(verticalMult.x, verticalMult.y);
                 }
                 else
                 {
-                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.FastSpringHorizontalMinMax.Value;
-                    Vector2 verticalMult = AdditionalCameraRecoilSettings.FastSpringVerticalMinMax.Value;
+                    Vector2 horizontalMult = AdditionalCameraRecoilSettings.FastSpringHorizontalMinMax.Value * intensity;
+                    Vector2 verticalMult = AdditionalCameraRecoilSettings.FastSpringVerticalMinMax.Value * intensity;
 
                     fastDir.x *= Random.Range(horizontalMult.x, horizontalMult.y);
                     fastDir.y *= Random.Range(verticalMult.x, verticalMult.y);

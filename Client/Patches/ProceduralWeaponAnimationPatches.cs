@@ -1,5 +1,7 @@
-﻿using EFT;
+﻿using Diz.Jobs;
+using EFT;
 using EFT.Animations;
+using EFT.InventoryLogic;
 using HarmonyLib;
 using PeinRecoilRework.Components;
 using PeinRecoilRework.Config.Settings;
@@ -10,7 +12,6 @@ using UnityEngine;
 
 namespace PeinRecoilRework.Patches
 {
-
     public class CameraRecoilRotationPatch : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
@@ -83,8 +84,10 @@ namespace PeinRecoilRework.Patches
         }
 
         [PatchPostfix]
-        private static void PatchPostfix(ProceduralWeaponAnimation __instance)
+        private static void PatchPostfix(ProceduralWeaponAnimation __instance, float str)
         {
+            DebugLogger.LogInfo($"recoil strength: {str}");
+
             float scaleVert = 0.01f;
             float scaleHor = 0.01f;
 
@@ -124,13 +127,17 @@ namespace PeinRecoilRework.Patches
 
             if (AdditionalCameraRecoilSettings.EnableAdditionalCameraRecoil.Value == true)
             {
+                bool isUsingOptic = __instance.CurrentScope.IsOptic;
+                float intensity = isUsingOptic ? 1f : 0f;
+
+                DebugLogger.LogInfo($"isUsingOptic: {isUsingOptic}");
                 if (realRecoilDirection == null)
                 {
-                    cameraShake.DoRecoilShake();
+                    cameraShake.DoRecoilShake(null, intensity);
                 }
                 else
                 {
-                    cameraShake.DoRecoilShake(realRecoilDirection);
+                    cameraShake.DoRecoilShake(realRecoilDirection, intensity);
                 }
             }
         }

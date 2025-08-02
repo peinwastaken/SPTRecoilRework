@@ -41,11 +41,6 @@ namespace PeinRecoilRework.Helpers
 
         public void ApplyImpulse(Vector3 dir)
         {
-            Velocity = dir;
-        }
-
-        public void AddVelocity(Vector3 dir)
-        {
             Velocity += dir;
         }
     }

@@ -21,7 +21,7 @@ namespace PeinRecoilRework.Components
             dir.y *= WeaponSwaySettings.WeaponSwayMult.Value.y;
 
             // x - vertical, y - roll, z - horizontal
-            WeaponSwayAngSpring.AddVelocity(new Vector3(dir.y, -dir.x/2, -dir.x) * dt);
+            WeaponSwayAngSpring.ApplyImpulse(new Vector3(dir.y, -dir.x/2, -dir.x) * dt);
             // WeaponSwayPosSpring.ApplyImpulse(new Vector3(dir.x, dir.y, 0) * dt);
         }
 
