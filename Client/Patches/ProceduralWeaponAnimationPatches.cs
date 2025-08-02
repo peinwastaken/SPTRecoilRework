@@ -84,8 +84,6 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, float str)
         {
-            DebugLogger.LogInfo($"recoil strength: {str}");
-
             float scaleVert = 0.01f;
             float scaleHor = 0.01f;
 
@@ -127,7 +125,7 @@ namespace PeinRecoilRework.Patches
             if (AdditionalCameraRecoilSettings.EnableAdditionalCameraRecoil.Value == true)
             {
                 bool isUsingIrons = WeaponHelper.IsUsingIrons(__instance);
-                float intensity = isUsingIrons ? AdditionalCameraRecoilSettings.AdditionalRecoilIronsMult.Value : AdditionalCameraRecoilSettings.AdditionalRecoilOpticsMult.Value;
+                float intensity = isUsingIrons ? AdditionalCameraRecoilSettings.AdditionalRecoilIronsMult.Value : AdditionalCameraRecoilSettings.AdditionalRecoilOpticsMult.;
 
                 DebugLogger.LogInfo($"isUsingIrons: {isUsingIrons}");
 
