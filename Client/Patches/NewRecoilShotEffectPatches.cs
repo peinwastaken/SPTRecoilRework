@@ -63,12 +63,12 @@ namespace PeinRecoilRework.Patches
                 return;
             }
 
-            float angReturnSpeed = isPistol ? PistolRecoilSettings.PistolRecoilAngReturnSpeed.Value : RecoilSettings.RecoilAngReturnSpeed.Value;
-            float angDamping = isPistol ? PistolRecoilSettings.PistolRecoilAngDamping.Value : RecoilSettings.RecoilAngDamping.Value;
-
-            float posIntensity = isPistol ? PistolRecoilSettings.PistolRecoilPosIntensity.Value : RecoilSettings.RecoilPosIntensity.Value;
-            float posReturnSpeed = isPistol ? PistolRecoilSettings.PistolRecoilPosReturnSpeed.Value : RecoilSettings.RecoilPosReturnSpeed.Value;
-            float posDamping = isPistol ? PistolRecoilSettings.PistolRecoilPosDamping.Value : RecoilSettings.RecoilPosDamping.Value;
+            // wtf is this!!!
+            float angReturnSpeed = isPistol ? PistolRecoilSettings.RecoilAngReturnSpeed.Value : RecoilSettings.RecoilAngReturnSpeed.Value;
+            float angDamping = isPistol ? PistolRecoilSettings.RecoilAngDamping.Value : RecoilSettings.RecoilAngDamping.Value;
+            float posIntensity = isPistol ? PistolRecoilSettings.RecoilPosIntensity.Value : RecoilSettings.RecoilPosIntensity.Value;
+            float posReturnSpeed = isPistol ? PistolRecoilSettings.RecoilPosReturnSpeed.Value : RecoilSettings.RecoilPosReturnSpeed.Value;
+            float posDamping = isPistol ? PistolRecoilSettings.RecoilPosDamping.Value : RecoilSettings.RecoilPosDamping.Value;
 
             float cameraSnap = isPistol ? GeneralSettings.PistolCameraSnap.Value : GeneralSettings.CameraSnap.Value;
             bool useCategoryMult = RealRecoilSettings.EnableRealRecoilPerWeaponMults.Value;

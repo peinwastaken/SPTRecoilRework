@@ -15,9 +15,9 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RecoilAngReturnSpeed { get; set; }
         public static ConfigEntry<float> RecoilAngDamping { get; set; }
 
-        public static ConfigEntry<float> RollMultiplier;
-        public static ConfigEntry<float> RollAimingMultiplier;
-        public static ConfigEntry<float> RollTimeMultiplier;
+        public static ConfigEntry<float> RollMultiplier { get; set; }
+        public static ConfigEntry<float> RollAimingMultiplier { get; set; }
+        public static ConfigEntry<float> RollTimeMultiplier { get; set; }
 
         public static ConfigEntry<bool> AllowDynamicAdjust { get; set; }
         public static ConfigEntry<Vector2> DynamicRangeMinMax { get; set; }
