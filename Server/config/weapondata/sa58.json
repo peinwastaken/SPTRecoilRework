@@ -2,6 +2,6 @@
     "weaponId": "5b0bbe4e5acfc40dc528a72d",
     "overrideProperties": {
         "RecoilCategoryMultiplierHandRotation": 0.14,
-        "RecoilPosZMult": 1.0
+        "RecoilPosZMult": 1.2
     }
 }

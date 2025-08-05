@@ -1,10 +1,8 @@
 ﻿using BepInEx;
 using PeinRecoilRework.Config;
 using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Data;
 using PeinRecoilRework.Helpers;
 using PeinRecoilRework.Patches;
-using System.Collections.Generic;
 
 namespace PeinRecoilRework
 {
@@ -21,12 +19,8 @@ namespace PeinRecoilRework
             RealRecoilSettings.Bind(Config, 2, Category.ReallyReal);
             CameraRecoilSettings.Bind(Config, 3, Category.CameraRecoil);
             AdditionalCameraRecoilSettings.Bind(Config, 4, Category.AdditionalCamera);
-            RecoilPosSettings.Bind(Config, 5, Category.RecoilPos);
-            PistolRecoilPosSettings.Bind(Config, 6, Category.PistolRecoilPos);
-            RecoilAngSettings.Bind(Config, 7, Category.RecoilAng);
-            PistolRecoilAngSettings.Bind(Config, 8, Category.PistolRecoilAng);
-            WeaponRecoilSettings.Bind(Config, 9, Category.WeaponRecoilSettings);
-            PistolWeaponRecoilSettings.Bind(Config, 10, Category.PistolWeaponRecoilSettings);
+            RecoilSettings.Bind(Config, 5, Category.RecoilSettings);
+            PistolRecoilSettings.Bind(Config, 6, Category.PistolRecoilSettings);
 
             new RecoilProcessPatch().Enable();
             new CameraRecoilRotationPatch().Enable();

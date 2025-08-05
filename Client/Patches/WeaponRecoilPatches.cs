@@ -17,10 +17,11 @@ namespace PeinRecoilRework.Patches
         public static void PatchPostfix(WeaponRecoil __instance)
         {
             bool isPistol = WeaponHelper.IsPistolCurrentlyEquipped;
-            DebugLogger.LogInfo(isPistol.ToString());
-            float recoilRotationMult = isPistol ? PistolWeaponRecoilSettings.Multiplier.Value : WeaponRecoilSettings.Multiplier.Value;
-            float recoilAimingMult = isPistol ? PistolWeaponRecoilSettings.AimingMultiplier.Value : WeaponRecoilSettings.AimingMultiplier.Value;
-            float recoilTimeMult = isPistol ? PistolWeaponRecoilSettings.TimeMultiplier.Value : WeaponRecoilSettings.TimeMultiplier.Value;
+            DebugLogger.LogInfo($"is current wpn pistol: {isPistol}");
+
+            float recoilRotationMult = isPistol ? PistolRecoilSettings.RollMultiplier.Value : RecoilSettings.RollMultiplier.Value;
+            float recoilAimingMult = isPistol ? PistolRecoilSettings.RollAimingMultiplier.Value : RecoilSettings.RollAimingMultiplier.Value;
+            float recoilTimeMult = isPistol ? PistolRecoilSettings.RollTimeMultiplier.Value : RecoilSettings.RollTimeMultiplier.Value;
 
             WeaponRecoilValue[] weaponRecoils = __instance.Values;
             foreach (WeaponRecoilValue recoil in weaponRecoils)

@@ -1,7 +1,6 @@
 {
     "weaponId": "5bb2475ed4351e00853264e3",
     "overrideProperties": {
-        "RecoilForceBack": 220,
-        "RecoilPosZMult": 1.2
+        "RecoilPosZMult": 0.70
     }
 }

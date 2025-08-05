@@ -3,18 +3,13 @@
     public class Category
     {
         public static string General = "General";
-        public static string LeftStance = "Left Stance";
         public static string ReallyReal = "Real Recoil";
         public static string CameraRecoil = "Camera Recoil";
-        public static string RecoilPos = "Rifle Recoil Position";
-        public static string PistolRecoilPos = "Pistol Recoil Position";
-        public static string RecoilAng = "Rifle Recoil Angle";
-        public static string PistolRecoilAng = "Pistol Recoil Angle";
         public static string AdditionalCamera = "Additional Camera Recoil";
         public static string Debug = "Debug";
         public static string WeaponSway = "Weapon Sway";
-        public static string WeaponRecoilSettings = "Recoil Rotation Settings";
-        public static string PistolWeaponRecoilSettings = "Pistol Recoil Rotation Settings";
+        public static string RecoilSettings = "Recoil Settings";
+        public static string PistolRecoilSettings = "Pistol Recoil Settings";
 
         public static string Format(int order, string category) => $"{order.ToString("D2")}. {category}";
     }
