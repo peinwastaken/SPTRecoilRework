@@ -2,6 +2,7 @@
 using EFT;
 using EFT.Animations;
 using EFT.InventoryLogic;
+using PeinRecoilRework.Config.Settings;
 using PeinRecoilRework.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,29 +59,19 @@ namespace PeinRecoilRework.Helpers
         {
             string weaponClassId = template.weapClass.ToLower();
 
-            switch (weaponClassId)
+            return weaponClassId switch
             {
-                case "assaultrifle":
-                    return EWeaponClass.AssaultRifle;
-                case "assaultcarbine":
-                    return EWeaponClass.AssaultCarbine;
-                case "pistol":
-                    return EWeaponClass.Pistol;
-                case "shotgun":
-                    return EWeaponClass.Shotgun;
-                case "sniperrifle":
-                    return EWeaponClass.SniperRifle;
-                case "machinegun":
-                    return EWeaponClass.MachineGun;
-                case "smg":
-                    return EWeaponClass.SubMachineGun;
-                case "marksmanrifle":
-                    return EWeaponClass.MarksmanRifle;
-                case "grenadelauncher":
-                    return EWeaponClass.GrenadeLauncher;
-                default:
-                    return EWeaponClass.None; // hopefully this never happens
-            }
+                "assaultrifle" => EWeaponClass.AssaultRifle,
+                "assaultcarbine" => EWeaponClass.AssaultCarbine,
+                "pistol" => EWeaponClass.Pistol,
+                "shotgun" => EWeaponClass.Shotgun,
+                "sniperrifle" => EWeaponClass.SniperRifle,
+                "machinegun" => EWeaponClass.MachineGun,
+                "smg" => EWeaponClass.SubMachineGun,
+                "marksmanrifle" => EWeaponClass.MarksmanRifle,
+                "grenadelauncher" => EWeaponClass.GrenadeLauncher,
+                _ => EWeaponClass.None // hopefully this never happens
+            };
         }
 
         public static bool IsUsingIrons(ProceduralWeaponAnimation pwa)
@@ -99,11 +90,16 @@ namespace PeinRecoilRework.Helpers
             }
         }
 
-        public static float GetDynamicRecoilRange(float recoilForceBack, Vector2 rangeMinMax)
+        public static float GetDynamicRecoilMult(float recoilForce, Vector2 valueRangeMinMax, Vector2 clampRangeMinMax, bool isPistol)
         {
-            float delta = Mathf.InverseLerp(rangeMinMax.x, rangeMinMax.y, recoilForceBack);
+            // hi. got lazy
+            if (isPistol && PistolRecoilSettings.AllowDynamicAdjust.Value == false) return 1f;
+            if (!isPistol && RecoilSettings.AllowDynamicAdjust.Value == false) return 1f;
 
-            return Mathf.Clamp01(delta);
+            float modifier01 = Mathf.Clamp01(Mathf.InverseLerp(valueRangeMinMax.x, valueRangeMinMax.y, recoilForce));
+            float modifier = Mathf.Lerp(clampRangeMinMax.x, clampRangeMinMax.y, modifier01);
+
+            return modifier;
         }
     }
 }

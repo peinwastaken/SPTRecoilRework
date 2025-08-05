@@ -19,7 +19,8 @@ namespace PeinRecoilRework.Patches
         {
             Target processType = __instance.ProcessType;
             bool pistolEquipped = WeaponHelper.IsPistolCurrentlyEquipped;
-
+            Vector2 recoilVals = WeaponHelper.CurrentRecoilVals;
+            Vector2 recoilRange = pistolEquipped ? PistolRecoilSettings.DynamicRangeMinMax.Value : RecoilSettings.DynamicRangeMinMax.Value;
             float posBackMult = pistolEquipped ? PistolRecoilSettings.RecoilPosBackMult.Value : RecoilSettings.RecoilPosBackMult.Value;
             float angUpMult = pistolEquipped ? PistolRecoilSettings.RecoilAngUpMult.Value : RecoilSettings.RecoilAngUpMult.Value;
             float angSideMult = pistolEquipped ? PistolRecoilSettings.RecoilAngSideMult.Value : RecoilSettings.RecoilAngSideMult.Value;
@@ -34,8 +35,7 @@ namespace PeinRecoilRework.Patches
 
             if (processType == Target.HandsPosition)
             {
-                Vector2 recoilVals = WeaponHelper.CurrentRecoilVals;
-                float multModifier = WeaponHelper.GetDynamicRecoilRange(recoilVals.x, RecoilSettings.DynamicReturnMinMax.Value);
+                float multModifier = pistolEquipped ? 1f : WeaponHelper.GetDynamicRecoilMult(recoilVals.x, recoilRange, RecoilSettings.DynamicMultMinMax.Value, pistolEquipped);
 
                 Vector3 newVector = rnd;
                 newVector.z *= posBackMult * multModifier;
@@ -44,8 +44,10 @@ namespace PeinRecoilRework.Patches
 
             if (processType == Target.HandsRotation)
             {
+                float multModifier = pistolEquipped ? WeaponHelper.GetDynamicRecoilMult(recoilVals.y, recoilRange, PistolRecoilSettings.DynamicMultMinMax.Value, pistolEquipped) : 1f ;
+
                 Vector3 newVector = rnd;
-                newVector.x *= angUpMult;
+                newVector.x *= angUpMult * multModifier;
                 newVector.y *= angSideMult;
                 rnd = newVector;
             }

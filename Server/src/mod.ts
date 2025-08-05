@@ -47,8 +47,9 @@ class Mod implements IPostDBLoadMod //, IPreSptLoadMod
             const weaponId = weapon["weaponId"]
             const weaponIds = weapon["weaponIds"]
             const override = weapon["overrideProperties"]
+            const overrideEntries = Object.entries(override)
 
-            for (const [property, value] of Object.entries(override)) {
+            for (const [property, value] of overrideEntries) {
                 if (weaponId) {
                     templates.items[weaponId]._props[property] = value
                 }
@@ -59,7 +60,9 @@ class Mod implements IPostDBLoadMod //, IPreSptLoadMod
                 }
             }
 
-            weaponCount += weaponIds?.length || 1
+            if (overrideEntries.length > 0) {
+                weaponCount += weaponIds?.length || 1
+            }
         })
 
         this.cachedWeaponData = weaponData
