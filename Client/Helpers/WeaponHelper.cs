@@ -39,6 +39,17 @@ namespace PeinRecoilRework.Helpers
         {
             if (fc == null) return Vector2.zero;
 
+            // temp
+            if (RealRecoilSettings.RealRecoil172Behavior.Value == true)
+            {
+                Player player = fc.GetComponent<Player>();
+                ProceduralWeaponAnimation pwa = player.ProceduralWeaponAnimation;
+
+                float recoilStr = pwa.Shootingg.NewShotRecoil.BasicPlayerRecoilRotationStrength.y;
+
+                return new Vector2(recoilStr, recoilStr);
+            }
+
             float recoilUp = fc.Weapon.Template.RecoilForceUp;
             float recoilBack = fc.Weapon.Template.RecoilForceBack;
             float recoilDelta = fc.Weapon.RecoilDelta;

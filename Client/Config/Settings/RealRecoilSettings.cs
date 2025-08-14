@@ -6,6 +6,7 @@ namespace PeinRecoilRework.Config.Settings
     public class RealRecoilSettings
     {
         public static ConfigEntry<bool> EnableRealRecoil { get; set; }
+        public static ConfigEntry<bool> RealRecoil172Behavior { get; set; }
         public static ConfigEntry<float> RealRecoilVerticalMult { get; set; } // base multiplier
         public static ConfigEntry<float> RealRecoilHorizontalMult { get; set; } // base multiplier
         public static ConfigEntry<float> RealRecoilDecaySpeed { get; set; }
@@ -30,6 +31,9 @@ namespace PeinRecoilRework.Config.Settings
             string formattedCategory = Category.Format(order, category);
 
             EnableRealRecoil = Config.Bind(formattedCategory, "Enable Real Recoil", true, new ConfigDescription("Enables real recoil, which simulates recoil by physically rotating the camera. The amount depends on your weapon's recoil stats and the multipliers below.", null, new ConfigurationManagerAttributes { Order = 870 }));
+
+            RealRecoil172Behavior = Config.Bind(formattedCategory, "Use 1.7.2 Recoil Values", true, new ConfigDescription("(TEMPORARY) Makes real recoil use 1.7.2 values for calculating real recoil force amounts. Requires config changes - Vertical mult: 4.0, Horizontal mult: 0.6, All category mults: 1.0", null, new ConfigurationManagerAttributes { Order = 865 }));
+            
             RealRecoilVerticalMult = Config.Bind(formattedCategory, "Real Recoil Vertical Mult", 1.2f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
             RealRecoilHorizontalMult = Config.Bind(formattedCategory, "Real Recoil Horizontal Mult", 0.2f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 850 }));
             RealRecoilDecaySpeed = Config.Bind(formattedCategory, "Real Recoil Decay Speed", 20f, new ConfigDescription("Real recoil decay speed.", null, new ConfigurationManagerAttributes { Order = 820 }));

@@ -6,7 +6,7 @@ using PeinRecoilRework.Patches;
 
 namespace PeinRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.8.0")]
+    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.8.1")]
     public class Plugin : BaseUnityPlugin
     {
         private void Awake()
