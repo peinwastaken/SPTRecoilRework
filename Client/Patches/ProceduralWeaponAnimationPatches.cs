@@ -92,10 +92,18 @@ namespace PeinRecoilRework.Patches
             Player player = fc.gameObject.GetComponent<Player>();
 
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();
-            if (realRecoil == null) return;
+            if (realRecoil == null)
+            {
+                DebugLogger.LogWarning("RealRecoilComponent missing, skipping recoil method");
+                return;
+            }
 
             CameraOffsetComponent cameraShake = player.gameObject.GetComponent<CameraOffsetComponent>();
-            if (realRecoil == null) return;
+            if (realRecoil == null)
+            {
+                DebugLogger.LogWarning("CameraOffsetComponent missing, skipping recoil method");
+                return;
+            }
 
             Vector2? realRecoilDirection = null;
 
