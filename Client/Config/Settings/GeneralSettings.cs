@@ -4,9 +4,9 @@ namespace PeinRecoilRework.Config.Settings
 {
     public class GeneralSettings
     {
-        public static ConfigEntry<bool> EnableCrankRecoil { get; set; } // recoil backwards instead of forwards
-        public static ConfigEntry<float> CameraSnap { get; set; } // camera snap speed
-        public static ConfigEntry<float> PistolCameraSnap { get; set; } // pistol camera snap speed
+        public static ConfigEntry<bool> EnableCrankRecoil { get; set; }
+        public static ConfigEntry<float> CameraSnap { get; set; }
+        public static ConfigEntry<float> PistolCameraSnap { get; set; }
         public static ConfigEntry<bool> AllowLeanCameraTilt { get; set; }
         public static ConfigEntry<bool> AllowStableRecoil { get; set; }
 

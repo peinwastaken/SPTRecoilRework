@@ -19,6 +19,9 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RollAimingMultiplier { get; set; }
         public static ConfigEntry<float> RollTimeMultiplier { get; set; }
 
+        public static ConfigEntry<float> HipPenaltyTacOnMult { get; set; }
+        public static ConfigEntry<float> HipPenaltyTacOffMult { get; set; }
+
         public static ConfigEntry<bool> AllowDynamicAdjust { get; set; }
         public static ConfigEntry<Vector2> DynamicRangeMinMax { get; set; }
         public static ConfigEntry<Vector2> DynamicMultMinMax { get; set; }
@@ -42,6 +45,9 @@ namespace PeinRecoilRework.Config.Settings
             RollMultiplier = Config.Bind(formattedCategory, "Roll Multiplier", 1f, new ConfigDescription("Visual recoil roll multiplier while not aiming.", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 920 }));
             RollAimingMultiplier = Config.Bind(formattedCategory, "Roll Aiming Multiplier", 1f, new ConfigDescription("Visual recoil roll multiplier while aiming", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 910 }));
             RollTimeMultiplier = Config.Bind(formattedCategory, "Roll Speed Multiplier", 1f, new ConfigDescription("Visual recoil roll speed multiplier", new AcceptableValueRange<float>(0.1f, 10f), new ConfigurationManagerAttributes { Order = 900 }));
+
+            HipPenaltyTacOnMult = Config.Bind(formattedCategory, "Hipfire Penalty Mult (Laser On)", 1f, new ConfigDescription("Changes the hipfire penalty multiplier when tactical devices are turned on.", null, new ConfigurationManagerAttributes { Order = 899 }));
+            HipPenaltyTacOffMult = Config.Bind(formattedCategory, "Hipfire Penalty Mult (Laser Off)", 1f, new ConfigDescription("Changes the hipfire penalty multiplier when tactical devices are turned off.", null, new ConfigurationManagerAttributes { Order = 898 }));
 
             AllowDynamicAdjust = Config.Bind(formattedCategory, "Allow Dynamic Adjustments", true, new ConfigDescription("Allows dynamic adjustment of multiplier, damping and return speed values based on the equipped weapon's recoil values.", null, new ConfigurationManagerAttributes { Order = 890 }));
             DynamicRangeMinMax = Config.Bind(formattedCategory, "Dynamic Recoil Range", new Vector2(600f, 900f), new ConfigDescription("Minimum and maximum HORIZONTAL RECOIL values used for dynamic range. Dynamic recoil adjustments begin at X and end at Y.", null, new ConfigurationManagerAttributes { Order = 880 }));

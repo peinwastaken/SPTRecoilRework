@@ -2,7 +2,10 @@
 using EFT.Animations;
 using HarmonyLib;
 using PeinRecoilRework.Components;
+using PeinRecoilRework.Config.Settings;
+using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
+using System;
 using System.Reflection;
 
 namespace PeinRecoilRework.Patches
@@ -47,6 +50,52 @@ namespace PeinRecoilRework.Patches
             {
                 player.MovementContext.PlayerAnimator.SetAiming(false);
             }
+        }
+    }
+
+    public class UpdateHipAccuracyPatch : ModulePatch
+    {
+        protected override MethodBase GetTargetMethod()
+        {
+            return AccessTools.Method(typeof(Player.FirearmController), nameof(Player.FirearmController.UpdateHipInaccuracy));
+        }
+
+        private static bool IsTacEnabled(TacticalComboItemClass tacItem)
+        {
+            return tacItem.Light != null && tacItem.Light.IsActive;
+        }
+
+        [PatchPostfix]
+        private static void PatchPostfix(Player.FirearmController __instance)
+        {
+            Player player = __instance.GetComponent<Player>();
+            BreathEffector breath = player.ProceduralWeaponAnimation.Breath;
+
+            if (!player.IsYourPlayer) return;
+
+            bool isPistol = WeaponHelper.IsPistolCurrentlyEquipped;
+            float onMult = isPistol ? PistolRecoilSettings.HipPenaltyTacOnMult.Value : RecoilSettings.HipPenaltyTacOnMult.Value;
+            float offMult = isPistol ? PistolRecoilSettings.HipPenaltyTacOffMult.Value : RecoilSettings.HipPenaltyTacOffMult.Value;
+
+            if (__instance.AimingDevices.Length == 0)
+            {
+                __instance.HipInaccuracy *= offMult;
+                breath.HipPenalty = __instance.HipInaccuracy;
+                return;
+            }
+
+            foreach (TacticalComboItemClass tacItem in __instance.AimingDevices)
+            {
+                if (tacItem.Light != null && tacItem.Light.IsActive)
+                {
+                    __instance.HipInaccuracy *= onMult;
+                    breath.HipPenalty = __instance.HipInaccuracy;
+                    return;
+                }
+            }
+
+            __instance.HipInaccuracy *= offMult;
+            breath.HipPenalty = __instance.HipInaccuracy;
         }
     }
 }

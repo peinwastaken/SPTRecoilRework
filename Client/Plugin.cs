@@ -33,6 +33,7 @@ namespace PeinRecoilRework
             new SetPlayerAimingPatch().Enable();
             new WeaponRecoilInitializePatch().Enable();
             new ShiftWeaponRootPatch().Enable();
+            new UpdateHipAccuracyPatch().Enable();
         }
     }
 }
