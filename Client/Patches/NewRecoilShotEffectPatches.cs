@@ -61,6 +61,7 @@ namespace PeinRecoilRework.Patches
             float dampingModifier = WeaponHelper.GetDynamicRecoilMult(recoilValToUse, recoilRange, dampingMinMax, isPistol);
 
             CameraOffsetComponent cameraOffset = player?.GetComponent<CameraOffsetComponent>();
+            RealRecoilComponent realRecoil = player?.GetComponent<RealRecoilComponent>();
 
             if (player == null || player != Util.GetLocalPlayer())
             {
@@ -120,6 +121,13 @@ namespace PeinRecoilRework.Patches
                 cameraSpring.Damping = AdditionalCameraRecoilSettings.CameraSpringDamping.Value;
                 cameraSpring.Speed = AdditionalCameraRecoilSettings.CameraSpringSpeed.Value;
                 cameraSpring.Stiffness = AdditionalCameraRecoilSettings.CameraSpringStiffness.Value;
+            }
+
+            if (realRecoil != null)
+            {
+                realRecoil.RecoilSpring.Speed = RealRecoilSettings.AlternateRealRecoilSpeed.Value;
+                realRecoil.RecoilSpring.Damping = RealRecoilSettings.AlternateRealRecoilDamping.Value;
+                realRecoil.RecoilSpring.Stiffness = RealRecoilSettings.AlternateRealRecoilStiffness.Value;
             }
 
             if (useCategoryMult)

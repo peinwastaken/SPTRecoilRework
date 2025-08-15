@@ -1,5 +1,6 @@
 ﻿using EFT;
 using PeinRecoilRework.Config.Settings;
+using PeinRecoilRework.Helpers;
 using UnityEngine;
 
 namespace PeinRecoilRework.Components
@@ -8,7 +9,8 @@ namespace PeinRecoilRework.Components
     {
         public static RealRecoilComponent Instance { get; private set; }
 
-        public Vector2 RecoilDirection = Vector2.zero; // Y - vertical, X - horizontal
+        public RecoilSpring RecoilSpring { get; private set; }
+        public Vector2 RecoilDirection = Vector2.zero;
         
         private Player _player;
 
@@ -25,16 +27,32 @@ namespace PeinRecoilRework.Components
             }
 
             _player = GetComponent<Player>();
+            RecoilSpring = new RecoilSpring()
+            {
+                Damping = 0.2f,
+                Stiffness = 15f,
+                Speed = 30f
+            };
         }
 
         private void Update()
         {
             float dt = Time.deltaTime;
-            Camera camera = Camera.main;
 
-            RecoilDirection = Vector2.Lerp(RecoilDirection, Vector2.zero, RealRecoilSettings.RealRecoilDecaySpeed.Value * dt);
+            if (RealRecoilSettings.EnableRealRecoilAlternateSystem.Value == true)
+            {
+                RecoilSpring.Update(dt);
 
-            _player.Rotate(RecoilDirection, true);
+                Vector2 dir = new Vector2(RecoilSpring.Velocity.x, RecoilSpring.Velocity.y) * dt;
+
+                _player.Rotate(dir, true);
+            }
+            else
+            {
+                RecoilDirection = Vector2.Lerp(RecoilDirection, Vector2.zero, RealRecoilSettings.RealRecoilDecaySpeed.Value * dt);
+
+                _player.Rotate(RecoilDirection, true);
+            }
         }
 
         public Vector2 ApplyRecoil(float verticalAmount, float horizontalAmount, bool randomHorizontal = true)
@@ -42,8 +60,15 @@ namespace PeinRecoilRework.Components
             float vertical = verticalAmount;
             float horizontal = randomHorizontal ? Random.Range(-horizontalAmount, horizontalAmount) : horizontalAmount;
 
-            RecoilDirection.x = horizontal;
-            RecoilDirection.y = -vertical;
+            if (RealRecoilSettings.EnableRealRecoilAlternateSystem.Value == true)
+            {
+                RecoilSpring.ApplyImpulse(new Vector3(horizontal, -vertical, 0) * 100);
+            }
+            else
+            {
+                RecoilDirection.x = horizontal;
+                RecoilDirection.y = -vertical;
+            }
 
             return new Vector2(horizontal, vertical);
         }

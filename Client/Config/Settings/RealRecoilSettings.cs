@@ -10,6 +10,10 @@ namespace PeinRecoilRework.Config.Settings
         public static ConfigEntry<float> RealRecoilVerticalMult { get; set; } // base multiplier
         public static ConfigEntry<float> RealRecoilHorizontalMult { get; set; } // base multiplier
         public static ConfigEntry<float> RealRecoilDecaySpeed { get; set; }
+        public static ConfigEntry<bool> EnableRealRecoilAlternateSystem { get; set; }
+        public static ConfigEntry<float> AlternateRealRecoilSpeed { get; set; }
+        public static ConfigEntry<float> AlternateRealRecoilStiffness { get; set; }
+        public static ConfigEntry<float> AlternateRealRecoilDamping { get; set; }
         public static ConfigEntry<float> RealRecoilMountedMult { get; set; }
         public static ConfigEntry<float> RealRecoilCrouchMult { get; set; }
         public static ConfigEntry<float> RealRecoilProneMult { get; set; }
@@ -37,12 +41,16 @@ namespace PeinRecoilRework.Config.Settings
             RealRecoilVerticalMult = Config.Bind(formattedCategory, "Real Recoil Vertical Mult", 1.2f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
             RealRecoilHorizontalMult = Config.Bind(formattedCategory, "Real Recoil Horizontal Mult", 0.2f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 850 }));
             RealRecoilDecaySpeed = Config.Bind(formattedCategory, "Real Recoil Decay Speed", 20f, new ConfigDescription("Real recoil decay speed.", null, new ConfigurationManagerAttributes { Order = 820 }));
+            EnableRealRecoilAlternateSystem = Config.Bind(formattedCategory, "Enable Alternate Real Recoil", false, new ConfigDescription("Enables an alternate version of real recoil that uses a spring based system and has auto-compensation.", null, new ConfigurationManagerAttributes { Order = 819 }));
+            AlternateRealRecoilSpeed = Config.Bind(formattedCategory, "Alternate Real Recoil Spring Speed", 6f, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 818 }));
+            AlternateRealRecoilStiffness = Config.Bind(formattedCategory, "Alternate Real Recoil Spring Stiffness", 3f, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 817 }));
+            AlternateRealRecoilDamping = Config.Bind(formattedCategory, "Alternate Real Recoil Spring Damping", 0.02f, new ConfigDescription("", null, new ConfigurationManagerAttributes { Order = 816 }));
             RealRecoilMountedMult = Config.Bind(formattedCategory, "Real Recoil Mounted Multiplier", 0.5f, new ConfigDescription("Changes the amount of recoil while mounted or using a bipod.", null, new ConfigurationManagerAttributes { Order = 810 }));
             RealRecoilCrouchMult = Config.Bind(formattedCategory, "Real Recoil Crouch Multiplier", 0.75f, new ConfigDescription("Changes the amount of recoil while crouching.", null, new ConfigurationManagerAttributes { Order = 800 }));
             RealRecoilProneMult = Config.Bind(formattedCategory, "Real Recoil Prone Multiplier", 0.35f, new ConfigDescription("Changes the amount of recoil while prone.", null, new ConfigurationManagerAttributes { Order = 810 }));
             RealRecoilAimingMult = Config.Bind(formattedCategory, "Real Recoil Aiming Multiplier", 0.75f, new ConfigDescription("Changes the amount of recoil while aiming.", null, new ConfigurationManagerAttributes { Order = 800 }));
 
-            EnableRealRecoilPerWeaponMults = Config.Bind(formattedCategory, "Enable Weapon Class Multipliers. Recommended to keep on since pistols have insane recoil values.", true, new ConfigDescription("Enables class specific real recoil multipliers.", null, new ConfigurationManagerAttributes { Order = 795 }));
+            EnableRealRecoilPerWeaponMults = Config.Bind(formattedCategory, "Enable Weapon Class Multipliers", true, new ConfigDescription("Enables class specific real recoil multipliers. Recommended to keep enabled since pistols have insane recoil values.", null, new ConfigurationManagerAttributes { Order = 795 }));
             RifleRealRecoilMult = Config.Bind(formattedCategory, "Rifle Real Recoil Multiplier", new Vector2(0.7f, 1f), new ConfigDescription("Real recoil multiplier for rifles.", null, new ConfigurationManagerAttributes { Order = 790 }));
             CarbineRealRecoilMult = Config.Bind(formattedCategory, "Carbine Real Recoil Multiplier", new Vector2(0.7f, 1.3f), new ConfigDescription("Real recoil multiplier for carbines.", null, new ConfigurationManagerAttributes { Order = 780 }));
             PistolRealRecoilMult = Config.Bind(formattedCategory, "Pistol Real Recoil Multiplier", new Vector2(0.35f, 0.5f), new ConfigDescription("Real recoil multiplier for pistols.", null, new ConfigurationManagerAttributes { Order = 780 }));
