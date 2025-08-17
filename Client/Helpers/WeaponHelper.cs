@@ -13,15 +13,15 @@ namespace PeinRecoilRework.Helpers
     {
         public static Dictionary<EWeaponClass, ConfigEntry<Vector2>> RealRecoilMultipliers = new Dictionary<EWeaponClass, ConfigEntry<Vector2>>
         {
-            { EWeaponClass.AssaultRifle, Config.Settings.RealRecoilSettings.RifleRealRecoilMult },
-            { EWeaponClass.AssaultCarbine, Config.Settings.RealRecoilSettings.CarbineRealRecoilMult },
-            { EWeaponClass.Pistol, Config.Settings.RealRecoilSettings.PistolRealRecoilMult },
-            { EWeaponClass.SubMachineGun, Config.Settings.RealRecoilSettings.SmgRealRecoilMult },
-            { EWeaponClass.Shotgun, Config.Settings.RealRecoilSettings.ShotgunRealRecoilMult },
-            { EWeaponClass.SniperRifle, Config.Settings.RealRecoilSettings.SniperRealRecoilMult },
-            { EWeaponClass.MarksmanRifle, Config.Settings.RealRecoilSettings.MarksmanRealRecoilMult },
-            { EWeaponClass.MachineGun, Config.Settings.RealRecoilSettings.MachineGunRealRecoilMult },
-            { EWeaponClass.GrenadeLauncher, Config.Settings.RealRecoilSettings.GrenadeLauncherRealRecoilMult }
+            { EWeaponClass.AssaultRifle, RealRecoilSettings.RifleRealRecoilMult },
+            { EWeaponClass.AssaultCarbine, RealRecoilSettings.CarbineRealRecoilMult },
+            { EWeaponClass.Pistol, RealRecoilSettings.PistolRealRecoilMult },
+            { EWeaponClass.SubMachineGun, RealRecoilSettings.SmgRealRecoilMult },
+            { EWeaponClass.Shotgun, RealRecoilSettings.ShotgunRealRecoilMult },
+            { EWeaponClass.SniperRifle, RealRecoilSettings.SniperRealRecoilMult },
+            { EWeaponClass.MarksmanRifle, RealRecoilSettings.MarksmanRealRecoilMult },
+            { EWeaponClass.MachineGun, RealRecoilSettings.MachineGunRealRecoilMult },
+            { EWeaponClass.GrenadeLauncher, RealRecoilSettings.GrenadeLauncherRealRecoilMult }
         };
 
         public static WeaponTemplate CurrentTemplate = null;
@@ -87,15 +87,24 @@ namespace PeinRecoilRework.Helpers
 
         public static bool IsUsingIrons(ProceduralWeaponAnimation pwa)
         {
-            if (pwa.CurrentAimingMod != null)
+            SightComponent currentAimingMod = pwa.CurrentAimingMod;
+
+            if (currentAimingMod != null)
             {
+                string parentId = currentAimingMod.Item.Template.StringId;
+
+                if (parentId == "55818ac54bdc2d5b648b456e") // IronSight
+                {
+                    return true;
+                }
+
                 return pwa.CurrentAimingMod.Item is IronSightItemClass;
             }
             else if (pwa.CurrentScope != null) // sort of a fallback
             {
                 return !pwa.CurrentScope.IsOptic;
             }
-            else // actual fallback
+            else // actual fallback. not an iron sight, clearly
             {
                 return false;
             }

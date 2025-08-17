@@ -36,7 +36,7 @@ namespace PeinRecoilRework.Config.Settings
 
             EnableRealRecoil = Config.Bind(formattedCategory, "Enable Real Recoil", true, new ConfigDescription("Enables real recoil, which simulates recoil by physically rotating the camera. The amount depends on your weapon's recoil stats and the multipliers below.", null, new ConfigurationManagerAttributes { Order = 870 }));
 
-            RealRecoil172Behavior = Config.Bind(formattedCategory, "Use 1.7.2 Recoil Values", false, new ConfigDescription("(TEMPORARY) Makes real recoil use 1.7.2 values (for the most part) for calculating real recoil force amounts. Requires config changes. Baseline settings: Vertical mult: 4.0, Horizontal mult: 0.6, All category mults: 1.0", null, new ConfigurationManagerAttributes { Order = 865 }));
+            RealRecoil172Behavior = Config.Bind(formattedCategory, "Use 1.7.2 Recoil Values", false, new ConfigDescription("(TEMPORARY) Makes real recoil use 1.7.2 values (for the most part) for calculating real recoil force amounts. Requires config changes. Baseline settings: Vertical mult: 2.0, Horizontal mult: 0.7, All category multipliers on their default values (Reset)", null, new ConfigurationManagerAttributes { Order = 865 }));
             
             RealRecoilVerticalMult = Config.Bind(formattedCategory, "Real Recoil Vertical Mult", 1.2f, new ConfigDescription("Real recoil vertical multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 860 }));
             RealRecoilHorizontalMult = Config.Bind(formattedCategory, "Real Recoil Horizontal Mult", 0.2f, new ConfigDescription("Real recoil horizontal multiplier.", new AcceptableValueRange<float>(0f, 10f), new ConfigurationManagerAttributes { Order = 850 }));
