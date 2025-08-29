@@ -116,9 +116,9 @@ namespace PeinRecoilRework.Components
             CameraSpring = new RecoilSpring();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            float dt = Time.fixedDeltaTime;
+            float dt = Time.deltaTime;
 
             SlowShakeSpring.Update(dt);
             FastShakeSpring.Update(dt);

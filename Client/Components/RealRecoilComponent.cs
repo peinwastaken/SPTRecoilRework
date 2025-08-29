@@ -35,9 +35,9 @@ namespace PeinRecoilRework.Components
             };
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            float dt = Time.deltaTime;
+            float dt = Time.fixedDeltaTime;
 
             if (RealRecoilSettings.EnableRealRecoilAlternateSystem.Value == true)
             {
