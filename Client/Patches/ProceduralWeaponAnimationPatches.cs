@@ -50,7 +50,7 @@ namespace PeinRecoilRework.Patches
         [PatchPostfix]
         private static void PatchPostfix(ProceduralWeaponAnimation __instance, float dt)
         {
-            Vector2 scale = new Vector2(0.01f, 0.01f);
+            Vector2 scale = Vector2.one * 0.01f;
 
             Player player = Util.GetLocalPlayer();
             CameraOffsetComponent cameraShake = player.gameObject.GetComponent<CameraOffsetComponent>();
@@ -61,7 +61,6 @@ namespace PeinRecoilRework.Patches
 
             Vector3 slowShake = cameraShake.SlowShakeSpring.Position;
             Vector3 fastShake = cameraShake.FastShakeSpring.Position;
-
             Vector3 cameraRecoil = cameraShake.CameraSpring.Position;
 
             Vector3 cameraPosOffset = slowShake + fastShake;

@@ -21,7 +21,7 @@ namespace PeinRecoilRework.Helpers
                 return Vector2.zero;
             }
 
-            float dtScaled = Mathf.Min(deltaTime * Speed, 1);
+            float dtScaled = 1f - Mathf.Exp(-deltaTime * Speed);
 
             Vector3 displacement = Target - Position;
             Vector3 force = displacement * Stiffness;
