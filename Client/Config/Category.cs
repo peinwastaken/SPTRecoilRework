@@ -1,4 +1,4 @@
-﻿namespace PeinRecoilRework.Config
+﻿namespace SPTRecoilRework.Config
 {
     public class Category
     {

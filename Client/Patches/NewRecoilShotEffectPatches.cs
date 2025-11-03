@@ -4,15 +4,15 @@ using EFT.Animations;
 using EFT.Animations.NewRecoil;
 using EFT.InventoryLogic;
 using HarmonyLib;
-using PeinRecoilRework.Components;
-using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Data;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
+using SPTRecoilRework.Components;
+using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Data;
+using SPTRecoilRework.Helpers;
 using System.Reflection;
 using UnityEngine;
 
-namespace PeinRecoilRework.Patches
+namespace SPTRecoilRework.Patches
 {
     public class RecalculateRecoilOnWeaponSwitchPatch : ModulePatch
     {

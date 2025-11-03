@@ -1,9 +1,9 @@
 ﻿using Comfort.Common;
 using EFT;
-using PeinRecoilRework.Config.Settings;
+using SPTRecoilRework.Config.Settings;
 using UnityEngine;
 
-namespace PeinRecoilRework.Helpers
+namespace SPTRecoilRework.Helpers
 {
     public static class Util
     {

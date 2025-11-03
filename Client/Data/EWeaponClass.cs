@@ -1,4 +1,4 @@
-﻿namespace PeinRecoilRework.Data
+﻿namespace SPTRecoilRework.Data
 {
     public enum EWeaponClass
     {

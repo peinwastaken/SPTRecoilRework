@@ -2,12 +2,12 @@
 using EFT;
 using EFT.Animations;
 using EFT.InventoryLogic;
-using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Data;
+using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Data;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PeinRecoilRework.Helpers
+namespace SPTRecoilRework.Helpers
 {
     public static class WeaponHelper
     {

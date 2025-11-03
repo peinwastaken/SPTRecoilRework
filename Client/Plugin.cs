@@ -1,12 +1,12 @@
 ﻿using BepInEx;
-using PeinRecoilRework.Config;
-using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Helpers;
-using PeinRecoilRework.Patches;
+using SPTRecoilRework.Config;
+using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Helpers;
+using SPTRecoilRework.Patches;
 
-namespace PeinRecoilRework
+namespace SPTRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "PeinRecoilRework", "1.9.1")]
+    [BepInPlugin("com.pein.camerarecoilmod", "SPTRecoilRework", "1.10.0")]
     public class Plugin : BaseUnityPlugin
     {
         private void Awake()

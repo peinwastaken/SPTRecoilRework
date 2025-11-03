@@ -1,10 +1,10 @@
 ﻿using EFT.Animations;
 using HarmonyLib;
-using PeinRecoilRework.Config.Settings;
 using SPT.Reflection.Patching;
+using SPTRecoilRework.Config.Settings;
 using System.Reflection;
 
-namespace PeinRecoilRework.Patches
+namespace SPTRecoilRework.Patches
 {
     public class SetStableModePatch : ModulePatch
     {

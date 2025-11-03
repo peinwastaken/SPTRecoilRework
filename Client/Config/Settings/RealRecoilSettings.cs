@@ -1,7 +1,7 @@
 ﻿using BepInEx.Configuration;
 using UnityEngine;
 
-namespace PeinRecoilRework.Config.Settings
+namespace SPTRecoilRework.Config.Settings
 {
     public class RealRecoilSettings
     {

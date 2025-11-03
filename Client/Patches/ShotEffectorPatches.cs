@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
-using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
+using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Helpers;
 using System.Reflection;
 using UnityEngine;
 
-namespace PeinRecoilRework.Patches
+namespace SPTRecoilRework.Patches
 {
     public class RecoilProcessPatch : ModulePatch
     {

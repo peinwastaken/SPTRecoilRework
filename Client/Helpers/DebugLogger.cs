@@ -1,7 +1,7 @@
 ﻿using BepInEx.Logging;
-using PeinRecoilRework.Config.Settings;
+using SPTRecoilRework.Config.Settings;
 
-namespace PeinRecoilRework.Helpers
+namespace SPTRecoilRework.Helpers
 {
     public class DebugLogger
     {

@@ -1,14 +1,14 @@
 ﻿using EFT;
 using EFT.Animations;
 using HarmonyLib;
-using PeinRecoilRework.Components;
-using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
+using SPTRecoilRework.Components;
+using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Helpers;
 using System;
 using System.Reflection;
 
-namespace PeinRecoilRework.Patches
+namespace SPTRecoilRework.Patches
 {
     public class PlayerInitPatch : ModulePatch
     {

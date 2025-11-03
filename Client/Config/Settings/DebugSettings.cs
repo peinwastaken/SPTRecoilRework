@@ -1,6 +1,6 @@
 ﻿using BepInEx.Configuration;
 
-namespace PeinRecoilRework.Config.Settings
+namespace SPTRecoilRework.Config.Settings
 {
     public class DebugSettings
     {

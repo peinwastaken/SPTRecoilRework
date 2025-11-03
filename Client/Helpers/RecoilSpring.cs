@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PeinRecoilRework.Helpers
+namespace SPTRecoilRework.Helpers
 {
     public class RecoilSpring
     {

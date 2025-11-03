@@ -1,12 +1,12 @@
 ﻿using EFT;
 using HarmonyLib;
-using PeinRecoilRework.Helpers;
 using SPT.Reflection.Patching;
+using SPTRecoilRework.Helpers;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-namespace PeinRecoilRework.Patches
+namespace SPTRecoilRework.Patches
 {
     public class ShiftWeaponRootPatch : ModulePatch
     {

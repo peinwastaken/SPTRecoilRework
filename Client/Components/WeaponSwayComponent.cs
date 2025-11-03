@@ -1,8 +1,8 @@
-﻿using PeinRecoilRework.Config.Settings;
-using PeinRecoilRework.Helpers;
+﻿using SPTRecoilRework.Config.Settings;
+using SPTRecoilRework.Helpers;
 using UnityEngine;
 
-namespace PeinRecoilRework.Components
+namespace SPTRecoilRework.Components
 {
     public class WeaponSwayComponent : MonoBehaviour
     {
