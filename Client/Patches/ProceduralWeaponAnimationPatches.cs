@@ -87,7 +87,7 @@ namespace PeinRecoilRework.Patches
             float scaleHor = 0.01f;
 
             ShotEffector shotEffector = __instance.Shootingg;
-            Player.FirearmController fc = shotEffector._firearmController;
+            Player.FirearmController fc = shotEffector.FirearmController;
             Player player = fc.gameObject.GetComponent<Player>();
 
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();

@@ -1,26 +1,26 @@
 [
-    {
-        "weaponIds": ["5a17f98cfcdbcb0980087290", "5abccb7dd8ce87001773e277"],
-        "overrideProperties": {
-            "RecoilCategoryMultiplierHandRotation": 0.1,
-            "RecoilStableIndexShot": 999,
-            "RotationCenterNoStock": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            }
-        }
-    },
-    {
-        "weaponId": "5b1fa9b25acfc40018633c01",
-        "overrideProperties": {
-            "RecoilCategoryMultiplierHandRotation": 0.1,
-            "RecoilStableIndexShot": 999,
-            "RotationCenterNoStock": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            }
-        }
+  {
+    "weaponIds": ["5a17f98cfcdbcb0980087290", "5abccb7dd8ce87001773e277"],
+    "overrideProperties": {
+      "RecoilCategoryMultiplierHandRotation": 0.1,
+      "RecoilStableIndexShot": 999,
+      "RotationCenterNoStock": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
     }
+  },
+  {
+    "weaponId": "5b1fa9b25acfc40018633c01",
+    "overrideProperties": {
+      "RecoilCategoryMultiplierHandRotation": 0.1,
+      "RecoilStableIndexShot": 999,
+      "RotationCenterNoStock": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    }
+  }
 ]

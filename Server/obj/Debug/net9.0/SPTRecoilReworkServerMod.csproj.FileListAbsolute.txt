@@ -1,0 +1,13 @@
+F:\SPT-DEV-400\development\sptrecoilrework\Server\bin\Debug\net9.0\SPTRecoilReworkServerMod.deps.json
+F:\SPT-DEV-400\development\sptrecoilrework\Server\bin\Debug\net9.0\SPTRecoilReworkServerMod.dll
+F:\SPT-DEV-400\development\sptrecoilrework\Server\bin\Debug\net9.0\SPTRecoilReworkServerMod.pdb
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.csproj.AssemblyReference.cache
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.GeneratedMSBuildEditorConfig.editorconfig
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.AssemblyInfoInputs.cache
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.AssemblyInfo.cs
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.csproj.CoreCompileInputs.cache
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.sourcelink.json
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.dll
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\refint\SPTRecoilReworkServerMod.dll
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\SPTRecoilReworkServerMod.pdb
+F:\SPT-DEV-400\development\sptrecoilrework\Server\obj\Debug\net9.0\ref\SPTRecoilReworkServerMod.dll
