@@ -31,7 +31,6 @@ namespace SPTRecoilReworkServerMod
             foreach (string weaponDataJson in weaponDataJsons)
             {
                 string fileName = Path.GetFileName(weaponDataJson);
-                logger.LogWithColor(fileName, LogTextColor.Green);
                 List<WeaponOverrideConfig>? overrideConfigs = jsonUtil.DeserializeFromFile<List<WeaponOverrideConfig>>(weaponDataJson);
 
                 if (overrideConfigs == null) continue;

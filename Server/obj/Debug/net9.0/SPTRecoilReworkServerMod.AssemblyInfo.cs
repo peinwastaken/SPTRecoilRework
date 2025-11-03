@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SPTRecoilReworkServerMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2a9c60d7e1c4d0488a5984d5693d781e84eb1ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87ca218c0bdcd20abdc9a7fa1590f69032d68c08")]
 [assembly: System.Reflection.AssemblyProductAttribute("SPTRecoilReworkServerMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SPTRecoilReworkServerMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
