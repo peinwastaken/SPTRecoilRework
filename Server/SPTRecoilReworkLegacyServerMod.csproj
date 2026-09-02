@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SPTarkov.Server.Core" Version="4.1.2" />
+    </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)*&quot; &quot;C:\Games\SPT\SPT 41\SPT 41 Game\DEV\SPTRecoilReworkLegacy\_Output\SPT_Runtime\user\mods\SPTRecoilReworkLegacy\&quot; /s /y" />
+  </Target>
+
+</Project>

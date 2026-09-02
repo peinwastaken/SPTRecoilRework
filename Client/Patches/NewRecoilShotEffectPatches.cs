@@ -25,7 +25,7 @@ namespace SPTRecoilRework.Patches
         public static void PatchPostfix(
             NewRecoilShotEffect __instance,
             WeaponTemplate template,
-            BackendConfigSettingsClass.AimingConfiguration AimingConfig,
+            GlobalConfiguration.AimingConfiguration AimingConfig,
             Player.FirearmController firearmController,
             float recoilSuppressionX,
             float recoilSuppressionY,

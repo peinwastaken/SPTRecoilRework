@@ -1,5 +1,6 @@
 ﻿using EFT;
 using EFT.Animations;
+using EFT.InventoryLogic;
 using HarmonyLib;
 using SPT.Reflection.Patching;
 using SPTRecoilRework.Components;
@@ -60,7 +61,7 @@ namespace SPTRecoilRework.Patches
             return AccessTools.Method(typeof(Player.FirearmController), nameof(Player.FirearmController.UpdateHipInaccuracy));
         }
 
-        private static bool IsTacEnabled(TacticalComboItemClass tacItem)
+        private static bool IsTacEnabled(TacticalCombo tacItem)
         {
             return tacItem.Light != null && tacItem.Light.IsActive;
         }
@@ -84,7 +85,7 @@ namespace SPTRecoilRework.Patches
                 return;
             }
 
-            foreach (TacticalComboItemClass tacItem in __instance.AimingDevices)
+            foreach (TacticalCombo tacItem in __instance.AimingDevices)
             {
                 if (tacItem.Light != null && tacItem.Light.IsActive)
                 {
