@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Client/SPTRecoilReworkLegacyClient.csproj" />
+  <Project Path="Server/SPTRecoilReworkLegacyServerMod.csproj" />
+</Solution>

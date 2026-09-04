@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Server;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
-using SPTarkov.Server.Core.Models.Logging;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Utils;
@@ -12,12 +12,12 @@ using SPTRecoilReworkServerMod.Models;
 using System.Reflection;
 using Path = System.IO.Path;
 
-namespace SPTRecoilReworkServerMod
+namespace SPTRecoilReworkLegacyServerMod
 {
-    [Injectable(InjectionType.Singleton, TypePriority = OnLoadOrder.PostDBModLoader + 1)]
-    public class RecoilRework(ISptLogger<RecoilRework> logger, DatabaseService dbService, JsonUtil jsonUtil, ModHelper modHelper) : IOnLoad
+    [Injectable(InjectionType.Singleton, TypePriority = OnLoadOrder.PostLoad + 1)]
+    public class RecoilRework(ISptLogger<RecoilRework> logger, TemplateTable templateTable, JsonUtil jsonUtil, ModHelper modHelper) : IOnLoad
     {
-        public Task OnLoad()
+        public Task OnLoadAsync(CancellationToken cancellationToken)
         {
             string modPath = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
             string configPath = Path.Combine(modPath, "config");
@@ -25,7 +25,7 @@ namespace SPTRecoilReworkServerMod
             
             List<string> randomStrings = modHelper.GetJsonDataFromFile<List<string>>(configPath, "strings.json");
             string[] weaponDataJsons = Directory.GetFiles(weaponDataPath);
-            Dictionary<MongoId, TemplateItem> dbItems = dbService.GetItems();
+            Dictionary<MongoId, TemplateItem> dbItems = templateTable.Items;
             int configCount = 0;
             
             foreach (string weaponDataJson in weaponDataJsons)
@@ -54,7 +54,7 @@ namespace SPTRecoilReworkServerMod
                 }
             }
             
-            logger.LogWithColor($"Successfully loaded Recoil Rework! Loaded custom weapon data for {configCount} weapons. {randomStrings[new Random().Next(0, randomStrings.Count)]}", LogTextColor.Green);
+            logger.LogWithColor($"Successfully loaded Recoil Rework! Loaded custom weapon data for {configCount} weapons. {randomStrings[new Random().Next(0, randomStrings.Count)]}", Spectre.Console.Color.Green);
             
             return Task.CompletedTask;
         }

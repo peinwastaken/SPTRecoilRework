@@ -1,2 +1,9 @@
 Release/
 .vs/
+/_Output
+/Client/.idea
+/Client/bin
+/Client/obj
+/Server/.idea
+/Server/bin
+/Server/obj

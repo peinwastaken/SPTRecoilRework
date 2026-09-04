@@ -14,7 +14,7 @@ namespace SPTRecoilRework.Patches
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.method_19));
+            return AccessTools.Method(typeof(ProceduralWeaponAnimation), nameof(ProceduralWeaponAnimation.AddHandRecoilRotateToCamera));
         }
 
         [PatchPrefix]
@@ -87,7 +87,7 @@ namespace SPTRecoilRework.Patches
             float scaleHor = 0.01f;
 
             ShotEffector shotEffector = __instance.Shootingg;
-            Player.FirearmController fc = shotEffector.FirearmController;
+            Player.FirearmController fc = shotEffector._firearmController;
             Player player = fc.gameObject.GetComponent<Player>();
 
             RealRecoilComponent realRecoil = player.gameObject.GetComponent<RealRecoilComponent>();

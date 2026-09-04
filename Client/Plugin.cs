@@ -6,7 +6,7 @@ using SPTRecoilRework.Patches;
 
 namespace SPTRecoilRework
 {
-    [BepInPlugin("com.pein.camerarecoilmod", "SPTRecoilRework", "1.10.0")]
+    [BepInPlugin("com.pein.camerarecoilmod", "SPTRecoilReworkLegacy", "2.0.0")]
     public class Plugin : BaseUnityPlugin
     {
         private void Awake()

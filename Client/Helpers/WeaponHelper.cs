@@ -98,7 +98,7 @@ namespace SPTRecoilRework.Helpers
                     return true;
                 }
 
-                return pwa.CurrentAimingMod.Item is IronSightItemClass;
+                return pwa.CurrentAimingMod.Item is IronSight;
             }
             else if (pwa.CurrentScope != null) // sort of a fallback
             {

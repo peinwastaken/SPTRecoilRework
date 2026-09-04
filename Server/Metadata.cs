@@ -4,20 +4,20 @@ using Version = SemanticVersioning.Version;
 
 namespace SPTRecoilReworkServerMod
 {
-    public record Metadata : AbstractModMetadata
+    public record Metadata : IModMetadata
     {
-        public override string ModGuid { get; init; } = "com.pein.camerarecoilmod";
-        public override string Name { get; init; } = "Recoil Rework";
-        public override string Author { get; init; } = "pein";
-        public override Version Version { get; init; } = new Version("1.10.0");
-        public override Range SptVersion { get; init; } = new Range("~4.0.0");
-        public override string? Url { get; init; } = "https://github.com/peinwastaken";
-        public override string License { get; init; } = "MIT";
-        
+        public string ModGuid { get; init; } = "com.pein.camerarecoilmod";
+        public string Name { get; init; } = "Recoil Rework";
+        public string Author { get; init; } = "pein";
+        public Version Version { get; init; } = new Version("2.0.0");
+        public Range SptVersion { get; init; } = new Range("~4.1.0");
+        public bool HasPrepatcher { get; init; } = false;
+        public string? Url { get; init; } = "https://github.com/peinwastaken";
+        public string License { get; init; } = "MIT";
+
         // unused
-        public override bool? IsBundleMod { get; init; }
-        public override List<string>? Contributors { get; init; }
-        public override List<string>? Incompatibilities { get; init; }
-        public override Dictionary<string, Range>? ModDependencies { get; init; }
+        public List<string>? Contributors { get; init; }
+        public List<string>? Incompatibilities { get; init; }
+        public Dictionary<string, Range>? ModDependencies { get; init; }
     }
 }
